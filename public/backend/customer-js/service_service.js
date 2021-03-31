@@ -1,6 +1,8 @@
+
 var count_cart=0;
 var arr_cart=[];
 arr_service_service=[];
+arr_service=[];
 $(document).ready(function() {
     
     list_service_service();
@@ -73,33 +75,44 @@ function search_service_service()
 }
 function add_cart(data)
 {
+    var flag  = 0 ;
     var item  = arr_service_service[data];
     
-    var arr_service =[JSON.parse(localStorage.getItem('service_service'))];
-    if(arr_service[0] == null )
+    var arr_service_json =JSON.parse(localStorage.getItem('service_service'));
+    if(arr_service_json == null )
     {
-        console.log(item);
-    
-        // arr_service.push(item1);
-        // count_cart++;
-        // localStorage.setItem('service_service', JSON.stringify(arr_cart));
-        // localStorage.setItem('total_cart', JSON.stringify(count_cart));
+        arr_service.push(item);
+        count_cart++;
+        localStorage.setItem('service_service', JSON.stringify(arr_service));
+        localStorage.setItem('total_cart', JSON.stringify(count_cart));
     }
     else{
-        arr_service[0].forEach(function (service){
-            arr_cart.push(service);
+        arr_service_json.forEach(function(cart) {
+            console.log(cart);
+            if(cart.id_service == item.id_service)
+            {
+                alert('Dịch vụ này đã tốn tại trong giỏ hàng của bạn')
+                flag = 1;
+            }
         });
-        item.packet_detail.forEach(function(item1) {
-            arr_cart.push(item1);   
-        });
-        const key = 'id_service';
+        if(flag == 0)
+        {
+            arr_service_json.forEach(function (service){
+                arr_service.push(service);
+            });
+            arr_service.push(item);   
+            
+            const key = 'id_service';
+    
+            const unique = [...new Map(arr_service.map(item =>
+            [item[key], item])).values()]
+            
+            localStorage.setItem('service_service', JSON.stringify(unique));
+            count_cart++;
+            localStorage.setItem('total_cart', JSON.stringify(count_cart));
+        }
 
-        const unique = [...new Map(arr_cart.map(item =>
-        [item[key], item])).values()]
-        
-        localStorage.setItem('service_service', JSON.stringify(unique));
-        count_cart++;
-        localStorage.setItem('total_cart', JSON.stringify(count_cart));
+       
     
     }
 

@@ -51,7 +51,7 @@ p{
       
 <div style="clear: both; height: 61px;"></div>
 <div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
+    {{--  <div class="row">
         <div class="col-lg-12">
             <div class="inqbox float-e-margins">
             <div class="inqbox-content">
@@ -70,9 +70,9 @@ p{
             </div>
             </div>
         </div>
-    </div>
+    </div>  --}}
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-7">
             <div class="inqbox">
             <div class="inqbox-content">
                 {{--  <span class="text-muted small pull-right">Last modification: <i class="fa fa-clock-o"></i> 2:10 pm - 12.06.2015</span>
@@ -91,11 +91,9 @@ p{
                                 <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        
                                         <th style="30px"></th>
                                         <th>Tên dich vụ</th>
                                         <th>Giá tiền</th>
-                    
                                         <th colspan="2"><center>Hành động</center></th>
                                     </tr>
 
@@ -107,235 +105,23 @@ p{
                                         <td>20.000.000</td>
                                         <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
                                     </tr>
-                                    <tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr><tr>
-                                        <th style="30px"></th>
-                                        <td>Anthony Jackson</td>
-                                        <td>20.000.000</td>
-                                        <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr>  
                                     </tbody>
 
                                 </table>
                                 
                             </div>
                             <hr>
-                            <table class="total_history">
+                            <table class="total_history" >
                                 <tr> 
                                 <td><strong  style="color:#44C13C;font-size: large;">  Tổng tiền:</strong></td>
-                                <td><strong  style="color:#44C13C;font-size: large;"> 80.000.000 VND</h2></strong></td>
+                                <td><strong id="total_service_price"  style="color:#44C13C;font-size: large;"> 80.000.000 VND</h2></strong></td>
                                 </tr>
                             </table>
-                        <select id="cars" class="btn btn-danger btn-sm btn-block">
+                        <select id="type_cars" onchange="form_profile_cart()" class="btn btn-danger btn-sm btn-block">
                             <option value="0">Chọn hình thức</option>
                             <option value="1">Khám cá nhân</option>
                             <option value="2">Đặt khám hộ</option>
                         </select>
-                        <button type="button" class="btn btn-danger btn-sm btn-block">Chọn hình thức</button>
                         </div>
                         </div>
                         <div id="tab-2" class="tab-pane">
@@ -363,8 +149,8 @@ p{
         </div>
      <div class="col-sm-5">
             <div class="inqbox ">
-            <div class="inqbox-content">
-                <div class="tab-content">
+            <div class="inqbox-content" id="detail_profile">
+                <div class="tab-content" hidden>
                     <div id="contact-1" class="tab-pane active">
                         <div class="row m-b-lg">
                         <div class="col-lg-12 text-center">
@@ -421,11 +207,8 @@ p{
                                 <p>Tiểu sử(nếu có):</p>
                                 <textarea rows="6" cols="50"></textarea>
                             </div>
-                           
-                            
-
                                 <hr>
-                                   <button type="button" class="btn btn-danger btn-sm btn-block">Xem lại lịch đặt khám</button>
+                                   <button type="button" onclick="create_booking()" class="btn btn-danger btn-sm btn-block">Xem lại lịch đặt khám</button>
                                  
                             </div>
                         </div>
@@ -437,7 +220,45 @@ p{
         </div>
     </div>
 </div>
+{{--  payment  --}}
+<div id="type_paypal" class="modal fade">
+    <div class="modal-dialog">
+     <div class="modal-content">
 
+      <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal">&times;</button>
+       <center><h2 class="modal-title"><strong style="color:black">Phương thức thanh toán</strong></h2></center>
+      </div>
+      <div class="modal-body">
+        <table class="total_history">
+                <tr> 
+                    <td><strong style="color:#10ABFE">  <span style="color:blue;"><i><img src="../backend/icon/cash in hand.svg"></i> <i><img src="../backend/icon/Thanh toán chi phí tại bệnh viện.svg"></i> </span></strong></td>
+                    <td><strong style="color:#10ABFE"> <input type="radio" name="radio_pay"> </strong></td>
+                </tr>
+                <tr> 
+                    <td><strong style="color:#10ABFE">  <span style="color:blue;"><i><img src="../backend/icon/online payment.svg"></i> <i><img src="../backend/icon/Thanh toán chi phí qua chuyển khoản.svg"></i> </span></strong></td>
+                    <td><strong style="color:#10ABFE"> <input type="radio" name="radio_pay"></strong></td>
+                </tr>
+        </table>
+       
+       
+       <center><img alt="" height="270" width="250" src="{{ asset('backend/icon/img_paypal.svg')}}"> </center>
+       <center><h2><strong style="color:orange"> Lưu ý :</strong></h2></center>
+       <p>Đối với khách hàng thanh toán trực tiếp tại bệnh viện chúng tôi sẽ hỗ trợ đặt lịch khám cho khách hàng. Tuy nhiên số thứ tự khám bệnh sẽ được cấp sau khi khách hàng thanh toán chi phí khám cho bệnh viện. </p>
+       
+       </div>
+
+        
+   
+      <div class="modal-footer">
+       <button type="button" data-dismiss="modal" id="insert_service" onClick="insert_service()" class="btn btn-danger">Chọn ngay</button>
+       <button type="button" class="btn btn-default" data-dismiss="modal"> Đóng </button>
+      </div>
+      
+     </div>
+    </div>
+</div>
+{{--    --}}
 </body>
     <script src="{{ asset('backend/js/jquery-3.5.0.min.js') }}"></script>
     <script src="{{ asset('backend/customer-js/customer_local.js') }}"></script>

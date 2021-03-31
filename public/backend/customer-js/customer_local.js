@@ -42,6 +42,18 @@ function formatNumber(num) {
         return 'Nam';
     }
   }
+  function customer_sex_fill_info(sex)
+  {
+    if(sex == "Nam")
+    {
+        return 'male';
+    }
+    else
+    {
+        return 'female';
+    }
+  }
+
   function payment_type(type,item)
   {
       if(type==1)

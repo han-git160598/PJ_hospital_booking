@@ -144,10 +144,17 @@ function add_cart(data)
             arr_cart.push(item1);
         });
         arr_id_packet.push(item.service_packet_id);
-        count_cart++;
+
+       
         localStorage.setItem('service_packet', JSON.stringify(arr_id_packet));
         localStorage.setItem('service_service', JSON.stringify(arr_cart));
+        
+        arr_service_count =JSON.parse(localStorage.getItem('service_service'));
+        arr_service_count.forEach(function(item1) {
+            count_cart++;
+        });
         localStorage.setItem('total_cart', JSON.stringify(count_cart));
+        
     }
     else{
         arr_packet.forEach(function(cart) {
@@ -176,7 +183,11 @@ function add_cart(data)
 
             localStorage.setItem('service_packet', JSON.stringify(arr_id_packet));
             localStorage.setItem('service_service', JSON.stringify(unique));
-            count_cart++;
+            arr_service_count =JSON.parse(localStorage.getItem('service_service'));
+            
+            arr_service_count.forEach(function(item1) {
+                count_cart++;
+            });
             localStorage.setItem('total_cart', JSON.stringify(count_cart));
         }
     }
