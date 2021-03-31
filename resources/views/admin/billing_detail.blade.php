@@ -1,7 +1,7 @@
 @extends('dashboard')
 @section('admin_content') 
 
-<div style="clear: both; height: 61px;"></div>
+<div style="clear: both; height: 63px;"></div>
     <div class="wrapper wrapper-content animated fadeInRight">
 
         <div class="row">
@@ -96,20 +96,21 @@
                            
                             
                             <center> <h3> <strong style="color:blue;">  </strong> </h3> 
-                            
+                            <div class="pre-scrollable">
                             <div>
                             @if(isset($data['document']))
                             @foreach($data['document'] as $v )
                              <center>
                              <a target="_blank" href="{{ asset($v->image_upload) }}" class="imgpreview">
                               <img src="{{ asset($v->image_upload) }}" alt="gallery thumbnail" height="150" width="150"> 
-                              </center>
+                            </a>
+                            </center>
+                              <div class="hr-line-dashed"></div>
                              @endforeach
                             @else
-                            
                             @endif
                             </div>
-                            
+                            <div class="pre-scrollable">
                             </div>
                             </div>
                             
@@ -139,7 +140,7 @@ function service_detail(id)
         dataType: 'json',
         success: function (response) 
         {   
-            console.log(response);
+           
             var dem = 1;
             var output=`
             <tr>
@@ -151,8 +152,8 @@ function service_detail(id)
             </tr>`;
             $('tbody').html('');
             var sum =0 ;
-            response.forEach(function (item) {
-                console.log(item);
+            response['service'].forEach(function (item) {
+             
             output+=`
             <tr>
                 <td style="width:30px;"></td>
@@ -160,7 +161,7 @@ function service_detail(id)
                     <p>${dem++}<p>
                 </td>
                 <td class="project-title">
-                    <p>${item.service}<p>
+                    <p><i><img src="{{asset ('backend/icon/detail appointment schedule.svg')}}"></i> ${item.service}</p>
                 </td>
                 <td class="project-title">
                     <p>${formatNumber(item.price)}<p>
@@ -170,23 +171,28 @@ function service_detail(id)
             sum +=parseInt(item.price);
             });
              output+=`
-            <tr> <td style="width:30px;"></td><td colspan="2"><strong> Tổng tiền:</strong></td>
-            
-            <td><strong> ${formatNumber(sum)} </strong></td></tr>`;
+            <tr><td style="width:30px;"></td><td colspan="2" style="color:black"><strong> Thành tiền: </strong></td>
+            <td><strong style="color:black"> ${formatNumber(sum)} VND </strong></td></tr>
+
+            <tr><td style="width:30px;"></td><td colspan="2" style="color:blue"><strong> Người khám : </strong></td>
+            <td><strong style="color:blue"> X${response['total_person']}  </strong></td></tr>
+
+            <tr><td style="width:30px;"></td><td colspan="2" style="color:green"><strong> Tổng dịch vụ ban đầu : </strong></td>
+            <td><strong style="color:green"> ${formatNumber(response['initial_total'])} VND  </strong></td></tr>`;
             $('tbody').html(output);   
         }
     });
 }
 function customer_detail(id)
 {
-    //console.log(id);
+
     $.ajax({
         url: '{{URL::to('/customer-detail')}}'+'/'+id,
         type: 'GET',
         dataType: 'json',
         success: function (response) 
         {
-            //console.log(response);  
+         
             var output=`
             <tr> 
                 <th style="width:30px;"></th>
@@ -199,7 +205,7 @@ function customer_detail(id)
             </tr>`;
             $('tbody').html('');
             response.forEach(function (item) {
-                //console.log(item);
+               
             output+=`
             <tr>
                 <td style="width:30px;"></td>
@@ -228,7 +234,7 @@ function customer_detail(id)
 }
 function actually_detail(id)
 {
-   // console.log(id);
+  
    $.ajax({
         url: '{{URL::to('/actually-detail')}}',
         type: 'POST',
@@ -237,7 +243,7 @@ function actually_detail(id)
         dataType: 'json',
         success: function (response) 
         {
-            console.log(response);
+           
             var output=`
             <tr> 
                 <th style="width:30px;"></th>
@@ -252,7 +258,7 @@ function actually_detail(id)
             <tr>
                 <td style="width:30px;"></td>
                 <td class="project-title">
-                    <p>${item.service}<p>
+                    <p><i><img src="{{asset ('backend/icon/detail appointment schedule.svg')}}"></i> ${item.service}</p>
                 </td>
                 <td class="project-title">
                     <p>${item.billing_quantity}<p>
@@ -265,8 +271,8 @@ function actually_detail(id)
             </tr>`;    
             });
             output+=`
-            <tr><td style="width:30px;"></td><td  colspan="2"><strong> Tổng tiền:</strong></td>
-            <td ><strong>${formatNumber(response.total[0].total_actually)} VND </strong></td></tr>`;
+            <tr><td style="width:30px;"></td><td  colspan="2"><strong style="color:green"> Tổng tiền:</strong></td>
+            <td><strong style="color:green">${formatNumber(response.total[0].total_actually)} VND </strong></td></tr>`;
 
             $('tbody').html(output); 
         }
@@ -274,7 +280,7 @@ function actually_detail(id)
 }
 function billing_detail(id)
 {
-    console.log(id);
+  
     $.ajax({
         url: '{{URL::to('/billing-detail')}}',
         type: 'POST',
@@ -283,7 +289,7 @@ function billing_detail(id)
         dataType: 'json',
         success: function (response) 
         {
-            console.log(response);
+           
         var output=`
             <tr> 
                 <th style="width:30px;"></th>
@@ -294,7 +300,7 @@ function billing_detail(id)
             </tr>`;
             $('tbody').html('');
             response.forEach(function (item) {
-               console.log(item);
+            
             output+=`
             <tr>
                 <td style="width:30px;"></td>

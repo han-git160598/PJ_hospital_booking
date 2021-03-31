@@ -5,8 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title> HOSPITAL BOOKING </title>
-        <!-- img -->
-   
+     
         <!--  -->
         <link href="{{ asset('backend/css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('backend/fonts/font-awesome/css/font-awesome.css')}}" rel="stylesheet">
@@ -84,11 +83,11 @@
                                         @foreach($permission as $key=> $v)
                                         @if($v->permission == 'account_service')
                                         <li class="nav-parent">
-                                            <a href="#"><i><img src="{{asset ('backend/icon/product management.svg')}}"></i> <span class="nav-label"> Quản lý sản phẩm </span></a>
+                                            <a href="#"><i><img src="{{asset ('backend/icon/product management.svg')}}"></i> <span class="nav-label"> {{$v->description}} </span></a>
                                             <ul class="children nav">
-                                                <li><a href="{{URL::to('/all-service-service')}}"> Danh mục sản phẩm</a></li>
-                                                <li><a href="{{URL::to('/all-service-packet')}}"> Danh sách sản phẩm theo khách hàng</a></li>
-                                                <li><a href="{{URL::to('/disable-service-service')}}"> Danh sách nguyên vật liệu</a></li>
+                                                <li><a href="{{URL::to('/all-service-service')}}"> Danh sách dịch vụ khám</a></li>
+                                                <li><a href="{{URL::to('/all-service-packet')}}"> Danh sách gói khám</a></li>
+                                                <li><a href="{{URL::to('/disable-service-service')}}"> Dịch vụ bị vô hiệu hóa</a></li>
                                             </ul>
                                         </li>
                                         @endif
@@ -109,12 +108,22 @@
                                         @endif
                                          @if($v->permission == 'account_orders')
                                         <li >
-                                            <a href="{{URL::to('/all-billing')}}"><i><img src="{{asset ('backend/icon/order management.svg')}}"></i> <span class="nav-label"> Quản lý đơn đặt hàng </span></a>
+                                            <a href="{{URL::to('/all-billing')}}"><i><img src="{{asset ('backend/icon/order management.svg')}}"></i> <span class="nav-label"> {{$v->description}} </span></a>
                                         </li>
                                         @endif
                                          @if($v->permission == 'account_slide')
                                         <li >
                                             <a href="{{URL::to('/all-slide')}}"><i><img src="{{asset ('backend/icon/slide management.svg')}}"></i> <span class="nav-label"> {{$v->description}} </span></a>
+                                        </li>
+                                        @endif
+                                        @if($v->permission == 'account_reports')
+                                        <li class="nav-parent">
+                                            <a href="#"><i><img src="{{asset ('backend/icon/statistic management1.svg')}}"></i> <span class="nav-label"> {{$v->description}} </span></a>
+                                            <ul class="children nav">
+                                                <li><a href="{{URL::to('/report-statistical-examination-schedule')}}">  Báo cáo thống kê theo lịch khám</a></li>
+                                                <li><a href="{{URL::to('/report-statistical-service')}}"> Báo cáo thống kê theo  dịch vụ</a></li>
+                         
+                                            </ul>
                                         </li>
                                         @endif
                                         @if($v->permission == 'account_customer')
@@ -127,16 +136,6 @@
                                             <a href="{{URL::to('/force-sign-out')}}"><i><img  src="{{asset ('backend/icon/force sign out.svg')}}"></i> <span class="nav-label"> {{$v->description}} </span></a>
                                         </li>
                                         @endif
-                                       
-                                        <li class="nav-parent">
-                                            <a href="#"><i><img src="{{asset ('backend/icon/employee management.svg')}}"></i> <span class="nav-label"> Quản lý kho </span></a>
-                                            <ul class="children nav">
-                                                <li><a href="{{URL::to('/all-account-admin')}}"> Kho thành phẩm</a></li>
-                                                <li><a href="{{URL::to('/all-account-permission')}}"> Nguyên vật liệu </a></li>
-                                                <li><a href="{{URL::to('/all-account-type')}}"> Quản lý loại tài khoản</a></li>
-                                            </ul>
-                                        </li>
-                                        
                                      @endforeach
                                         
                                     </ul>
@@ -190,7 +189,7 @@
                            
                                     <li class="divider"></li>
                                      
-                                    <li><a onClick="show_modal()" class="animated animated-short fadeInUp"><i class="fa fa-sign"></i> Thay đổi mật khẩu </a></li>
+                                    <li><a onClick="show_modal()" class="animated animated-short fadeInUp"><i class="fa fa-key"></i> Thay đổi mật khẩu </a></li>
                                     <li><a href="{{URL::to('/logout-admin')}}" class="animated animated-short fadeInUp"><i class="fa fa-sign-out"></i> Đăng xuất </a></li>
                                 </ul>
                             </li>
@@ -198,6 +197,19 @@
                     </nav>
                 </div>
                 <!-- END HEADER -->
+
+<!-- Simple pop-up dialog box containing a form -->
+<dialog id="change_pass_dialog">
+  <form method="dialog">
+    <h3><strong>Thay đổi mật khẩu thành công </strong></h2>
+    
+    <center>  <button class="btn btn-success btn-sm"> OK </button> </center>
+  </form>
+</dialog>
+
+
+
+
     <div id="change_password" class="modal fade">
             <div class="modal-dialog">
              <div class="modal-content">
@@ -210,25 +222,24 @@
             <form id="change_password_form" enctype="multipart/form-data">
             {{ csrf_field() }}
             <label> Mật khẩu cũ (<font style="color: red">*</font>)</label>
+            <a type="button" onclick="show_old_password()" href="#"><i class="fa fa-eye"></i></a>
             <input type="password" name="old_password" id="old_password" class="form-control" />
             <br/>
              <label> Mật khẩu mới (<font style="color: red">*</font>)</label>
+             <a type="button" onclick="show_new_password()" href="#"><i class="fa fa-eye"></i></a>
              <input type="password" onkeyup="checkPass()" name="new_password" id="new_password" class="form-control" />
             <br/>
             <label> Xác nhận mật khẩu  (<font style="color: red">*</font>)</label>
+            <a type="button" onclick="show_confirm_password()" href="#"><i class="fa fa-eye"></i></a>
             <input type="password" onkeyup="checkPass()"  name="confirm_password" id="confirm_password" class="form-control" />
             <input type="hidden" name="id_admin" value="{{$id}}" id="id_admin" class="form-control" />
             <br/>
             <div id="error-nwl"></div>
             <br/>
-            <button class="btn btn-default" type="button" onclick="show_password()"><i class="fa fa-eye"></i></button>
-            <br/><br/>
             <input type="submit"  name="update" id="insert_category" value="Xác nhận" class="btn btn-success" />
            </form>
               </div>
-              <div class="modal-footer">
-               <button type="button" class="btn btn-default" data-dismiss="modal"> Đóng </button>
-              </div>
+            
              </div>
             </div>
            </div>
@@ -279,6 +290,10 @@
             <script src="{{ asset('backend/js/plugins/ckeditor/ckeditor.js')}}"></script>
             <!-- Summernote Plugin -->
             <script src="{{ asset('backend/js/plugins/summernote/summernote.min.js')}}"></script>
+                 <!-- Jquery Validate -->
+            <script src="{{ asset('backend/js/plugins/validate/jquery.validate.min.js')}}"></script>
+    
+
             <script>
             $(document).ready(function () {
                 "use strict";
@@ -295,8 +310,8 @@
             $('#change_password').modal('show');
             }
             $( document ).ready(function() {
-                $('#change_password').on('hidden.bs.modal', function () {
-                $(this).find("input,textarea").val('').end();
+                $('#change_password').on('hidden.bs.modal', function(){
+                $(this).find('form')[0].reset();
                 });
 
             $('#change_password_form').on('submit', function(event) {
@@ -304,6 +319,21 @@
                     var new_password = $('#new_password').val();
                     var confirm_password = $('#confirm_password').val();
                    // console.log(new_password); console.log(confirm_password);
+                    if(new_password.indexOf(' ') >= 0)
+                    {
+                        alert('Mật khẩu không được thêm kí tự trắng');
+                        return;
+                    }
+                    if(new_password == '' || confirm_password =='')
+                    {
+                        alert('Vui lòng không bỏ trống');
+                        return;
+                    }
+                    if(new_password.length < 6 || confirm_password.length < 6)
+                    {
+                        alert('Mật khẩu phải tối thiểu 6 kí tự');
+                        return;
+                    }
                     if(new_password == confirm_password)
                     {
                         $.ajax({
@@ -316,7 +346,11 @@
                         processData: false,
                         success: function(response) 
                         {
-                            alert(response['mes']);
+                            
+                            if(response['mes']== 'Thay đổi mật khẩu thành công')
+                            {
+                                change_pass_dialog.showModal()
+                            }else{alert(response['mes']);}
                         }
                     });
                     $('#change_password').modal('hide');
@@ -326,19 +360,17 @@
                 });
             });
 
-            function show_password(){
-            var x = document.getElementById("confirm_password");
-            var y = document.getElementById("old_password");
+            function show_old_password(){
+            var x = document.getElementById("old_password");
+                if(x.type === "password" ){x.type = "text";} else { x.type = "password";}
+            }
+            function show_new_password(){
             var z = document.getElementById("new_password");
-            if (x.type === "password" ) {
-                x.type = "text";
-                y.type = "text";
-                z.type = "text";
-            } else {
-                x.type = "password";
-                y.type = "password";
-                z.type = "password";
-                }
+            if (z.type === "password" ) {z.type = "text";} else {z.type = "password";}
+            }
+            function show_confirm_password(){
+            var y = document.getElementById("confirm_password");
+            if (y.type === "password" ) {y.type = "text";} else {y.type = "password";}
             }
             
             function checkPass() {
@@ -393,9 +425,42 @@
             function feedback(msg) {
             getElm('error-nwl').innerHTML = msg;
             }
+        </script>     
+ 
+      <script>
+         $(document).ready(function () {
+             "use strict";
+             
+             $("#form").validate({
+                 rules: {
+                     password: {
+                         required: true,
+                         minlength: 3
+                     },
+                     url: {
+                         required: true,
+                         url: true
+                     },
+                     number: {
+                         required: true,
+                         number: true
+                     },
+                     min: {
+                         required: true,
+                         minlength: 6
+                     },
+                     max: {
+                         required: true,
+                         maxlength: 4
+                     }
+                 }
+             });
+         });
+      </script>
+     
 
-
-        </script>        
-                
+      
+            
+    
     </body>
 </html>

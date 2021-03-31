@@ -1,7 +1,7 @@
 @extends('dashboard')
 @section('admin_content') 
    <body>
-    <div style="clear: both; height: 61px;"></div>
+    <div style="clear: both; height: 63px;"></div>
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <div class="col-lg-12">
@@ -19,7 +19,7 @@
                 <div class="inqbox-title">
                   
                     <div class="inqbox-tools">
-                        <a href="{{URL::to('/add-service-service')}}" class="btn btn-primary">Tạo sản phẩm</a>
+                        <a href="{{URL::to('/add-service-service')}}" class="btn btn-primary"> Tạo dịch vụ </a>
                     </div>
                 </div>
                 <div class="inqbox-content">
@@ -67,7 +67,10 @@
 <script>
 function enable_service(id)
 {
-    console.log(id);
+    var r = confirm('Bạn có muốn khôi phục dịch vụ này')
+    if(r = true)
+    {
+  
     $.ajax({
         url: '{{URL::to('/enable-service-service')}}'+'/'+id,
         type: 'GET',
@@ -82,7 +85,7 @@ function enable_service(id)
             </tr>`;
             $('tbody').html('');
             response.forEach(function (item) {
-                console.log(item.service);
+             
             output+=`
             <tr>
                 <td class="project-title">
@@ -100,6 +103,8 @@ function enable_service(id)
             $('tbody').html(output);        
         }
     });
+    alert('Khôi phục dịch vụ thành công');
+    }else{}
 }
 function search_service_disable()
 {
@@ -112,7 +117,7 @@ function search_service_disable()
     dataType: 'json',
     success: function (response) 
     { 
-        //console.log(response);
+        
          var output=`
             <tr> 
                 <th style="width:30px;"></th>
@@ -122,7 +127,7 @@ function search_service_disable()
             </tr>`;
             $('tbody').html('');
             response.forEach(function (item) {
-                //console.log(item);
+               
             output+=`
            <tr>
                 <td style="width:30px;"></td>

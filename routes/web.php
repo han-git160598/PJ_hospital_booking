@@ -97,7 +97,7 @@ Route::get('/edit-account-customer/{id}','AccountCustomerController@edit_account
 Route::get('/update-account-customer/{id}','AccountCustomerController@update_account_customer');
 
 Route::post('/search-account-customer','AccountCustomerController@search_account_custome');
-
+Route::post('/reset-password-customer','AccountCustomerController@reset_password_customer');
 
 Route::get('/history-account-customer/{id}','AccountCustomerController@all_history_account_customer');
 Route::get('/detail-order-customer/{id}','AccountCustomerController@detail_order_customer');
@@ -148,6 +148,7 @@ Route::post('/remove-service-actually','BillingController@remove_service_actuall
 Route::post('/appointment-detail','BillingController@appointment_detail');
 // Acctually
 Route::post('/save-billing-actually','BillingController@save_billing_acctually');
+Route::post('/update-billing-quanlity','BillingController@update_billing_quanlity');
 // billing customer
 Route::post('/add-prehistoric','BillingController@add_prehistoric');
 // billing document
@@ -186,7 +187,95 @@ Route::get('/force-sign-out',function(){
 Route::post('/force-sign-out-staff','ForceSignOutController@force_sign_out_staff');
 Route::post('/force-sign-out-customer','ForceSignOutController@force_sign_out_customer');
 
+// Báo cáo thống kê
+Route::get('/report-statistical-examination-schedule',function()
+{
+    $model = new AuthModel;
+    $id = Session::get('id');
+    $permission=$model->permission();
+    return view('admin.report_statistical.examination_schedule',compact('permission'));
+});
+// báo cáo thống kê theo lịch khám
+Route::post('/statistical-examination-schedule','ReportStatisticalController@statistical_examination_schedule');
+Route::post('/fillter-total-examination-schedule','ReportStatisticalController@fillter_total_examination_schedule');
+// báo cáo thống kê theo dịch vụ
+Route::get('/report-statistical-service',function()
+{
+    $model = new AuthModel;
+    $id = Session::get('id');
+    $permission=$model->permission();
+    return view('admin.report_statistical.service_service',compact('permission'));
+});
+Route::post('/statistical-service','ReportStatisticalController@statistical_service');
+Route::post('/fillter-total-service','ReportStatisticalController@fillter_total_service');
+//báo cáo thống kê theo khách hàng
+Route::get('/report-statistical-customer',function()
+{
+    $model = new AuthModel;
+    $id = Session::get('id');
+    $permission=$model->permission();
+    return view('admin.report_statistical.customer_customer',compact('permission'));
+});
+Route::post('/statistical-customer','ReportStatisticalController@statistical_customer');
+Route::post('/fillter-total-customer','ReportStatisticalController@fillter_total_customer');
+
+
+
 //test
 Route::get('/test',function (){
-	return view('qlsx.table_data_tables');
+	return view('admin.filetest');
+});
+// clear cache
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('config:clear');
+    $exitCode = Artisan::call('cache:clear');
+    $exitCode = Artisan::call('config:cache');
+    return 'DONE'; //tra ve gia tri
+});
+/////////////////////////customer//////////////////////////////////////////////////////////////////////////////
+Route::get('/dashboard-customer', function () {
+    // Session::put('full_name',null);
+    // Session::put('email',null);
+    // Session::put('id',null);
+    return view('dashboard_customer');
+});
+Route::get('/customer-service-packet', function () {
+    // Session::put('full_name',null);
+    // Session::put('email',null);
+    // Session::put('id',null);
+    return view('customer.service_packet');
+});
+Route::get('/customer-service-service', function () {
+    // Session::put('full_name',null);
+    // Session::put('email',null);
+    // Session::put('id',null);
+    return view('customer.service_service');
+});
+Route::get('/customer-useful-news', function () {
+    // Session::put('full_name',null);
+    // Session::put('email',null);
+    // Session::put('id',null);
+    return view('customer.useful_news');
+});
+Route::get('/customer-booking-history', function () {
+    // Session::put('full_name',null);
+    // Session::put('email',null);
+    // Session::put('id',null);
+    return view('customer.booking_history');
+});
+Route::get('/customer-appointment-schedule', function () {
+    // Session::put('full_name',null);
+    // Session::put('email',null);
+    // Session::put('id',null);
+    return view('customer.appointment_schedule');
+});
+
+Route::get('/customer-cart', function () {
+    // Session::put('full_name',null);
+    // Session::put('email',null);
+    // Session::put('id',null);
+    return view('customer.cart');
+});
+Route::get('/login-customer',function (){
+return view('customer.customer_login');
 });

@@ -1,7 +1,7 @@
 @extends('dashboard')
 @section('admin_content') 
    <body>
-    <div style="clear: both; height: 61px;"></div>
+    <div style="clear: both; height:63px;"></div>
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <div class="col-lg-12">
@@ -77,17 +77,16 @@
     </body>
 <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 <script>
-
 $("#create_account_customer").click( function(){
-    
     var output=``;
     $('tbody').html('');  
     output+=`
     <div class="inqbox-content">
     <div  class="form-horizontal">
+    <form id="clear_form_customer">
         <div class="form-group">
         <label class="col-sm-2 control-label"><i><img src="{{asset ('backend/icon/vector.svg')}}"></i>SĐT đăng nhập (*)</label>
-        <div class="col-sm-10"><input type="text"  id="phone_active" class="form-control"></div>
+        <div class="col-sm-10"><input type="text" onkeypress='return event.charCode >= 47 && event.charCode <= 57'  id="phone_active" class="form-control"></div>
         </div>
         <div class="hr-line-dashed"></div>
         <div class="form-group">
@@ -121,7 +120,7 @@ $("#create_account_customer").click( function(){
 
         <div class="form-group">
         <label class="col-sm-2 control-label"> SDT liên hệ :</label>
-        <div class="col-sm-10"><input type="number" onKeyPress="if(this.value.length==10) return false;"  id="phone_number" class="form-control"></div>
+        <div class="col-sm-10"><input type="text" onkeypress='return event.charCode >= 47 && event.charCode <= 57'  id="phone_number" class="form-control"></div>
         </div>
         <div class="hr-line-dashed"></div>
 
@@ -147,16 +146,21 @@ $("#create_account_customer").click( function(){
 
         <div class="form-group">
         <div class="col-sm-6 col-sm-offset-2">
-            <button class="btn btn-primary" onClick="save_account_customer()"" type="btn" id="save_news">Thêm khách hàng</button>
+            <button class="btn btn-primary" onClick="save_account_customer()"" type="submit" id="save_news">Thêm khách hàng</button>
         </div>
         </div>
+    </form>
     </div>
     </div> `;
     $('tbody').html(output);       
 });
 function save_account_customer()
 {
-    var phone_active1 = $('#phone_active').val()
+    //$('#clear_form_customer')[0].clear();
+    // document.getElementById("clear_form_customer")[0].reset();
+    // $("#clear_form_customer")[0].reset();
+    // $('.form-horizontal').find('#clear_form_customer')[0].reset();
+    var phone_active1 = $('#phone_active').val();
     var full_name1 = $('#full_name').val();
     var birthday1 = $('#birthday').val();
     var sex1 = $('#sex').val();
@@ -165,20 +169,48 @@ function save_account_customer()
     var email1 = $('#email').val();
     var password1 = $('#password').val();
     var nationality1 = $('#nationality').val();
+    console.log(phone_active1);
+    if(phone_active1 == '' || full_name1 == ''  || address1 =='' || password1  =='' )
+    {
+        alert('Không được bỏ trống các trường có kí hiệu (*) !');
+        return;   
+    }
+    if(password1.indexOf(' ') >= 0)
+    {
+        alert('Mật khẩu không được thêm kí tự trắng');
+        return;
+    }
+    if(password1.length < 6)
+    {
+        alert('Mật khẩu phải tối thiểu 6 kí tự');
+        return;
+    }
     $.ajax({
         type:"POST",
         url:'{{URL::to('/save-account-customer')}}',
-        data:{phone_active: phone_active1, full_name: full_name1, 
-            birthday: birthday1, nationality:nationality1 ,
-            sex:sex1, address :address1, phone_number:phone_number1, 
-            email:email1, password:password1
-            },
+        data:{phone_active: phone_active1, full_name: full_name1
+                , birthday: birthday1, nationality:nationality1 
+                ,sex:sex1, address :address1, phone_number:phone_number1
+                , email:email1, password:password1 },
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         dataType:"json",
         success: function(response)
         {
-            console.log(response);
+            //console.log(response);
+            
+            if(response['mes']=='Thêm thành công!')
+            {
             alert(response['mes']);
+            $('#phone_active').val("");
+            $('#full_name').val("");
+            $('#birthday').val("");
+            $('#address').val("");
+            $('#phone_number').val("");    
+            $('#email').val("");
+            $('#password').val("");
+            $('#nationality').val("");
+            }else
+            {alert(response['mes']);}
         }
     });
 }
@@ -195,7 +227,7 @@ function delete_account_customer(id)
         dataType:"json",
         success: function(response)
         {
-            console.log(response);
+        
         if(response['mes']=='sucsses'){
         var output=`
             <tr> 
@@ -208,7 +240,7 @@ function delete_account_customer(id)
             </tr>`;
             $('tbody').html('');
             response['customer'].forEach(function (item) {
-                console.log(item);
+            
             output+=`
             <tr>
                 <td style="width:30px;"></td>
@@ -244,7 +276,7 @@ function delete_account_customer(id)
 }
 function edit_account_customer(id)
 {
-    console.log(id);
+   
     $.ajax({
         type:"GET",
         url:'{{URL::to('/edit-account-customer')}}'+'/'+id,
@@ -254,6 +286,22 @@ function edit_account_customer(id)
         var output=``;
         $('tbody').html('');  
         output+=`
+         <dialog id="reset_password_customer">
+            <form method="dialog">
+                <p><label>Mật khẩu:</label></p>
+                <input type="password"id="pass_customer" name="pass_customer"> 
+                <p><label>Nhập lại mật khẩu:</label></p>
+                <input type="text" hidden id="id_customer" value="${response[0].id}">
+                <input type="password" id="pass_customer_again" name="pass_customer_again">
+                <p><label><smal id="erro_pass"></smal></label></p>
+                <br/>
+                <menu>
+                <button onClick="close_modal()"> Thoát </button>
+                <button type="submit" onClick="update_password_customer(${response[0].id})"> Xác nhận </button>
+                </menu>
+            </form>
+            </dialog>
+
         <div class="inqbox-content">
         <div  class="form-horizontal">
             <div class="form-group">
@@ -292,7 +340,7 @@ function edit_account_customer(id)
 
             <div class="form-group">
             <label class="col-sm-2 control-label"> SDT liên hệ :</label>
-            <div class="col-sm-10"><input type="number" onKeyPress="if(this.value.length==10) return false;" value="${response[0].phone_number}"  id="phone_number_ud" class="form-control"></div>
+            <div class="col-sm-10"><input type="text"  onkeypress='return event.charCode >= 47 && event.charCode <= 57' value="${response[0].phone_number}"  id="phone_number_ud" class="form-control"></div>
             </div>
             <div class="hr-line-dashed"></div>
 
@@ -310,7 +358,7 @@ function edit_account_customer(id)
 
             <div class="form-group">
             <label class="col-sm-2 control-label">Mật khẩu :</label>
-            <div class="col-sm-10"><input type="password" id="password_ud" class="form-control"></div>
+            <div class="col-sm-10"><button class="btn btn-primary" onClick="open_dialog_reset(${response[0].id})">Đặt lại mật khẩu</button></div>
             </div>
             <div class="hr-line-dashed"></div>
 
@@ -329,7 +377,7 @@ function edit_account_customer(id)
 }
 function update_account_customer(id)
 {
-    console.log(id);
+  
     var full_name1 = $('#full_name_ud').val();
     var birthday1 = $('#birthday_ud').val();
     var sex1 = $('#sex_ud').val();
@@ -338,7 +386,7 @@ function update_account_customer(id)
     var email1 = $('#email_ud').val();
     var password1 = $('#password_ud').val();
     var nationality1 = $('#nationality').val();
-    console.log(id);
+   
     $.ajax({
         type:"GET",
         url:'{{URL::to('/update-account-customer')}}'+'/'+id,
@@ -360,7 +408,7 @@ function history_account_customer(id)
         dataType:"json",
         success: function(response)
         {
-            console.log(response);
+           
             var output=`
             <tr> 
                 <th style="width:30px;"></th>
@@ -371,7 +419,7 @@ function history_account_customer(id)
             </tr>`;
             $('tbody').html('');
             response.forEach(function (item) {
-                //console.log(item.id);
+              
             output+=`
             <tr>
                 <td style="width:30px;"></td>
@@ -441,6 +489,61 @@ function search_customer()
         }
     });
 }
+function open_dialog_reset()
+{
+   
+    reset_password_customer.showModal();
+}
+function close_modal()
+{
+    reset_password_customer.close();
+}
 
+function update_password_customer(id)
+{
+    $('#erro_pass').html('');
+    var id_customer = $('#id_customer').val();
+    var pass_customer= $('#pass_customer').val();
+    var pass_customer_again= $('#pass_customer_again').val();
+    if(pass_customer.indexOf(' ') >= 0)
+    {
+        alert('Mật khẩu không được thêm kí tự trắng');
+        return;
+    }
+    if(pass_customer == '' || pass_customer_again =='')
+    {
+        alert('Vui lòng không bỏ trống');
+        return;
+    }
+    if(pass_customer.length < 6)
+    {
+        alert('Mật khẩu phải tối thiểu 6 kí tự');
+        return;
+    }
+    if(pass_customer !=pass_customer_again){
+    $('#erro_pass').html('Mật khẩu không trùng khớp');
+    alert(' Mật khẩu không trùng khớp');
+    }
+    else{
+
+    $.ajax({
+        url: '{{URL::to('/reset-password-customer')}}',
+        type: 'POST',
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        data: {id_customer:id_customer , pass_customer:pass_customer},
+        dataType: 'json',
+        success: function (response) 
+        {
+          
+            alert(response['mes']);    
+            if(response['mes']=='Thay đổi mật khẩu thành công !')
+            {
+                reset_password_customer.close();
+            }
+        }
+        });   
+       
+    }
+}
 </script>
 @endsection

@@ -9,9 +9,6 @@ class NewsController extends Controller
 {
     public function save_news(Request $request)
     {
-        // $validation = Validator::make($request->all(), [
-        //     'img_news' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
-        // ]);
         $check = DB::table('tbl_news')->where('title',$request->name_news)->get();
         if(count($check) > 0 )
         {
@@ -19,7 +16,7 @@ class NewsController extends Controller
         $mes['data']= 'faild';
         return json_encode($mes); 
         }
-        if($request->content_news ==''|| $request->name_news =='' )
+        if($request->content_news ==''|| $request->name_news =='' || $request->file('img_news')==null)
         {
         $mes['mes']='Vui lòng điền đầy đủ thông tin';
         $mes['data']= 'faild';
@@ -27,21 +24,26 @@ class NewsController extends Controller
         }
         $image = $request->file('img_news');
         $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images/slide/'), $new_name);
-        $url='images/slide/'.$new_name;
+        $image->move('../../images/news/', $new_name);
+        $url='images/news/'.$new_name;
         $data = array();
-        $data['home_action']='N';
+      //  $data['home_action']='N';
         $data['content']=$request->content_news;
         $data['title']=$request->name_news;
         $data['image_upload']=$url;
         DB::table('tbl_news')->insert($data);
         $mes['mes']='Thêm bài viết thành công';
-        $mes['data']= DB::table('tbl_news')->orderby('id','desc')->get();
+        $mes['data']= DB::table('tbl_news')->orderby('id','desc')   ->get();
         return json_encode($mes); 
     }
     public function delete_news($id)
     {
+        $image_path = DB::table('tbl_news')->where('id',$id)->get();
+       // return json_encode($image_path);
         DB::table('tbl_news')->where('id',$id)->delete();
+        if (file_exists('../../'. $image_path[0]->image_upload)) {
+          @unlink('../../'. $image_path[0]->image_upload);
+        }
         $data = DB::table('tbl_news')->orderby('id','desc')->get();
         return json_encode($data);
     } 
@@ -68,7 +70,7 @@ class NewsController extends Controller
         return json_encode($mes);   
         }
         $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images/slide/'), $new_name);
+        $image->move('../../images/news', $new_name);
         $url='images/slide/'.$new_name;
 
 

@@ -121,6 +121,11 @@ class AccountAdminController extends Controller
         $mes['mes']='Vui lòng không để trống !';
         return json_encode($mes);    
         }
+        if(strlen($request->pass_admin) < 6)
+        {
+        $mes['mes']='Mật khẩu phải tối thiểu 6 kí tự ';
+        return json_encode($mes);  
+        }
         $data= array();
         $data['password']=md5($request->pass_admin);
         DB::table('tbl_account_admin')->where('id',$request->id_admin)->update($data);
@@ -160,12 +165,6 @@ class AccountAdminController extends Controller
         return json_encode($mes);    
         }
         $per = $request->arr_per1;
-        if($request->full_name == '' || $request->username=='' || $request->email==''
-            || $request->account_type == 0 ||$request->password_admin=='' || $request->phone_number=='' )
-        {
-        $mes['mes']='Vui lòng điền đủ trường !';
-        return json_encode($mes);
-        }
         if(empty($per))
         {
         $mes['mes']='Bạn chưa phân quyền !';
@@ -178,8 +177,8 @@ class AccountAdminController extends Controller
         $data['id_type']= $request->account_type;
         $data['password']= md5($request->password_admin);
         $data['phone_number']=$request->phone_number;
-        $data['status']='Y';
-        $data['force_sign_out']='1';	
+        // $data['status']='Y';
+        // $data['force_sign_out']='0';	
         DB::table('tbl_account_admin')->insert($data);
         $id_admin= DB::table('tbl_account_admin')->orderby('id','desc')->get();
         $id_admin[0]->id;
@@ -206,11 +205,17 @@ class AccountAdminController extends Controller
     }
     public function update_account_admin(Request $request)
     {
-        if($request->full_name == '' || $request->username=='' || $request->email==''|| $request->phone_number=='' )
-        {
-        $mes['mes']='Vui lòng điền đủ trường !';
-        return json_encode($mes);
-        }
+        // $id = [];
+        // array_push($id,$request->id);
+        // $check = DB::table('tbl_account_admin')
+        // ->where('username',$request->username)
+        // ->whereNotIn('id',$id)
+        // ->get();
+        // if(count($check) > 0)
+        // {
+        //     $mes['mes']='Tên đăng nhập đã tồn tại';
+        //     return json_encode($mes); 
+        // }
         if($request->account_type==0)
         {
         $data = array();
@@ -264,6 +269,7 @@ class AccountAdminController extends Controller
         $check = DB::table('tbl_account_admin')->where('id',$request->id_admin)->where('password',md5($request->old_password))->get();
         $count = count($check);
         $min = $request->new_password;
+      //  if($request->)
         if($count > 0 )
         {
             $data['password']=md5($request->new_password);
@@ -274,6 +280,5 @@ class AccountAdminController extends Controller
             $mes['mes']='Mật khẩu cũ không chính xác';
             return json_encode($mes);
         }
-       
     }
 }

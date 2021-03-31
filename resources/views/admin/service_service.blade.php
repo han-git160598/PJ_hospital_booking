@@ -1,7 +1,7 @@
 @extends('dashboard')
 @section('admin_content') 
    <body>
-    <div style="clear: both; height: 61px;"></div>
+    <div style="clear: both; height: 63px;"></div>
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <div class="col-lg-12">
@@ -78,7 +78,7 @@ function delete_service(id)
     var r=confirm('Waring! Bạn có muốn xóa không !!');
     if(r==true)
     {
-    console.log(id)
+
     $.ajax({
         url: '{{URL::to('/delete-service-service')}}'+'/'+id,
         type: 'GET',
@@ -98,7 +98,7 @@ function delete_service(id)
             </tr>`;
             $('tbody').html('');
             response.forEach(function (item) {
-                console.log(item.service);
+
             output+=`
             <tr>
                 <td class="project-title">
@@ -116,7 +116,7 @@ function delete_service(id)
             </tr>`;    
             });
             $('tbody').html(output); 
-            alert('Xóa dịch vụ thành công')
+            alert('Xóa dịch vụ thành công');
         }   
         }
     });
@@ -126,7 +126,7 @@ function delete_service(id)
 }
 function edit_service(id)
 {
-    console.log(id)
+
      $.ajax({
         url: '{{URL::to('/edit-service-service')}}'+'/'+id,
         type: 'GET',
@@ -177,9 +177,7 @@ function update_service(id)
     var service1=$('#service').val();
     var content1=$('#content').val();
     var price1=$('#price').val();
-    console.log(service1);
-    console.log(content1);
-    console.log(price1);
+ 
     $.ajax({
         url: '{{URL::to('/update-service-service')}}'+'/'+id,
         type: 'GET',
@@ -196,7 +194,7 @@ function update_service(id)
             </tr>`;
             $('tbody').html('');
             response.forEach(function (item) {
-                console.log(item.service);
+            
             output+=`
             <tr>
                 <td class="project-title">
@@ -214,11 +212,14 @@ function update_service(id)
             </tr>`;    
             });
             $('tbody').html(output);
+            alert('Cập nhật dịch vụ thành công')
         }
     });  
 }
 function disable_service(id)
 {
+    var r = confirm('Bạn có muốn vô hiệu hóa dịch vụ này')
+    if(r = true){
     $.ajax({
         url: '{{URL::to('/disable-service-service')}}'+'/'+id,
         type: 'GET',
@@ -233,7 +234,7 @@ function disable_service(id)
             </tr>`;
             $('tbody').html('');
             response.forEach(function (item) {
-                console.log(item.service);
+             
             output+=`
             <tr>
                 <td class="project-title">
@@ -251,8 +252,11 @@ function disable_service(id)
             </tr>`;    
             });
             $('tbody').html(output);        
+
         }
     });
+    alert('Vô hiệu hóa dịch vụ thành công');
+    }else{}
 }
 
 function search_service()

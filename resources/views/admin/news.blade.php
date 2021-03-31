@@ -1,7 +1,7 @@
 @extends('dashboard')
 @section('admin_content') 
    <body>
-    <div style="clear: both; height: 61px;"></div>
+    <div style="clear: both; height: 63px;"></div>
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <div class="col-lg-12">
@@ -19,7 +19,7 @@
                 <div class="inqbox-title">
                     <h5></h5>
                     <div class="inqbox-tools">
-                         <button type="button" name="x" id="x" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-warning">Thêm bài viết</button>
+                         <button type="button"  data-toggle="modal" data-target="#add_news_Modal" class="btn btn-warning">Thêm bài viết</button>
                     </div>
                 </div>
                 <div class="inqbox-content">
@@ -33,7 +33,7 @@
                     </div>
             
                       {{--  model thêm  --}}
-    <div id="add_data_Modal" class="modal fade">
+    <div id="add_news_Modal" class="modal fade">
             <div class="modal-dialog">
              <div class="modal-content">
               <div class="modal-header">
@@ -58,7 +58,7 @@
                 <span id="upload_ed_image"></span>
             <br/>
             <br/>
-            <input type="submit" name="insert" id="insert_category" value="Thêm" class="btn btn-success" />
+            <input type="submit" name="insert" id="insert_news" value="Thêm" class="btn btn-success" />
            </form>
               </div>
               <div class="modal-footer">
@@ -68,7 +68,7 @@
             </div>
            </div>
             {{--  update    --}}
-             <div id="update_data_Modal" class="modal fade">
+        <div id="update_news_Modal" class="modal fade">
             <div class="modal-dialog">
              <div class="modal-content">
               <div class="modal-header">
@@ -86,14 +86,14 @@
              <textarea name="content_news_ud" rows="8" id="content_news" class="form-control"></textarea>
            <div id="id_news"> </div>
             <br/>
-            <label><label>Hình ảnh (<font style="color: red">*</font>)</label>
+            <label><label> Hình ảnh (<font style="color: red">*</font>)</label>
                 <input type="file" id="img_news"  name="img_news_ud" class="form-control" multiple="multiple"  placeholder="Hình ảnh">
                 </label>
             <br/>
                 <span id="upload_ed_image"></span>
             <br/>
             <br/>
-            <input type="submit" name="update" id="insert_category" value="Thêm" class="btn btn-success" />
+            <button type="submit" name="update" id="insert_category" class="btn btn-success" />Cập nhật</button>
            </form>
               </div>
               <div class="modal-footer">
@@ -114,6 +114,7 @@
                                 <th>Nội dung</th>
                                 <th>Hình ảnh</th>
                                 <th style="width:30px;"></th>
+                                <th style="width:30px;"></th>
                             </tr>
                             @foreach($all_news as $key=> $value)
                             <tr id="{{$value->id}}">
@@ -132,12 +133,12 @@
                                 <td class="project-title">
                                     <p>{{substr($value->content, 0, 200)}} <p>
                                 </td>
-                                <td >
-                                <img alt="" height="150" width="150" src="{{$value->image_upload}}">
+                                <td class="project-title">
+                                <img alt="" height="150" width="150" src="../../{{$value->image_upload}}">
                                 </td>
                                 <td class="project-actions">
                                     <button onClick="edit_news({{$value->id}})" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Sửa </button>
-                                      {{--  <button type="button" name="x" id="x" data-toggle="modal" data-target="#update_data_Modal"><i class="fa fa-pencil"></i> Sửa </button>  --}}
+                                      {{--  <button type="button" name="x" id="x" data-toggle="modal" data-target="#update_news_Modal"><i class="fa fa-pencil"></i> Sửa </button>  --}}
                                 </td>
                                 <td class="project-actions">
                                     <button onClick="delete_news({{$value->id}})" class="btn btn-white btn-sm"><i class="fa fa-remove"></i> Xóa </button>
@@ -158,12 +159,15 @@
 <script>
 $( document ).ready(function() {
 
-     //clear data model
-     $('#add_data_Modal').on('hidden.bs.modal', function () {
-    $(this).find("input,textarea").val('').end();
-    });
+   //  clear data model
+  //  $('#add_news_Modal').on('hidden.bs.modal', function () {
+ //   $(this).find("input,textarea").val('').end();
+   // });
+   $('#add_news_Modal').on('hidden.bs.modal', function(){
+    $(this).find('form')[0].reset();
+});
     
-   
+
     $('#insert_news_form').on('submit', function(event) {
         event.preventDefault();
         $.ajax({
@@ -176,7 +180,7 @@ $( document ).ready(function() {
             processData: false,
             success: function(response) {
                  alert(response['mes']);
-                 console.log(response['data']);
+            
             if(response['data'] != 'faild')
             {
                  var output=`
@@ -186,10 +190,11 @@ $( document ).ready(function() {
                     <th>Nội dung</th>
                     <th>Hình ảnh</th>
                     <th style="width:30px;"></th>
+                    <th style="width:30px;"></th>
                 </tr>`;
                 $('tbody').html('');
                 response['data'].forEach(function (item) {
-                  //  console.log(item);
+                
                 output+=`
                 <tr>`;
                 if(item.home_action == 'Y')
@@ -208,21 +213,24 @@ $( document ).ready(function() {
                     </td>
                     <td class="project-title">
                         <p>${item.content.substr(0, 200)}<p>
-
                     </td>
-                    <td >
-                        <img alt="" height="150" width="150" src="${item.image_upload}">
+                    <td class="project-title">
+                        <img alt="" height="150" width="150" src="../../${item.image_upload}">
                     </td>
                     <td class="project-actions">
                         <button onClick="edit_news(${item.id})" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Sửa </button>
+                    </td>
+                    <td class="project-actions"> 
                         <button onClick="delete_news(${item.id})" class="btn btn-white btn-sm"><i class="fa fa-remove"></i> Xóa </button>
                     </td>
                 </tr>`;    
                 
                 });
-            }
-            $('tbody').html(output);   
-            $('#add_data_Modal').modal('hide');
+                 $('tbody').html(output);   
+                $('#add_news_Modal').modal('hide');
+              
+            }else{ alert('Thêm bài viết thất bại, kiểm tra thông tin trước khi thêm')}
+           
             }
         })
     });
@@ -241,7 +249,7 @@ $( document ).ready(function() {
              success: function(data) 
              {
                  alert(data['mes']);
-                 console.log(data);
+              //   console.log(data);
                  var output=``;
              
                   if(data['data'][0].home_action == 'Y')
@@ -261,8 +269,8 @@ $( document ).ready(function() {
                     <td class="project-title">
                         <p>${data['data'][0].content.substr(0, 200)} <p>
                     </td>
-                    <td >
-                    <img alt="Image" height="100" width="100" src="${data['data'][0].image_upload}">
+                    <td class="project-title">
+                    <img alt="Image" height="100" width="100" src="../../${data['data'][0].image_upload}">
                     </td>
                     <td class="project-actions">
                         <button onClick="edit_news(${data['data'][0].id})" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Sửa </button>
@@ -271,7 +279,7 @@ $( document ).ready(function() {
                         <button onClick="delete_news(${data['data'][0].id})" class="btn btn-white btn-sm"><i class="fa fa-remove"></i> Xóa </button>
                     </td>`;
                    $('#'+data['data'][0].id).html(output);   
-                   $('#update_data_Modal').modal('hide');
+                   $('#update_news_Modal').modal('hide');
              }
          });
     });
@@ -287,7 +295,7 @@ $.ajax({
         dataType: 'json',
         success: function (response) 
         {   
-            console.log(response);
+            //console.log(response);
            
         var output=`
             <label>Tên bài viết (<font style="color: red">*</font>)</label>
@@ -299,7 +307,7 @@ $.ajax({
             <br/>
             <label><label>Hình ảnh (<font style="color: red">*</font>)</label>
             <input type="file" id="img_news" value="${response[0].image_upload}" accept="image/png, image/jpeg" name="img_news_ud" class="form-control" multiple="multiple"  placeholder="Hình ảnh">
-            <img src="${response[0].image_upload}" height="150" width="200" >
+            <img src="../../${response[0].image_upload}" height="150" width="200" >
             </label>
             <br/>
                 <span id="upload_ed_image"></span>
@@ -312,7 +320,7 @@ $.ajax({
 
         }
     });
-    $('#update_data_Modal').modal('show');
+    $('#update_news_Modal').modal('show');
 }
 
  
@@ -328,167 +336,6 @@ function delete_news(id)
         success: function (response) 
         {
             var output=`
-            <tr> 
-                <th style="width:30px;"></th>
-                <th>Tên bài viêt</th>
-                <th>Nội dung</th>
-                <th>Hình ảnh</th>
-                <th style="width:30px;"></th>
-            </tr>`;
-            $('tbody').html('');
-            response.forEach(function (item) {
-                console.log(item);
-            output+=`
-            <tr>`;
-            if(item.home_action == 'Y')
-            output+=` 
-                <td class="project-status">
-                     <button class="label label-primary" onClick="disable_news(${item.id})" >Disable</button>
-                </td>`;
-            else
-            output+=`  
-                <td class="project-status">
-                     <button class="label label-primary" onClick="enable_news(${item.id}))" >Enable</button>
-                </td>`;  
-            output+=`
-                <td class="project-title">
-                    <p>${item.title.substr(0, 200)}<p>
-                </td>
-                <td class="project-title">
-                    <p>${item.content.substr(0, 200)}<p>
-
-                </td>
-                <td >
-                     <img alt="" height="150" width="150" src="${item.image_upload}">
-                </td>
-                <td class="project-actions">
-                    <button onClick="edit_news(${item.id})" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Sửa </button>
-                    <button onClick="delete_news(${item.id})" class="btn btn-white btn-sm"><i class="fa fa-remove"></i> Xóa </button>
-                </td>
-            </tr>`;    
-            });
-            $('tbody').html(output);   
-        }
-    }); 
-    }else{
-        
-    }
-}
-
-
-
-function disable_news(id)
-{
-    $.ajax({
-        url: '{{URL::to('/disable-news')}}'+'/'+id,
-        type: 'GET',
-        dataType: 'json',
-        success: function (response) 
-        {
-            var output=`
-            <tr> 
-                <th style="width:30px;"></th>
-                <th>Tên bài viêt</th>
-                <th>Nội dung</th>
-                <th>Hình ảnh</th>
-                <th style="width:30px;"></th>
-            </tr>`;
-            response.forEach(function (item) {
-                console.log(item);
-            output+=`
-            <tr>`;
-            if(item.home_action == 'Y')
-            output+=` 
-                <td class="project-status">
-                     <button class="label label-primary" onClick="disable_news(${item.id})" >Disable</button>
-                </td>`;
-            else
-            output+=`  
-                <td class="project-status">
-                     <button class="label label-primary" onClick="enable_news(${item.id})" >Enable</button>
-                </td>`;  
-            output+=`
-                <td class="project-title">
-                    <p>${item.title.substr(0, 200)}</p>  
-                </td>
-                <td class="project-title">
-                    <p> ${item.content.substr(0, 200)} VND</p> 
-                </td>
-                <td >
-                     <img alt="" height="150" width="150" src="${item.image_upload}">
-                </td>
-                <td class="project-actions">
-                    <button onClick="edit_news(${item.id})" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Sửa </button>
-                    <button onClick="delete_news(${item.id})" class="btn btn-white btn-sm"><i class="fa fa-remove"></i> Xóa </button>
-                </td>
-            </tr>`;    
-            });
-            $('tbody').html(output);
-        }
-    });   
-}
-function enable_news(id)
-{
-    console.log(id);
-    $.ajax({
-        url: '{{URL::to('/enable-news')}}'+'/'+id,
-        type: 'GET',
-        dataType: 'json',
-        success: function (response) 
-        {
-            var output=`
-            <tr> 
-                <th style="width:30px;"></th>
-                <th>Tên bài viêt</th>
-                <th>Nội dung</th>
-                <th>Hình ảnh</th>
-                <th style="width:30px;"></th>
-            </tr>`;
-            response.forEach(function (item) {
-                console.log(item);
-            output+=`
-            <tr>`;
-            if(item.home_action == 'Y')
-            output+=` 
-                <td class="project-status">
-                     <button class="label label-primary" onClick="disable_news(${item.id})" >Disable</button>
-                </td>`;
-            else
-            output+=`  
-                <td class="project-status">
-                     <button class="label label-primary" onClick="enable_news(${item.id})" >Enable</button>
-                </td>`;  
-            output+=`
-                <td class="project-title">
-                    <p>${item.title.substr(0, 200)}</p>  
-                </td>
-                <td class="project-title">
-                    <p> ${item.content.substr(0, 200)} VND</p> 
-                </td>
-                <td >
-                     <img alt="" height="150" width="150" src="${item.image_upload}">
-                </td>
-                <td class="project-actions">
-                    <button onClick="edit_news(${item.id})" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Sửa </button>
-                    <button onClick="delete_news(${item.id})" class="btn btn-white btn-sm"><i class="fa fa-remove"></i> Xóa </button>
-                </td>
-            </tr>`;    
-            });
-            $('tbody').html(output);
-        }
-    });       
-}
-$('#search_news').keyup(function(){
-    var result= $('#search_news').val();
-    $.ajax({
-        type:"POST",
-        url:'{{URL::to('/search-news')}}',
-        data: { result:result},
-        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        dataType:"json",
-        success: function(response)
-        {
-         var output=`
             <tr> 
                 <th style="width:30px;"></th>
                 <th>Tên bài viêt</th>
@@ -519,11 +366,179 @@ $('#search_news').keyup(function(){
                     <p>${item.content.substr(0, 200)}<p>
 
                 </td>
-                <td >
-                     <img alt="" height="150" width="150" src="${item.image_upload}">
+                <td class="project-title">
+                     <img alt="" height="150" width="150" src="../../${item.image_upload}">
                 </td>
                 <td class="project-actions">
                     <button onClick="edit_news(${item.id})" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Sửa </button>
+                </td>
+                <td class="project-actions">               
+                    <button onClick="delete_news(${item.id})" class="btn btn-white btn-sm"><i class="fa fa-remove"></i> Xóa </button>
+                </td>
+            </tr>`;    
+            });
+            $('tbody').html(output);   
+            alert('Xóa bài viết thành công');
+        }
+       
+    }); 
+    }else{
+        
+    }
+}
+
+
+
+function disable_news(id)
+{
+    $.ajax({
+        url: '{{URL::to('/disable-news')}}'+'/'+id,
+        type: 'GET',
+        dataType: 'json',
+        success: function (response) 
+        {
+            var output=`
+            <tr> 
+                <th style="width:30px;"></th>
+                <th>Tên bài viêt</th>
+                <th>Nội dung</th>
+                <th>Hình ảnh</th>
+                <th style="width:30px;"></th>
+            </tr>`;
+            response.forEach(function (item) {
+              
+            output+=`
+            <tr>`;
+            if(item.home_action == 'Y')
+            output+=` 
+                <td class="project-status">
+                     <button class="label label-primary" onClick="disable_news(${item.id})" >Disable</button>
+                </td>`;
+            else
+            output+=`  
+                <td class="project-status">
+                     <button class="label label-primary" onClick="enable_news(${item.id})" >Enable</button>
+                </td>`;  
+            output+=`
+                <td class="project-title">
+                    <p>${item.title.substr(0, 200)}</p>  
+                </td>
+                <td class="project-title">
+                    <p> ${item.content.substr(0, 200)} VND</p> 
+                </td>
+                <td class="project-title">
+                     <img alt="" height="150" width="150" src="../../${item.image_upload}">
+                </td>
+                <td class="project-actions">
+                    <button onClick="edit_news(${item.id})" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Sửa </button>
+                </td><td class="project-actions">
+                    <button onClick="delete_news(${item.id})" class="btn btn-white btn-sm"><i class="fa fa-remove"></i> Xóa </button>
+                </td>
+            </tr>`;    
+            });
+            $('tbody').html(output);
+        }
+    });   
+}
+function enable_news(id)
+{
+   // console.log(id);
+    $.ajax({
+        url: '{{URL::to('/enable-news')}}'+'/'+id,
+        type: 'GET',
+        dataType: 'json',
+        success: function (response) 
+        {
+            var output=`
+            <tr> 
+                <th style="width:30px;"></th>
+                <th>Tên bài viêt</th>
+                <th>Nội dung</th>
+                <th>Hình ảnh</th>
+                <th style="width:30px;"></th>
+            </tr>`;
+            response.forEach(function (item) {
+             
+            output+=`
+            <tr>`;
+            if(item.home_action == 'Y')
+            output+=` 
+                <td class="project-status">
+                     <button class="label label-primary" onClick="disable_news(${item.id})" >Disable</button>
+                </td>`;
+            else
+            output+=`  
+                <td class="project-status">
+                     <button class="label label-primary" onClick="enable_news(${item.id})" >Enable</button>
+                </td>`;  
+            output+=`
+                <td class="project-title">
+                    <p>${item.title.substr(0, 200)}</p>  
+                </td>
+                <td class="project-title">
+                    <p> ${item.content.substr(0, 200)} VND</p> 
+                </td>
+                <td class="project-title" >
+                     <img alt="" height="150" width="150" src="../../${item.image_upload}">
+                </td>
+                <td class="project-actions">
+                    <button onClick="edit_news(${item.id})" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Sửa </button>
+                </td><td class="project-actions">
+                    <button onClick="delete_news(${item.id})" class="btn btn-white btn-sm"><i class="fa fa-remove"></i> Xóa </button>
+                </td>
+            </tr>`;    
+            });
+            $('tbody').html(output);
+        }
+    });       
+}
+$('#search_news').keyup(function(){
+    var result= $('#search_news').val();
+    $.ajax({
+        type:"POST",
+        url:'{{URL::to('/search-news')}}',
+        data: { result:result},
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        dataType:"json",
+        success: function(response)
+        {
+         var output=`
+            <tr> 
+                <th style="width:30px;"></th>
+                <th>Tên bài viêt</th>
+                <th>Nội dung</th>
+                <th>Hình ảnh</th>
+                <th style="width:30px;"></th>
+                <th style="width:30px;"></th>
+            </tr>`;
+            $('tbody').html('');
+            response.forEach(function (item) {
+               
+            output+=`
+            <tr>`;
+            if(item.home_action == 'Y')
+            output+=` 
+                <td class="project-status">
+                     <button class="label label-primary" onClick="disable_news(${item.id})" >Disable</button>
+                </td>`;
+            else
+            output+=`  
+                <td class="project-status">
+                     <button class="label label-primary" onClick="enable_news(${item.id})" >Enable</button>
+                </td>`;  
+            output+=`
+                <td class="project-title">
+                    <p>${item.title.substr(0, 200)}<p>
+                </td>
+                <td class="project-title">
+                    <p>${item.content.substr(0, 200)}<p>
+                </td>
+                <td class="project-title">
+                     <img alt="" height="150" width="150" src="../../${item.image_upload}">
+                </td>
+                <td class="project-actions">
+                    <button onClick="edit_news(${item.id})" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Sửa </button>
+                </td><td class="project-actions">
                     <button onClick="delete_news(${item.id})" class="btn btn-white btn-sm"><i class="fa fa-remove"></i> Xóa </button>
                 </td>
             </tr>`;    
