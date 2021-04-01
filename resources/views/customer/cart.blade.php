@@ -150,6 +150,7 @@ p{
      <div class="col-sm-5">
             <div class="inqbox ">
             <div class="inqbox-content" id="detail_profile">
+               
                 <div class="tab-content" hidden>
                     <div id="contact-1" class="tab-pane active">
                         <div class="row m-b-lg">
@@ -230,28 +231,27 @@ p{
        <center><h2 class="modal-title"><strong style="color:black">Phương thức thanh toán</strong></h2></center>
       </div>
       <div class="modal-body">
+      <form>
         <table class="total_history">
                 <tr> 
                     <td><strong style="color:#10ABFE">  <span style="color:blue;"><i><img src="../backend/icon/cash in hand.svg"></i> <i><img src="../backend/icon/Thanh toán chi phí tại bệnh viện.svg"></i> </span></strong></td>
-                    <td><strong style="color:#10ABFE"> <input type="radio" name="radio_pay"> </strong></td>
+                    <td><strong style="color:#10ABFE"> <input onChange="cash_in_hand()" checked type="radio" name="radio_pay"> </strong></td>
                 </tr>
                 <tr> 
                     <td><strong style="color:#10ABFE">  <span style="color:blue;"><i><img src="../backend/icon/online payment.svg"></i> <i><img src="../backend/icon/Thanh toán chi phí qua chuyển khoản.svg"></i> </span></strong></td>
-                    <td><strong style="color:#10ABFE"> <input type="radio" name="radio_pay"></strong></td>
+                    <td><strong style="color:#10ABFE"> <input onChange="online_payment()" type="radio" name="radio_pay"></strong></td>
                 </tr>
         </table>
-       
-       
-       <center><img alt="" height="270" width="250" src="{{ asset('backend/icon/img_paypal.svg')}}"> </center>
-       <center><h2><strong style="color:orange"> Lưu ý :</strong></h2></center>
-       <p>Đối với khách hàng thanh toán trực tiếp tại bệnh viện chúng tôi sẽ hỗ trợ đặt lịch khám cho khách hàng. Tuy nhiên số thứ tự khám bệnh sẽ được cấp sau khi khách hàng thanh toán chi phí khám cho bệnh viện. </p>
-       
+       </form>
+        <div id="img_type_pay">
+            <center><img alt="" height="270" width="250" src="{{ asset('backend/icon/img_paypal.svg')}}"> </center>
+            <center><h2><strong style="color:orange"> Lưu ý :</strong></h2></center>
+            <p style="color:black">Đối với khách hàng thanh toán trực tiếp tại bệnh viện chúng tôi sẽ hỗ trợ đặt lịch khám cho khách hàng. Tuy nhiên số thứ tự khám bệnh sẽ được cấp sau khi khách hàng thanh toán chi phí khám cho bệnh viện. </p>
+        </div>
        </div>
 
-        
-   
       <div class="modal-footer">
-       <button type="button" data-dismiss="modal" id="insert_service" onClick="insert_service()" class="btn btn-danger">Chọn ngay</button>
+       <button type="button" data-dismiss="modal" id="insert_service" onClick="select_type_payment()" class="btn btn-danger">Chọn ngay</button>
        <button type="button" class="btn btn-default" data-dismiss="modal"> Đóng </button>
       </div>
       

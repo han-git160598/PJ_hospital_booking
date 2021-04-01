@@ -44,7 +44,7 @@ function formatNumber(num) {
   }
   function customer_sex_fill_info(sex)
   {
-    if(sex == "Nam")
+    if(sex == 'Nam')
     {
         return 'male';
     }
@@ -54,7 +54,7 @@ function formatNumber(num) {
     }
   }
 
-  function payment_type(type,item)
+  function payment_type(type)
   {
       if(type==1)
       {
@@ -62,6 +62,20 @@ function formatNumber(num) {
       }else{
         return `<h5> <span style="color:blue;"><i><img src="../backend/icon/online payment.svg"></i> <i><img src="../backend/icon/Thanh toán chi phí qua chuyển khoản.svg"></i> </span></h5>
         <img alt="" height="200px" width="99%" src="#">
+        `;
+      }
+  }
+  function select_payment_type(type)
+  {
+      if(type==1)
+      {
+        return `
+        <input type="text" hidden id="payment_type" value="1">
+        <span style="color:blue;"><i><img src="../backend/icon/cash in hand.svg"></i> <i><img src="../backend/icon/Thanh toán chi phí tại bệnh viện.svg"></i> </span> `;
+      }else{
+        return `
+        <input type="text" hidden id="payment_type" value="2">
+        <span style="color:blue;"><i><img src="../backend/icon/online payment.svg"></i> <i><img src="../backend/icon/Thanh toán chi phí qua chuyển khoản.svg"></i> </span>
         `;
       }
   }
