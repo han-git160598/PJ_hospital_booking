@@ -67,7 +67,7 @@ function form_profile_cart()
 {
    var a = $('#type_cars').val();
    var count_cart = JSON.parse(localStorage.getItem('service_service'));
-   var account_customer = JSON.parse(localStorage.getItem('account_customer'));
+   var account_customer = JSON.parse(localStorage.getItem('account_customer')); //test
 
    if(account_customer == null || account_customer == '')
    {
