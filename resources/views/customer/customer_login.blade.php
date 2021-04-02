@@ -52,14 +52,14 @@
                             ?></span></center> </h4>
                   <form class="m-t" role="form" action="{{URL::to('login-customer')}}">
                      <div class="form-group">
-                        <input type="text" class="form-control" name="username" placeholder="Tên đăng nhập" required="">
+                        <input type="text" class="form-control" id="username_customer" placeholder="Số điện thoại" required="">
                      </div>
                      <div class="form-group">
-                        <input type="password" class="form-control" name="password" placeholder="Mật khẩu" required="">
+                        <input type="password" class="form-control" id="password_customer" placeholder="Mật khẩu" required="">
                      </div>
                      <a id="Forgot_password" data-toggle="modal" data-target="#Forgot_password_modal">Quên mật khẩu ?</a>  
                      <hr>
-                     <button type="submit" class="btn btn-primary block full-width m-b"> Đăng nhập </button>
+                     <button type="button" onClick="customer_login()" class="btn btn-primary block full-width m-b"> Đăng nhập </button>
                        
                   </form>
                    <p>Bạn không có tài khoản, <a data-toggle="modal" data-target="#myModal6">Đăng ký</a></p>
@@ -87,6 +87,7 @@
                </div>
                <div class="modal-footer">
                   <button type="button" class="btn btn-white" data-dismiss="modal">Đóng</button>
+                  <button type="button" onclick="phoneAuth()">Tiếp tục</button>
                   <button type="button" data-toggle="modal" data-target="#Verification_modal" class="btn btn-primary">Tiếp tục</button>
                </div>
             </div>
@@ -227,8 +228,13 @@
 {{--  -------------------------------------------------------------  --}}
 
    </body>
-   <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-<script src="{{ asset('backend/js/jquery-2.1.1.js')}}"></script>
+ 
+    <script src="{{ asset('backend/customer-js/customer_local.js') }}"></script>
+    <script src="{{ asset('backend/customer-js/account_customer.js') }}"></script>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+  <script src="{{ asset('backend/js/jquery-2.1.1.js')}}"></script>
   <script src="{{ asset('backend/js/bootstrap.min.js')}}"></script>
   <script src="{{ asset('backend/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
   <script src="{{ asset('backend/js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>

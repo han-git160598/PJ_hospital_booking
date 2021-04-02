@@ -86,8 +86,8 @@ p{
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane active">
                         <div class="full-height-scroll">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-hover">
+                            <div class="table-responsive" style="width:100%;height:600px; overflow: auto;">
+                                <table class="table table-striped table-hover" >
                                 <tbody>
                                     <tr>
                                         
@@ -100,17 +100,17 @@ p{
                                     </tr>
 
                                     </tbody>
-                                    <tbody id="list_booking_history">
-                                    <tr>
+                                    <tbody id="list_booking_history" >
+                                    {{--  <tr>
                                         <th style="30px"></th>
                                         <td>MH 51222366</td>
                                         <td>20/11/2020 9:30</td>
                                         <td>Khám nội tổng quát ...</td>
                                         <td><center><button class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </button></center></td>
                                         
-                                    </tr>
-                                    
+                                    </tr>  --}}
                                     </tbody>
+                                   
                                 </table>
                             </div>
                         </div>
@@ -322,9 +322,9 @@ p{
                 <p><label>Lọc trạng thái:</label></p>
                  <select class="form-control" id="status_booking">
                     <option value=''>Tất cả</option>
-                    <option value='waiting_confirm'>Chờ xác nhận</option>
-                    <option value='schedule'>Lịch hẹn</option>
-                    <option value='wait_result'>Hoàn thành</option>
+                    <option value='1'>Chờ xác nhận</option>
+                    <option value='2'>Chờ kết quả</option>
+                    <option value='4'>Hoàn thành</option>
                 </select>
                 <p><label>Loại đơn khám:</label></p>
                  <select class="form-control" id="type_customer">
@@ -332,9 +332,7 @@ p{
                     <option value=1>Đơn cá nhân</option>
                     <option value=2>Đơn khám hộ</option>
                 </select>
-                <p><label>Thời gian bắt đầu:</label></p>
-                <input type="month" class="form-control" id="start_time_booking"> 
-                <p><label>Thời gian kết thúc:</label></p>
+                <p><label>Thời gian:</label></p>
                 <input type="month" class="form-control" id="finish_time_booking"> 
                 <center><menu class="menu">
                 <button class="btn btn-secondary">Hủy </button>

@@ -1,5 +1,5 @@
 const urlapi = "http://localhost/api_hospital/";
-const urlserver = "http://diendengiadung.com/";
+const urlserver = "http://127.0.0.1:8000/";
 const urlsocket = "https://exchangekse.herokuapp.com/";
 const headers = {"Authorization": "Basic YWRtaW46cXRjdGVrQDEyMwx=="};
 function formatNumber(num) {
@@ -18,6 +18,29 @@ function formatNumber(num) {
       if(status == 'wait_result')
       {
           return 'Hoàn tất';
+      }
+  }
+  function booking_status_number(status)
+  {
+      if(status == '1')
+      {
+          return 'Chờ xác nhận';
+      }
+      if(status =='2')
+      {
+          return 'Đã đặt lịch';
+      }
+      if(status =='3')
+      {
+          return 'Chờ kết quả';
+      }
+      if(status == '4')
+      {
+          return 'Hoàn tất';
+      }
+      if(status == '5')
+      {
+          return 'Hủy bỏ';
       }
   }
   function billing_type(type)

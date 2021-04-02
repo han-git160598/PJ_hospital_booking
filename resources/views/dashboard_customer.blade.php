@@ -149,7 +149,7 @@
                             <li class="dropdown pull-right">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                     <span class="pl15"><i id="cart" class="fa fa-cart-plus"></i></span><span id="badge" class="badge badge-danger">4</span>
-                                    <span class="pl15"><i class="fa fa-user"></i></span>
+                                    <span class="pl15"><i class="fa fa-user"></i><span id="username">ss</span></span>
                                     <span class="caret caret-tp"></span>
                                 </a>
                                 <ul class="dropdown-menu animated m-t-xs">
@@ -282,7 +282,7 @@
                     </div>
                     <div class="modal-footer">
                         <form action="{{ URL::to('/page/logout') }}" method="get">
-                            <button type="submid" class="btn btn-secondary">Yes</button>
+                            <button type="button" onClick="customer_logout()" class="btn btn-secondary">Yes</button>
                             <button type="button"class="btn btn-secondary" data-dismiss="modal">No</button>
                         </form>
 
@@ -296,8 +296,10 @@
 
 <!-- Mainly scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    {{--  <script src="{{ asset('backend/js/laravel_echo.js') }}"></script>
-    <script src="{{ asset('backend/js/socket.js') }}"></script>  --}}
+   
+    <script src="{{ asset('backend/customer-js/customer_local.js') }}"></script>
+    <script src="{{ asset('backend/customer-js/account_customer.js') }}"></script>
+
 
     <script src="{{ asset('backend/js/jquery-2.1.1.js')}}"></script>
     <script src="{{ asset('backend/js/bootstrap.min.js')}}"></script>

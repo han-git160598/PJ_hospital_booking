@@ -75,6 +75,7 @@ function search_service_service()
 }
 function add_cart(data)
 {
+
     var flag  = 0 ;
     var item  = arr_service_service[data];
     

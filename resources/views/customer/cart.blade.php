@@ -94,7 +94,8 @@ p{
                                         <th style="30px"></th>
                                         <th>Tên dich vụ</th>
                                         <th>Giá tiền</th>
-                                        <th colspan="2"><center>Hành động</center></th>
+                                        <th colspan="2"><center>Hành động </center></th>
+                                        <th><button class="btn btn-primary btn-sm" >Xóa hết</button></th>
                                     </tr>
 
                                     </thead>
@@ -114,7 +115,7 @@ p{
                             <table class="total_history" >
                                 <tr> 
                                 <td><strong  style="color:#44C13C;font-size: large;">  Tổng tiền:</strong></td>
-                                <td><strong id="total_service_price"  style="color:#44C13C;font-size: large;"> 80.000.000 VND</h2></strong></td>
+                                <td><strong id="total_service_price"  style="color:#44C13C;font-size: large;"> 0 VND</h2></strong></td>
                                 </tr>
                             </table>
                         <select id="type_cars" onchange="form_profile_cart()" class="btn btn-danger btn-sm btn-block">

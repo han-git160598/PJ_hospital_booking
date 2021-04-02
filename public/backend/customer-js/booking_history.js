@@ -2,32 +2,39 @@
 
 
 var arr_booking_history=[];
+var customer = JSON.parse(localStorage.getItem('account_customer'));
 $(document).ready(function() {
-    var tam="";
+    
     let i=0;
     $.ajax({
         url: urlapi,
         type: 'POST',
-        data: { detect: 'list_booking_history',limit: '100',id_customer:31 },
+        data: { detect: 'list_booking_history',limit: '100',id_customer:customer.id },
         dataType: 'json',
         headers: headers,
         success: function(response) 
         {
-            var output=``;
-            response.data.forEach(function(item) {
-            arr_booking_history.push(item);
-            output+=`
-            <tr>
-            <th style="30px"></th>
-            <td>${item.booking_code}</  td>
-            <td>${item.booking_date}</td>
-            <td>${item.booking_service[0].service_title}...</td>
-            <td colspan="2">
-                <center><button onClick="detail_booking_history(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </button></center>
-            </td>
-            </tr>`;
-            i++;
-        });
+            if(response.data == '')
+            {
+                alert('Chưa có lịch sử khám')
+            }else{
+                var output=``;
+                response.data.forEach(function(item) {
+                    arr_booking_history.push(item);
+                    output+=`
+                    <tr>
+                    <th style="30px"></th>
+                    <td>${item.booking_code}</  td>
+                    <td>${item.booking_date}</td>
+                    <td>${item.booking_service[0].service_title}...</td>
+                    <td colspan="2">
+                        <center><button onClick="detail_booking_history(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </button></center>
+                    </td>
+                    </tr>`;
+                    i++;
+                });
+            }
+            
         $('#list_booking_history').html(output);
         }
     });
@@ -35,6 +42,7 @@ $(document).ready(function() {
 function detail_booking_history(data)
 {
     var item  = arr_booking_history[data];
+    console.log((item.booking_status));
     var output =` 
     <div class="tab-content">
     <div id="contact-1" class="tab-pane active">
@@ -52,7 +60,7 @@ function detail_booking_history(data)
                 <table class="total_history">
                     <tr> 
                         <td><strong style="color:#000000"> Trạng thái:</strong></td>
-                        <td><strong style="color:#000000"> ${booking_status(item.booking_status)}</strong></td>
+                        <td><strong style="color:#000000"> ${booking_status_number(item.booking_status)}</strong></td>
                     </tr>
                     <tr> 
                         <td><strong style="color:#44C13C"> Mã đơn hàng :</strong></td>
@@ -240,20 +248,45 @@ function filter_booking_history()
 {
     var status_booking= $('#status_booking').val();
     var type_customer= $('#type_customer').val();
-    var start_time_booking = $('#start_time_booking').val();
     var finish_time_booking=$('#finish_time_booking').val();
-   // var key_service_packet=booking_status(status_booking);
+    
+    console.log(finish_time_booking);
+   let i =0;
     $.ajax({
         url: urlapi,
         type: 'POST',
         data: { detect: 'list_booking_history', 
         date_option:'',
-        booking_status: status_booking,limit: '20',id_customer:31 },
+        booking_status: status_booking,
+        booking_type:type_customer,
+        limit: '20',id_customer:customer.id },
         dataType: 'json',
         headers: headers,
         success: function(response) 
         {
             console.log(response);
+            if(response.data == '')
+            {
+                alert('Không tìm thấy yêu cầu')
+            }else{
+                var output=``;
+                response.data.forEach(function(item) {
+                    arr_booking_history.push(item);
+                    output+=`
+                    <tr>
+                    <th style="30px"></th>
+                    <td>${item.booking_code}</  td>
+                    <td>${item.booking_date}</td>
+                    <td>${item.booking_service[0].service_title}...</td>
+                    <td colspan="2">
+                        <center><button onClick="detail_booking_history(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </button></center>
+                    </td>
+                    </tr>`;
+                    i++;
+                });
+            }
+            
+        $('#list_booking_history').html(output);
         }
     });
 
