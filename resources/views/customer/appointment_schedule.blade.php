@@ -100,14 +100,14 @@ p{
                                     </tr>
                                     </tbody>
                                     <tbody id="list_billing_billing">
-                                    <tr>
+                                    {{--  <tr>
                                         <th style="30px"></th>
                                         <td>MH 51222366</td>
                                         <td>20/11/2020 9:30</td>
                                        
                                         <td><center><button class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </button></center></td>
                                         
-                                    </tr>
+                                    </tr>  --}}
                                     
                                     </tbody>
                                 </table>
@@ -264,7 +264,7 @@ p{
             </div>
         </div>
     </div>
-</div>
+</div> 
 
 </body>
     <script src="{{ asset('backend/js/jquery-3.5.0.min.js') }}"></script>

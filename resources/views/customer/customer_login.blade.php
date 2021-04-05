@@ -125,7 +125,7 @@
             <div class="modal-content">
                <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                  <h5 class="modal-title"><strong style="color:black">Nhập mã xác minh </strong></h5>
+                  <h5 class="modal-title"><strong style="color:black"> Nhập thông tin cá nhân</strong></h5>
                </div>
                <div class="modal-body">
                   <form>

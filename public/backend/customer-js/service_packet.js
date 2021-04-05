@@ -28,7 +28,7 @@ function list_service_packet()
             output+=`
             <tr>
             <th style="30px"></th>
-            <td>${item.service_packet_title}</td>
+            <td> <img alt="image" width="25px" height="25px"  src="../backend/icon/service_packet.svg"> ${item.service_packet_title}</td>
             <td>${formatNumber(item.service_packet_total)} VND</td>
             <td colspan="2"><center><button onClick="detail_service_packet(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </button>
             <button onClick="add_cart(${i})" class="btn btn-primary btn-sm"><i class="fa fa-cart-plus"></i></button></center></td>
@@ -103,8 +103,10 @@ function detail_service_packet(data)
     $('#detail_service_packet_data').fadeOut().html(output);
     $('#detail_service_packet_data').fadeIn().html(output);
 }
-function search_service_service()
+function search_service_packet()
 {
+    let i=0;
+    arr_service_packet=[];
     var key_service_packet = $('#key_service_packet').val();
     $.ajax({
         url: urlapi,
@@ -116,23 +118,25 @@ function search_service_service()
         {
             var output=``;
             response.data.forEach(function(item) {
+            arr_service_packet.push(item);
             output+=`
             <tr>
-                <th style="30px"></th>
-                <td>${item.service_title}</td>
-                <td >${item.service_content}</td>
-                <td>${formatNumber(item.service_price)} VND</td>
-                <td colspan="2"><center>
-                <button class="btn btn-primary btn-sm"><i class="fa fa-cart-plus"></i></button></center></td>
+            <th style="30px"></th>
+            <td><img alt="image" width="25px" height="25px"  src="../backend/icon/service_packet.svg"> ${item.service_packet_title}</td>
+            <td>${formatNumber(item.service_packet_total)} VND</td>
+            <td colspan="2"><center><button onClick="detail_service_packet(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </button>
+            <button onClick="add_cart(${i})" class="btn btn-primary btn-sm"><i class="fa fa-cart-plus"></i></button></center></td>
             </tr>`;
+            i++;
             });
-            $('#list_service_service').html(output);
+            $('#list_service_packet').html(output);
         }
     });
 }
 
 function add_cart(data)
 {
+    var count_cart=0;
     var flag =0;
     var item  = arr_service_packet[data];
     var arr_service =[JSON.parse(localStorage.getItem('service_service'))];

@@ -2,8 +2,6 @@
 $(document).ready(function() {
     var output = localStorage.getItem('total_cart');
     $('#badge').html(output);
-
-    
     list_cart();
 });
 function list_cart()
@@ -67,7 +65,7 @@ function form_profile_cart()
 {
    var a = $('#type_cars').val();
    var count_cart = JSON.parse(localStorage.getItem('service_service'));
-   var account_customer = JSON.parse(localStorage.getItem('account_customer')); //test
+   var account_customer = JSON.parse(localStorage.getItem('account_customer'));
 
    if(account_customer == null || account_customer == '')
    {
@@ -86,7 +84,7 @@ function form_profile_cart()
             <div id="contact-1" class="tab-pane active">
                 <div class="row m-b-lg">
                 <div class="col-lg-12 text-center">
-                    <h2><strong style="color:#10ABFE"> Khám cá nhân </strong></h2>
+                    <h2><strong style="color:#blue"> Khám cá nhân </strong></h2>
                 </div>
                 </div>
                 <div class="client-detail">
@@ -96,34 +94,34 @@ function form_profile_cart()
                     <div>
                     <table class="total_history">
                         <tr> 
-                            <td><strong style="color:#10ABFE"> Họ & Tên</strong></td>
-                            <td><strong id="customer_name" style="color:#10ABFE">${account_customer.full_name}</strong></td>
+                            <td><strong style="color:#blue"> Họ & Tên</strong></td>
+                            <td><strong id="customer_name" style="color:#blue">${account_customer.full_name}</strong></td>
                         </tr>
                         <tr> 
-                            <td><strong style="color:#10ABFE"> Số điện thoại:</strong></td>
-                            <td><strong id="customer_phone" style="color:#10ABFE">${account_customer.phone_number}</strong></td>
+                            <td><strong style="color:#blue"> Số điện thoại:</strong></td>
+                            <td><strong id="customer_phone" style="color:#blue">${account_customer.phone_number}</strong></td>
                         </tr>
                         <tr> 
-                            <td><strong style="color:#10ABFE"> Địa chỉ:</strong></td>
-                            <td><strong id="customer_address" style="color:#10ABFE">${account_customer.address}</strong></td>
+                            <td><strong style="color:#blue"> Địa chỉ:</strong></td>
+                            <td><strong id="customer_address" style="color:#blue">${account_customer.address}</strong></td>
                         </tr>
                         <tr> 
-                            <td><strong style="color:#10ABFE"> Ngày sinh:</strong></td>
-                            <td><strong id="customer_birthday" style="color:#10ABFE">${account_customer.birthday}</strong></td>
+                            <td><strong style="color:#blue"> Ngày sinh:</strong></td>
+                            <td><strong id="customer_birthday" style="color:#blue">${account_customer.birthday}</strong></td>
                         </tr>
                         <tr> 
-                            <td><strong style="color:#10ABFE"> Giới tính:</strong></td>
-                            <td><strong id="customer_sex" style="color:#10ABFE">${account_customer.sex}</strong></td>
+                            <td><strong style="color:#blue"> Giới tính:</strong></td>
+                            <td><strong id="customer_sex" style="color:#blue">${account_customer.sex}</strong></td>
                         </tr>
                     </table>
                     
                     <table>
                         <tr> 
-                            <td> <strong style="color:#10ABFE">1. Ngày hẹn:</strong></td>
+                            <td> <strong style="color:#blue">1. Ngày hẹn:</strong></td>
                             <td> <input id="appointment_date" type="date" class="form-control"></td>
                         </tr>
                         <tr> 
-                            <td> <strong style="color:#10ABFE">2. Giờ hẹn:</strong></td>
+                            <td> <strong style="color:#blue">2. Giờ hẹn:</strong></td>
                             <td> <input id="appointment_time" type="time" class="form-control"></td>
                         </tr>
                     </table>
@@ -148,7 +146,7 @@ function form_profile_cart()
             <div id="contact-1" class="tab-pane active">
                 <div class="row m-b-lg">
                 <div class="col-lg-12 text-center">
-                    <h2><strong style="color:#10ABFE"> Khám hộ </strong></h2>
+                    <h2><strong style="color:#blue"> Khám hộ </strong></h2>
                 </div>
                 </div>
                 <div class="client-detail">
@@ -169,7 +167,7 @@ function form_profile_cart()
             <div id="contact-1" class="tab-pane active">
                 <div class="row m-b-lg">
                 <div class="col-lg-12 text-center">
-                    <h2><strong style="color:#10ABFE"> Khám hộ </strong></h2>
+                    <h2><strong style="color:#blue"> Khám hộ </strong></h2>
                 </div>
                 </div>
                 <div class="client-detail">
@@ -179,11 +177,11 @@ function form_profile_cart()
                     <h3><strong style="color:Black">Danh sách khách hàng: </strong></h3>
                     <table>
                     <tr> 
-                        <td> <strong style="color:#10ABFE">1. Ngày hẹn:</strong></td>
+                        <td> <strong style="color:#blue">1. Ngày hẹn:</strong></td>
                         <td> <input id="appointment_date" type="date" class="form-control"></td>
                     </tr>
                     <tr> 
-                        <td> <strong style="color:#10ABFE">2. Giờ hẹn:</strong></td>
+                        <td> <strong style="color:#blue">2. Giờ hẹn:</strong></td>
                         <td> <input id="appointment_time" type="time" class="form-control"></td>
                     </tr>
                 </table>
@@ -194,28 +192,28 @@ function form_profile_cart()
 
                     <table class="total_history">
                         <tr> 
-                            <td><strong style="color:#10ABFE"></strong></td>
+                            <td><strong style="color:#blue"></strong></td>
                             <td><strong ><a onClick="remove_customer(${item.id_customer})" style="color:red"><i class="fa fa-close"></i></a></strong></td>
                         </tr>
                         <tr> 
-                            <td><strong style="color:#10ABFE">Họ & Tên</strong></td>
-                            <td><strong style="color:#10ABFE">${item.customer_name}</strong></td>
+                            <td><strong style="color:#blue">Họ & Tên</strong></td>
+                            <td><strong style="color:#blue">${item.customer_name}</strong></td>
                         </tr>
                         <tr> 
-                            <td><strong style="color:#10ABFE">Số điện thoại:</strong></td>
-                            <td><strong style="color:#10ABFE">${item.customer_phone}</strong></td>
+                            <td><strong style="color:#blue">Số điện thoại:</strong></td>
+                            <td><strong style="color:#blue">${item.customer_phone}</strong></td>
                         </tr>
                         <tr> 
-                            <td><strong style="color:#10ABFE">Địa chỉ:</strong></td>
-                            <td><strong style="color:#10ABFE">${item.customer_address}</strong></td>
+                            <td><strong style="color:#blue">Địa chỉ:</strong></td>
+                            <td><strong style="color:#blue">${item.customer_address}</strong></td>
                         </tr>
                         <tr> 
-                            <td><strong style="color:#10ABFE">Ngày sinh:</strong></td>
-                            <td><strong style="color:#10ABFE">${item.customer_birthday}</strong></td>
+                            <td><strong style="color:#blue">Ngày sinh:</strong></td>
+                            <td><strong style="color:#blue">${item.customer_birthday}</strong></td>
                         </tr>
                         <tr> 
-                            <td><strong style="color:#10ABFE">Giới tính:</strong></td>
-                            <td><strong style="color:#10ABFE">${item.customer_sex}</strong></td>
+                            <td><strong style="color:#blue">Giới tính:</strong></td>
+                            <td><strong style="color:#blue">${item.customer_sex}</strong></td>
                         </tr>
                     </table>
                         <p>Tiểu sử(nếu có):</p>
@@ -243,7 +241,7 @@ function fill_in_information()
         <div id="contact-1" class="tab-pane active">
             <div class="row m-b-lg">
             <div class="col-lg-12 text-center">
-                <h2><a onclick="form_profile_cart()"><i class="fa fa-arrow-left" aria-hidden="true"></i></a><strong style="color:#10ABFE"> Khám hộ </strong></h2>
+                <h2><a onclick="form_profile_cart()"><i class="fa fa-arrow-left" aria-hidden="true"></i></a><strong style="color:#blue"> Khám hộ </strong></h2>
             </div>
             </div>
             <div class="client-detail">
@@ -254,19 +252,19 @@ function fill_in_information()
                 <h3><strong style="color:Black">Thông tin người đặt </strong></h3>
                 <div>
                 <form>
-                <strong style="color:#10ABFE"> Họ và tên (*):</strong><br>
+                <strong style="color:#blue"> Họ và tên (*):</strong><br>
                 <input type="text" id="customer_name_form" placeholder=" Họ và tên" class="form-control" ><br>
-                <strong style="color:#10ABFE"> Ngày sinh (*):</strong><br>
+                <strong style="color:#blue"> Ngày sinh (*):</strong><br>
                 <input type="date" id="customer_birdth_form" placeholder="Ngày sinh" class="form-control" ><br>
-                <strong style="color:#10ABFE"> Giới tính (*):</strong><br>
+                <strong style="color:#blue"> Giới tính (*):</strong><br>
                 <select id="customer_sex_form" class="form-control" >
                     <option value='male'>Nam</option>
                     <option value='female'>Nữ</option>
                 </select>
                 <br>
-                <strong style="color:#10ABFE"> Số điện thoại (*):</strong><br>
+                <strong style="color:#blue"> Số điện thoại (*):</strong><br>
                 <input type="text" id="customer_phone_form" placeholder="Số điện thoại" class="form-control" ><br>
-                <strong style="color:#10ABFE"> Địa chỉ(*):</strong><br>
+                <strong style="color:#blue"> Địa chỉ(*):</strong><br>
                 <input type="text"  id="customer_address_form" placeholder="Địa chỉ" class="form-control" ><br>
                 <p>Tiểu sử(nếu có):</p>
                 <textarea rows="6" id="customer_prehistoric_form" cols="50" placeholder="Nội dung..."></textarea>
@@ -380,7 +378,7 @@ function booking_history_again()
     <div id="contact-1" class="tab-pane active">
         <div class="row m-b-lg" >
         <div class="col-lg-12 text-center"> 
-            <h2><a onclick="form_profile_cart()"><i class="fa fa-arrow-left" aria-hidden="true"></i></a><strong style="color:#10ABFE"> ${billing_type(booking_type)}</strong></h2>
+            <h2><a onclick="form_profile_cart()"><i class="fa fa-arrow-left" aria-hidden="true"></i></a><strong style="color:#blue"> ${billing_type(booking_type)}</strong></h2>
         </div>
         </div>
         <div class="client-detail">
@@ -391,35 +389,35 @@ function booking_history_again()
             <div>
               <table class="total_history">
                 <tr> 
-                    <td><strong style="color:#10ABFE"> Họ & Tên</strong></td>
-                    <td><strong style="color:#10ABFE">${customer_name}</strong></td>
+                    <td><strong style="color:#blue"> Họ & Tên</strong></td>
+                    <td><strong style="color:#blue">${customer_name}</strong></td>
                     <input type="text" hidden id="customer_name" value="${customer_name}" >
                 </tr>
                 <tr> 
-                    <td><strong style="color:#10ABFE"> SDT:</strong></td>
-                    <td><strong  style="color:#10ABFE">${customer_phone} </strong></td>
+                    <td><strong style="color:#blue"> SDT:</strong></td>
+                    <td><strong  style="color:#blue">${customer_phone} </strong></td>
                     <input type="text" hidden id="customer_phone" value="${customer_phone}" >
                 </tr>
                 <tr> 
-                    <td><strong style="color:#10ABFE"> Địa chỉ:</strong></td>
-                    <td><strong  style="color:#10ABFE">${customer_address}</strong></td>
+                    <td><strong style="color:#blue"> Địa chỉ:</strong></td>
+                    <td><strong  style="color:#blue">${customer_address}</strong></td>
                     <input type="text" hidden id="customer_address" value="${customer_address}" >
                 </tr>
                 <tr> 
-                    <td><strong style="color:#10ABFE"> Ngày sinh:</strong></td>
-                    <td><strong style="color:#10ABFE">${customer_birthday}</strong></td>
+                    <td><strong style="color:#blue"> Ngày sinh:</strong></td>
+                    <td><strong style="color:#blue">${customer_birthday}</strong></td>
                     <input type="text" hidden id="customer_birthday" value="${customer_birthday}" >
                 </tr>
                 <tr> 
-                    <td><strong style="color:#10ABFE"> Giới tính:</strong></td>
-                    <td><strong style="color:#10ABFE">${customer_sex} </strong></td>
+                    <td><strong style="color:#blue"> Giới tính:</strong></td>
+                    <td><strong style="color:#blue">${customer_sex} </strong></td>
                     <input type="text" hidden id="customer_sex" value="${customer_sex}" >
                 </tr>
               </table>
                 <p>Tiểu sử(nếu có):</p>
                 <textarea rows="6" id="customer_prehistoric" readonly cols="50">${customer_prehistoric}</textarea>
             </div>
-            <h3><strong style="color:#10ABFE"></strong></h3>
+            <h3><strong style="color:#blue"></strong></h3>
             <table class="total_history">
                 <tr> 
                     <td><strong style="color:#889DFC"> Thời gian hẹn </strong></td>
@@ -467,8 +465,8 @@ function booking_history_again()
                         <td><strong style="color:#000000"> ${formatNumber(total_service)} VND</strong></td>
                     </tr>
                     <tr> 
-                        <td><strong style="color:#10ABFE"> Người khám :</strong></td>
-                        <td><strong style="color:#10ABFE"> X1 </strong></td>
+                        <td><strong style="color:#blue"> Người khám :</strong></td>
+                        <td><strong style="color:#blue"> X1 </strong></td>
                     </tr>
                 </table>`;
             output+=`      
@@ -536,7 +534,7 @@ function help_booking_history_again()
     <div id="contact-1" class="tab-pane active">
         <div class="row m-b-lg" >
         <div class="col-lg-12 text-center"> 
-            <h2><a onclick="form_profile_cart()"><i class="fa fa-arrow-left" aria-hidden="true"></i></a><strong style="color:#10ABFE"> ${billing_type(booking_type)}</strong></h2>
+            <h2><a onclick="form_profile_cart()"><i class="fa fa-arrow-left" aria-hidden="true"></i></a><strong style="color:#blue"> ${billing_type(booking_type)}</strong></h2>
         </div>
         </div>
         <div class="client-detail">
@@ -551,28 +549,28 @@ function help_booking_history_again()
             <div>
               <table class="total_history">
                 <tr> 
-                    <td><strong style="color:#10ABFE"> Họ & Tên</strong></td>
-                    <td><strong style="color:#10ABFE">${item.customer_name}</strong></td>
+                    <td><strong style="color:#blue"> Họ & Tên</strong></td>
+                    <td><strong style="color:#blue">${item.customer_name}</strong></td>
                     <input type="text" hidden id="customer_name" value="${item.customer_name}" >
                 </tr>
                 <tr> 
-                    <td><strong style="color:#10ABFE"> SDT:</strong></td>
-                    <td><strong  style="color:#10ABFE">${item.customer_phone} </strong></td>
+                    <td><strong style="color:#blue"> SDT:</strong></td>
+                    <td><strong  style="color:#blue">${item.customer_phone} </strong></td>
                     <input type="text" hidden id="customer_phone" value="${item.customer_phone}" >
                 </tr>
                 <tr> 
-                    <td><strong style="color:#10ABFE"> Địa chỉ:</strong></td>
-                    <td><strong  style="color:#10ABFE">${item.customer_address}</strong></td>
+                    <td><strong style="color:#blue"> Địa chỉ:</strong></td>
+                    <td><strong  style="color:#blue">${item.customer_address}</strong></td>
                     <input type="text" hidden id="customer_address" value="${item.customer_address}" >
                 </tr>
                 <tr> 
-                    <td><strong style="color:#10ABFE"> Ngày sinh:</strong></td>
-                    <td><strong style="color:#10ABFE">${item.customer_birthday}</strong></td>
+                    <td><strong style="color:#blue"> Ngày sinh:</strong></td>
+                    <td><strong style="color:#blue">${item.customer_birthday}</strong></td>
                     <input type="text" hidden id="customer_birthday" value="${item.customer_birthday}" >
                 </tr>
                 <tr> 
-                    <td><strong style="color:#10ABFE"> Giới tính:</strong></td>
-                    <td><strong style="color:#10ABFE">${item.customer_sex} </strong></td>
+                    <td><strong style="color:#blue"> Giới tính:</strong></td>
+                    <td><strong style="color:#blue">${item.customer_sex} </strong></td>
                     <input type="text" hidden id="customer_sex" value="${item.customer_sex}" >
                 </tr>
               </table>
@@ -581,7 +579,7 @@ function help_booking_history_again()
             </div>`;
             });
             output+=`
-            <h3><strong style="color:#10ABFE"></strong></h3>
+            <h3><strong style="color:#blue"></strong></h3>
             <table class="total_history">
                 <tr> 
                     <td><strong style="color:#889DFC"> Thời gian hẹn </strong></td>
@@ -628,8 +626,8 @@ function help_booking_history_again()
                         <td><strong style="color:#000000"> ${formatNumber(total_service)} VND</strong></td>
                     </tr>
                     <tr> 
-                        <td><strong style="color:#10ABFE"> Người khám :</strong></td>
-                        <td><strong style="color:#10ABFE"> X ${count_customer} </strong></td>
+                        <td><strong style="color:#blue"> Người khám :</strong></td>
+                        <td><strong style="color:#blue"> X ${count_customer} </strong></td>
                     </tr>
                 </table>`;
             output+=`      

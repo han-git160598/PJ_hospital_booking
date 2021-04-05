@@ -279,3 +279,7 @@ Route::get('/customer-cart', function () {
 Route::get('/login-customer',function (){
 return view('customer.customer_login');
 });
+Route::get('test',function()
+{
+    return view('customer.test');
+});

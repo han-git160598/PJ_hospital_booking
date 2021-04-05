@@ -1,12 +1,13 @@
 var arr_billing_billing=[];
 $(document).ready(function() {
     // truyen them id account cho thằng sale
+    var customer = JSON.parse(localStorage.getItem('account_customer'));
     var tam="";
     let i=0;
     $.ajax({
         url: urlapi,
         type: 'POST',
-        data: { detect: 'list_booking_history',limit: '200',id_customer:31 },
+        data: { detect: 'list_booking_history',limit: '100',id_customer:customer.id },
         dataType: 'json',
         headers: headers,
         success: function(response) 

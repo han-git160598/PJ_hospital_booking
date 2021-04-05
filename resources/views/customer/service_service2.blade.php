@@ -70,46 +70,48 @@ padding-inline-start: 0px;
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-7">
+        <div class="col-sm-12">
             <div class="inqbox">
             <div class="inqbox-content">
                 {{--  <span class="text-muted small pull-right">Last modification: <i class="fa fa-clock-o"></i> 2:10 pm - 12.06.2015</span>
                 <h2>Clients</h2>  --}}
                 <div class="input-group">
-                    <input type="text" id="key_service_packet" placeholder="Search client " class="input form-control">
+                    <input type="text" id="key_service" placeholder="Tìm kiếm" class="input form-control">
                     <span class="input-group-btn">
-                    <button type="button" onClick="search_service_packet()" class="btn btn btn-primary"> <i class="fa fa-search"></i> Tìm kiếm</button>
+                    <button type="button" onClick="search_service_service()" class="btn btn btn-primary"> <i class="fa fa-search"></i> Search</button>
                     </span>
                 </div>
                 <div class="clients-list">
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane active">
                         <div class="full-height-scroll">
-                            <div class="table-responsive" style="width:100%;height:600px; overflow: auto;" >
+                            <div class="table-responsive" style="width:100%;height:600px; overflow: auto;">
                                 <table class="table table-striped table-hover">
-                                <tbody>
-                                    <tr>
-                                        
+                                    <thead >
+                                    <tr>          
                                         <th style="30px"></th>
-                                        <th>Tên gói khám </th>
-                                        <th>Giá tiền</th>
+                                        <th> Tên dịch vụ </th>
+                                        <th> Nội dung </th>
+                                      
+                                        <th> Giá tiền</th>
                     
                                         <th colspan="2"><center>Hành động</center></th>
                                     </tr>
-
-                                    </tbody>
-                                    <tbody id="list_service_packet">
+                                    </thead >
+                                    
+                                    <tbody id="list_service_service" >
                                     <tr>
                                         <th style="30px"></th>
                                         <td>Anthony Jackson</td>
+                                        <td >Anthony  JacksonJackson</td>
                                         <td>20.000.000</td>
-                                        <td colspan="2"><center><button class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </button>
+                                        <td colspan="2"><center>
                             
                                         <button class="btn btn-primary btn-sm"><i class="fa fa-cart-plus"></i></button></center></td>
-                                        
                                     </tr>
-                                    
                                     </tbody>
+                                   
+                                    
                                 </table>
                             </div>
                         </div>
@@ -137,10 +139,10 @@ padding-inline-start: 0px;
             </div>
             </div>
         </div>
-        <div class="col-sm-5">
+        {{--  <div class="col-sm-2">
             <div class="inqbox ">
-            <div class="inqbox-content" id="detail_service_packet_data">
-                <div class="tab-content" hidden>
+            <div class="inqbox-content">
+                <div class="tab-content">
                     <div id="contact-1" class="tab-pane active">
                         <div class="row m-b-lg">
                         <div class="col-lg-12 text-center">
@@ -155,7 +157,13 @@ padding-inline-start: 0px;
                                 tempor incididunt ut labore et dolore magna aliqua.
                             </p>
                             <hr/>
-                            <strong style="color:#FF5722">2. Chi tiết về gói khám sức khỏe nâng cao:</strong>
+                            <strong style="color:#FF5722">2. Những giá trị khi bạn chọn gói khám sức khỏe nâng cao:</strong>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua.
+                            </p>
+                            <hr/>
+                            <strong style="color:#FF5722">3. Chi tiết về gói khám sức khỏe nâng cao:</strong>
                             <div  class="vertical-container dark-timeline" style="width:100%;height:350px; overflow: auto;">
                                <table  id="detail_service_packet">
                                 <thead>
@@ -228,12 +236,12 @@ padding-inline-start: 0px;
                 </div>
             </div>
             </div>
-        </div> 
+        </div>  --}}
     </div>
 </div>
 
 </body>
     <script src="{{ asset('backend/js/jquery-3.5.0.min.js') }}"></script>
     <script src="{{ asset('backend/customer-js/customer_local.js') }}"></script>
-    <script src="{{ asset('backend/customer-js/service_packet.js') }}"></script>
+    <script src="{{ asset('backend/customer-js/service_service.js') }}"></script>
 @endsection

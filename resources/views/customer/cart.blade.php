@@ -95,7 +95,6 @@ p{
                                         <th>Tên dich vụ</th>
                                         <th>Giá tiền</th>
                                         <th colspan="2"><center>Hành động </center></th>
-                                        <th><button class="btn btn-primary btn-sm" >Xóa hết</button></th>
                                     </tr>
 
                                     </thead>

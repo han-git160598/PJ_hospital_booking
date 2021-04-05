@@ -146,19 +146,12 @@
 
                                 </ul>
                             </li>
-                            <li class="dropdown pull-right">
+                            <li class="dropdown pull-right" id="username_ac">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                                    <span class="pl15"><i id="cart" class="fa fa-cart-plus"></i></span><span id="badge" class="badge badge-danger">4</span>
-                                    <span class="pl15"><i class="fa fa-user"></i><span id="username">ss</span></span>
-                                    <span class="caret caret-tp"></span>
+                                    <span class="pl15"><i id="cart" class="fa fa-cart-plus"></i></span><span id="badge" class="badge badge-danger">0</span>
+                                    <span class="pl15"><i class="fa fa-user"></i><span id="username"></span></span>
                                 </a>
-                                <ul class="dropdown-menu animated m-t-xs">
-                                    <li><a  class="animated animated-short fadeInUp" onclick="clear_data_pass()" data-toggle="modal" data-target="#change_info_customer_modal">Thay đổi thông tin cá nhân</a></li>
-                                    <li class="divider"></li>
-                                    <li><a  class="animated animated-short fadeInUp" onclick="clear_data_pass()" data-toggle="modal" data-target="#change_password_customer_modal">Đổi mật khẩu</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#" class="animated animated-short fadeInUp" data-toggle="modal" data-target="#logout-dasboard"><i class="fa fa-sign-out"></i>Đăng xuất</a></li>
-                                </ul>
+                              
                             </li>
                         </ul>
                     </nav>
@@ -172,14 +165,21 @@
 
 
 
+            <div class="footer">
+               <div class="pull-right">
+                  10GB of <strong>250GB</strong> Free.
+               </div>
+               <div>
+                  <strong>Copyright</strong> Your Company &copy; 2015-2016
+               </div>
+            </div>    
 
                
 
 
 
             </div>
-            
-
+           
 
     </body>
     {{--  -----------   thay đổi tông tin cá nhân --------------  --}}
@@ -190,13 +190,13 @@
                  <div class="modal-content">
                   <div class="modal-header">
                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                   <h2 class="modal-title"><strong>Thay đổi thông tin cá nhân</strong></h2>
+                   <center><h2 class="modal-title"><strong>Thay đổi thông tin cá nhân</strong></h2></center>
                   </div>
                   <div class="modal-body">
 
                     <form id="info_customer">
                     <meta name="csrf-token-change-password-dashboard" content="{{ csrf_token() }}" />
-                    <div class="inqbox-content">
+                    <div class="inqbox-content" id="info_persenal">
                     <form>
                         <strong style="color:#10ABFE">1. Số điện thoại liên hệ :</strong><br>
                         <input type="text" placeholder="số điện thoại" class="form-control" ><br>
@@ -210,7 +210,7 @@
                         <input type="email" class="form-control" ><br>
                         <strong style="color:#10ABFE">6. Địa  chỉ(*) :</strong><br>
                         <input type="text" class="form-control" ><br>
-                        <input type="submit" id="btn_change_password_dashboard_account" value="Cập nhật" class="btn btn-success btn-sm btn-block" />
+                        <input type="button" onClick="update_info()" value="Cập nhật" class="btn btn-success btn-sm btn-block" />
                     </form>
                   </div>
                  </div>
@@ -227,7 +227,6 @@
                    <h2 class="modal-title"><strong>Thay đổi thông tin cá nhân</strong></h2>
                   </div>
                   <div class="modal-body">
-
                     <form id="change_password_dashboard_account_form">
                     <meta name="csrf-token-change-password-dashboard" content="{{ csrf_token() }}" />
                     <div class="inqbox-content">
@@ -243,7 +242,7 @@
 
                              <label>Mật khẩu mới</label>
                             <div class="input-group" id="show_hide_password2">
-                            <input class="form-control" type="password" name="account_password" id="dashpassword_change">
+                            <input class="form-control" onkeyup="checkPass()" type="password" id="new_password" id="dashpassword_change">
                             <br />
                             <div class="input-group-addon">
                                 <a><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
@@ -254,7 +253,7 @@
                             <br />
                         <label>Nhập lại mật khẩu</label>
                             <div class="input-group" id="show_hide_password3">
-                            <input class="form-control" type="password" name="account_password" id="dashpassword_change2">
+                            <input class="form-control" onkeyup="checkPass()" type="password" id="confirm_password" id="dashpassword_change2">
 
                             <div class="input-group-addon">
                                 <a><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
@@ -262,8 +261,10 @@
                             </div>
                             <small id="dasherpassword2" class="text-danger"></small>
                             <br />
+                            <div><strong  id="error-nwl" style="color:red"></strong></div>
                             <br />
-                    <input type="submit" name="edit" id="1" value="Cập nhật" class="btn btn-success btn-sm btn-block" />
+                            
+                    <input type="button" onClick="change_password()" name="edit" id="1" value="Cập nhật" class="btn btn-success btn-sm btn-block" />
                     </form>
                   </div>
                  </div>
@@ -322,5 +323,27 @@
     <script src="{{ asset('backend/js/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
     <!-- Sparkline demo data  -->
     <script src="{{ asset('backend/js/demo/sparkline-demo.js')}}"></script>
+    <script>
+    $( document ).ready(function() {
+        var username = JSON.parse(localStorage.getItem('account_customer'));
+        //$('#username').html(username.full_name);
+
+        var output = `
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+            <span class="pl15"><i id="cart" class="fa fa-cart-plus"></i></span><span id="badge" class="badge badge-danger">0</span>
+            <span class="pl15"><i class="fa fa-user"></i><span id="username">${username.full_name}</span></span>
+            <span class="caret caret-tp"></span>
+        </a>
+        <ul class="dropdown-menu animated m-t-xs">
+            <li><a  class="animated animated-short fadeInUp"  onClick="show_modal_profile()">Thay đổi thông tin cá nhân</a></li>
+            <li class="divider"></li>
+            <li><a  class="animated animated-short fadeInUp" data-toggle="modal" data-target="#change_password_customer_modal">Đổi mật khẩu</a></li>
+            <li class="divider"></li>
+            <li><a href="#" class="animated animated-short fadeInUp" data-toggle="modal" data-target="#logout-dasboard"><i class="fa fa-sign-out"></i>Đăng xuất</a></li>
+        </ul>`;
+        $('#username_ac').html(output);
+    });
+        
+    </script>
 
 </html>
