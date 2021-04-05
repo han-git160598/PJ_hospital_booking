@@ -17,7 +17,7 @@ function customer_login()
             }else{
         
                 localStorage.setItem('account_customer', JSON.stringify(response.data[0]));
-                window.location=urlserver+'customer-cart';
+                window.history.back();
              
             }
             
@@ -27,9 +27,10 @@ function customer_login()
 function customer_logout()
 {
     localStorage.removeItem('account_customer');
-    window.location=urlserver+'login-customer';
+    window.history.back();
 }
 /// change password
+
 function checkPass() 
 {
     var flag = 0;
@@ -78,7 +79,18 @@ function checkPass()
     }
     return flag;
 }
+function show_modal_change_password()
+{
+    $('#change_password_customer_modal').modal('show');
+    $('#old_password').val('');
+    $('#new_password').val('');
+    $('#confirm_password').val('');
+    document.getElementById("old_password").type= "password";
+    document.getElementById("new_password").type= "password";
+    document.getElementById("confirm_password").type= "password";
 
+
+}
 function change_password()
 {
     var a = checkPass();
@@ -124,6 +136,20 @@ getElm(id).style.backgroundColor = value;
 function feedback(msg) {
 getElm('error-nwl').innerHTML = msg;
 }
+// eys
+    function show_old_password(){
+    var x = document.getElementById("old_password");
+        if(x.type === "password" ){x.type = "text";} else { x.type = "password";}
+    }
+    function show_new_password(){
+    var z = document.getElementById("new_password");
+    if (z.type === "password" ) {z.type = "text";} else {z.type = "password";}
+    }
+    function show_confirm_password(){
+    var y = document.getElementById("confirm_password");
+    if (y.type === "password" ) {y.type = "text";} else {y.type = "password";}
+    }
+
 //thay đổi thông tin cá nhân
 function show_modal_profile()
 {

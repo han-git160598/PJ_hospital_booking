@@ -1,35 +1,48 @@
 var arr_billing_billing=[];
 $(document).ready(function() {
     // truyen them id account cho thằng sale
+    count_cart = localStorage.getItem('total_cart');
+
+    $('#badge').html(count_cart);
+    
     var customer = JSON.parse(localStorage.getItem('account_customer'));
-    var tam="";
-    let i=0;
-    $.ajax({
-        url: urlapi,
-        type: 'POST',
-        data: { detect: 'list_booking_history',limit: '100',id_customer:customer.id },
-        dataType: 'json',
-        headers: headers,
-        success: function(response) 
+    if(customer ==null)
+    {
+        var r = confirm('Vui lòng đăng nhập để xem lịch trình của bạn');
+        if(r ==true)
         {
-            console.log(response);
-           
-            var output=``;
-            response.data.forEach(function(item) {
-            arr_billing_billing.push(item)
-            output+=`
-            <tr>
-            <th style="30px"></th>
-            <td>${item.booking_code}</td>
-            <td>${item.booking_date} - ${item.booking_time} </td>
-            <td colspan="2"><center><button onClick="detail_booking_appointment(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </button>
-            </center></td>
-            </tr>`;
-            i++;
-        });
-            $('#list_billing_billing').html(output);
+            window.location=urlserver+'login-customer';
         }
-    });
+
+    }else{
+        let i=0;
+        $.ajax({
+            url: urlapi,
+            type: 'POST',
+            data: { detect: 'list_booking_history',limit: '100',id_customer:customer.id },
+            dataType: 'json',
+            headers: headers,
+            success: function(response) 
+            {
+                console.log(response);
+            
+                var output=``;
+                response.data.forEach(function(item) {
+                arr_billing_billing.push(item)
+                output+=`
+                <tr>
+                <th style="30px"></th>
+                <td>${item.booking_code}</td>
+                <td>${item.booking_date} - ${item.booking_time} </td>
+                <td colspan="2"><center><button onClick="detail_booking_appointment(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </button>
+                </center></td>
+                </tr>`;
+                i++;
+            });
+                $('#list_billing_billing').html(output);
+            }
+        });
+    }
 });
 function detail_booking_appointment(data)
 {

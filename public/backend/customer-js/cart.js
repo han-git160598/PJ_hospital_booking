@@ -24,9 +24,9 @@ function list_cart()
         output_cart +=` 
         <tr>
             <th style="30px"></th>
-            <td style="width:40%">${cart.service_title}</td>
-            <td>${formatNumber(cart.service_price)} VND</td>
-            <td colspan="2"><a onClick="remove_service(${cart.id_service})"><center><i class="fa fa-remove"></i> </a></center></td>
+            <td style="width:50%">${cart.service_title}</td>
+            <td style="width:30%">${formatNumber(cart.service_price)} VND</td>
+            <td colspan="2"><a onClick="remove_service(${cart.id_service})"><center><i class="fa fa-trash"></i> </a></center></td>
         </tr>`;
         total_service_price+=Number(cart.service_price);
         });

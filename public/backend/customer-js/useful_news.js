@@ -1,6 +1,9 @@
 var arr_news = [];
 $(document).ready(function() {
     // truyen them id account cho thằng sale
+    count_cart = localStorage.getItem('total_cart');
+
+    $('#badge').html(count_cart);
     $.ajax({
         url: urlapi,
         type: 'POST',
@@ -9,7 +12,7 @@ $(document).ready(function() {
         headers: headers,
         success: function(response) 
         {
-            console.log(response);
+    
             let i =0;
             var output=``;
             response.data.forEach(function(item) {
@@ -35,7 +38,7 @@ $(document).ready(function() {
 function detail_news(data)
 {
     var item  = arr_news[data];
-    console.log(item);
+  
     var output=`
     <div class="tab-content">
     <div id="contact-1" class="tab-pane active">
@@ -76,7 +79,7 @@ function search_news()
         headers: headers,
         success: function(response) 
         {
-            console.log(response);
+
             let i =0;
             var output=``;
             response.data.forEach(function(item) {

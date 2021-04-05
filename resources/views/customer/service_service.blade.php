@@ -1,11 +1,13 @@
 @extends('dashboard_customer')
 @section('customer_content') 
 <style>
-{{--  div #list_service_service{
-  height: 50px;
-  width: 100%;
-  //background-color: powderblue;
-}  --}}
+#div_div {
+  height: 220px;
+  /* border: 1px solid #4CAF50; */
+  padding: 5px;
+
+  
+}
 </style>
 <body>     
 <div style="clear: both; height: 61px;"></div>

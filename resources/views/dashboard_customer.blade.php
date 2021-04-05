@@ -235,7 +235,7 @@
                             <input class="form-control" type="password" name="old_password" id="old_password">
 
                             <div class="input-group-addon">
-                                <a><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                <a onClick="show_old_password()"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                             </div>
                             </div>
                             <small id="erold_password" class="text-danger"></small><br /><br />
@@ -245,18 +245,18 @@
                             <input class="form-control" onkeyup="checkPass()" type="password" id="new_password" id="dashpassword_change">
                             <br />
                             <div class="input-group-addon">
-                                <a><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                <a onClick="show_new_password()"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                             </div>
                             </div>
                             <small id="dasherpassword" class="text-danger"></small>
-                            <br />
+                            <br /> 
                             <br />
                         <label>Nhập lại mật khẩu</label>
                             <div class="input-group" id="show_hide_password3">
                             <input class="form-control" onkeyup="checkPass()" type="password" id="confirm_password" id="dashpassword_change2">
 
                             <div class="input-group-addon">
-                                <a><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                <a onClick="show_confirm_password()"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                             </div>
                             </div>
                             <small id="dasherpassword2" class="text-danger"></small>
@@ -327,21 +327,24 @@
     $( document ).ready(function() {
         var username = JSON.parse(localStorage.getItem('account_customer'));
         //$('#username').html(username.full_name);
-
-        var output = `
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-            <span class="pl15"><i id="cart" class="fa fa-cart-plus"></i></span><span id="badge" class="badge badge-danger">0</span>
-            <span class="pl15"><i class="fa fa-user"></i><span id="username">${username.full_name}</span></span>
-            <span class="caret caret-tp"></span>
-        </a>
-        <ul class="dropdown-menu animated m-t-xs">
-            <li><a  class="animated animated-short fadeInUp"  onClick="show_modal_profile()">Thay đổi thông tin cá nhân</a></li>
-            <li class="divider"></li>
-            <li><a  class="animated animated-short fadeInUp" data-toggle="modal" data-target="#change_password_customer_modal">Đổi mật khẩu</a></li>
-            <li class="divider"></li>
-            <li><a href="#" class="animated animated-short fadeInUp" data-toggle="modal" data-target="#logout-dasboard"><i class="fa fa-sign-out"></i>Đăng xuất</a></li>
-        </ul>`;
-        $('#username_ac').html(output);
+        if(username !=null)
+        {
+            var output = `
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                <span class="pl15"><i id="cart" class="fa fa-cart-plus"></i></span><span id="badge" class="badge badge-danger">0</span>
+                <span class="pl15"><i class="fa fa-user"></i><span id="username">${username.full_name}</span></span>
+                <span class="caret caret-tp"></span>
+            </a>
+            <ul class="dropdown-menu animated m-t-xs">
+                <li><a  class="animated animated-short fadeInUp"  onClick="show_modal_profile()">Thay đổi thông tin cá nhân</a></li>
+                <li class="divider"></li>
+                <li><a  class="animated animated-short fadeInUp" onClick="show_modal_change_password()">Đổi mật khẩu</a></li>
+                <li class="divider"></li>
+                <li><a href="#" class="animated animated-short fadeInUp" data-toggle="modal" data-target="#logout-dasboard"><i class="fa fa-sign-out"></i>Đăng xuất</a></li>
+            </ul>`;
+            $('#username_ac').html(output);
+                    
+        }
     });
         
     </script>

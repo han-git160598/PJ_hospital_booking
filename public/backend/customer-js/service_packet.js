@@ -96,7 +96,7 @@ function detail_service_packet(data)
     
         </div>
 <hr>
-<button type="button" class="btn btn-danger btn-sm btn-block">Đặt khám</button>
+<button type="button" onClick="add_cart(${data})" class="btn btn-danger btn-sm btn-block">Đặt khám</button>
     </div>
 </div>`;
    
@@ -142,6 +142,9 @@ function add_cart(data)
     var arr_service =[JSON.parse(localStorage.getItem('service_service'))];
     var arr_packet = JSON.parse(localStorage.getItem('service_packet'));
       //  arr_id_packet = JSON.parse(localStorage.getItem('service_packet'));
+
+   
+
     if(arr_packet == null )
     {
         item.packet_detail.forEach(function(item1) {
@@ -152,13 +155,13 @@ function add_cart(data)
        
         localStorage.setItem('service_packet', JSON.stringify(arr_id_packet));
         localStorage.setItem('service_service', JSON.stringify(arr_cart));
-        
+
         arr_service_count =JSON.parse(localStorage.getItem('service_service'));
         arr_service_count.forEach(function(item1) {
             count_cart++;
         });
         localStorage.setItem('total_cart', JSON.stringify(count_cart));
-        
+
     }
     else{
         arr_packet.forEach(function(cart) {
@@ -187,13 +190,14 @@ function add_cart(data)
 
             localStorage.setItem('service_packet', JSON.stringify(arr_id_packet));
             localStorage.setItem('service_service', JSON.stringify(unique));
-            arr_service_count =JSON.parse(localStorage.getItem('service_service'));
-            
-            arr_service_count.forEach(function(item1) {
-                count_cart++;
-            });
-            localStorage.setItem('total_cart', JSON.stringify(count_cart));
+           
         }
+
+        arr_service_count =JSON.parse(localStorage.getItem('service_service'));
+        arr_service_count.forEach(function(item1) {
+            count_cart++;
+        });
+        localStorage.setItem('total_cart', JSON.stringify(count_cart));
     }
     $('#badge').html(count_cart);
 

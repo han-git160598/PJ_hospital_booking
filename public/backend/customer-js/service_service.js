@@ -145,7 +145,7 @@ function list_service_service()
 {
     let i=0;
     $.ajax({
-        url: urlapi,
+        url: urlapi, 
         type: 'POST',
         data: { detect: 'list_service',limit: '100' },
         dataType: 'json',
@@ -156,7 +156,7 @@ function list_service_service()
             response.data.forEach(function(item) {
             arr_service_service.push(item);
             output+=`
-            <div class="col-lg-4">
+            <div class="col-lg-4" id="div_div" >
                      <div class="contact-box">
                         <div class="row">
                            <div class="col-sm-3">
@@ -206,7 +206,7 @@ function search_service_service()
             response.data.forEach(function(item) {
             arr_service_service.push(item);
             output+=`
-            <div class="col-lg-4">
+            <div class="col-lg-4" id="div_div">
                      <div class="contact-box">
                         <div class="row">
                            <div class="col-sm-3">

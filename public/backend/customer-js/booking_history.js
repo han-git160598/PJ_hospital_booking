@@ -1,43 +1,54 @@
 
 
-
 var arr_booking_history=[];
 var customer = JSON.parse(localStorage.getItem('account_customer'));
 $(document).ready(function() {
+    count_cart = localStorage.getItem('total_cart');
+    $('#badge').html(count_cart);
     
-    let i=0;
-    $.ajax({
-        url: urlapi,
-        type: 'POST',
-        data: { detect: 'list_booking_history',limit: '100',id_customer:customer.id },
-        dataType: 'json',
-        headers: headers,
-        success: function(response) 
+    if(customer ==null)
+    {
+        var r = confirm('Vui lòng đăng nhập để xem lịch sử khám của bạn');
+        if(r ==true)
         {
-            if(response.data == '')
-            {
-                alert('Chưa có lịch sử khám')
-            }else{
-                var output=``;
-                response.data.forEach(function(item) {
-                    arr_booking_history.push(item);
-                    output+=`
-                    <tr>
-                    <th style="30px"></th>
-                    <td>${item.booking_code}</  td>
-                    <td>${item.booking_date}</td>
-                    <td>${item.booking_service[0].service_title}...</td>
-                    <td colspan="2">
-                        <center><button onClick="detail_booking_history(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </button></center>
-                    </td>
-                    </tr>`;
-                    i++;
-                });
-            }
-            
-        $('#list_booking_history').html(output);
+            window.location=urlserver+'login-customer';
         }
-    });
+
+    }else{
+        let i=0;
+        $.ajax({
+            url: urlapi,
+            type: 'POST',
+            data: { detect: 'list_booking_history',limit: '100',id_customer:customer.id },
+            dataType: 'json',
+            headers: headers,
+            success: function(response) 
+            {
+                if(response.data == '')
+                {
+                    alert('Chưa có lịch sử khám')
+                }else{
+                    var output=``;
+                    response.data.forEach(function(item) {
+                        arr_booking_history.push(item);
+                        output+=`
+                        <tr>
+                        <th style="30px"></th>
+                        <td>${item.booking_code}</  td>
+                        <td>${item.booking_date}</td>
+                        <td>${item.booking_service[0].service_title}...</td>
+                        <td colspan="2">
+                            <center><button onClick="detail_booking_history(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </button></center>
+                        </td>
+                        </tr>`;
+                        i++;
+                    });
+                }
+                
+            $('#list_booking_history').html(output);
+            }
+        });
+    }
 });
 function detail_booking_history(data)
 {
