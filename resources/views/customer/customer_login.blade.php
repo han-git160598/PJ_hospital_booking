@@ -59,8 +59,10 @@
                      </div>
                   <a onClick="type_modal(1)" id="Forgot_password" >Quên mật khẩu ?</a>  
                   
-                  <button id="change_password" data-toggle="modal"  hidden data-target="#myModal6"></button>
-                  <button id="registration_customer" data-toggle="modal" hidden data-target="#myModal6"></button>
+                  <button id="btn_change_password" data-toggle="modal"  hidden data-target="#myModal6"></button>
+                  <button id="btn_registration_customer" data-toggle="modal" hidden data-target="#myModal6"></button>
+                  
+                  
       
                      <hr>
                      <button type="button" onClick="customer_login()" class="btn btn-primary block full-width m-b"> Đăng nhập </button>
@@ -97,10 +99,12 @@
             <input type="text" id="verificationCode" class="form-control" placeholder="Nhập mã">
 
                </div>   
-               <div class="modal-footer" id="btn_sms">
+               <div class="modal-footer" id="btn_sms"> 
                   <button type="button" class="btn btn-white" data-dismiss="modal">Đóng</button>
                   <button type="button" onClick="codeverify()" class="btn btn-primary" >Tiếp tục</button>
-                  <button hidden id="show_modal_info" data-toggle="modal" data-target="#registration_customer">Tiếp tục</button>
+                  <button hidden id="show_modal_info" data-toggle="modal" data-target="#registration_customer"> </button>
+                  <button hidden id="btn_forgot_password" data-toggle="modal" data-target="#Forgot_password_modal"> </button>
+            
                </div>
             </div>
          </div>
@@ -119,11 +123,12 @@
                      <strong style="color:#10ABFE">Tên đầy đủ</strong>:<br>
                      <input type="text" id="reg_name" placeholder="Tên đầy đủ" class="form-control" ><br>
                      <strong style="color:#10ABFE">Địa chỉ</strong>:<br>
-                     <input type="text" id="reg_address" placeholder="Địa chỉ" class="form-control" >
+                     <input type="text" id="reg_address" placeholder="Địa chỉ" class="form-control" ><br>
                      <strong style="color:#10ABFE">Email</strong>:<br>
                      <input type="text" id="reg_email" placeholder="Email" class="form-control" ><br>
+
                      <strong style="color:#10ABFE">Mật khẩu</strong>:<br>
-                     <input type="password"  onkeyup="checkPass()" id="new_password" placeholder="Mật khẩu" class="form-control" >
+                     <input type="password"  onkeyup="checkPass()" id="new_password" placeholder="Mật khẩu" class="form-control" ><br>
                      <strong style="color:#10ABFE">Nhập lại mật khẩu</strong>:<br>
                      <input type="password"  onkeyup="checkPass()" id="confirm_password" placeholder="Nhập lại mật khẩu" class="form-control" ><br>
                      <div><strong  id="error-nwl" style="color:red"></strong></div>
@@ -138,42 +143,8 @@
          </div>
       </div>
 {{--  -------------------------------------------------------------  --}}
-{{--  Quên mật khẩu--}}
-   
-         <div class="modal inmodal fade" id="Forgot_password_modal" tabindex="-1" role="dialog"  aria-hidden="true">
-         <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                  <h3><strong style="color:black">Số điện thoại của bạn là gì ? </strong></h3>
-               </div>
-               <div class="modal-body">
-                  
-            <label>Nhập số điện thoại</label>
-            <form>
-   
-                <input type="text" id="numberrr" class="form-control"  placeholder="84+">
-                <small class="text-danger" id="er_phone_used"></small>
-
-                <div id="recaptcha-container"></div>
-                <button class="btn btn-primary btn-sm" type="button" onclick="phoneAuth()">Gửi mã</button>
-            </form>
-            <br>
-            <label>Nhập mã điện thoại (mã được gửi về số điện thoại của bạn)</label>
-            <input type="text" id="verificationCode" class="form-control" placeholder="Nhập mã">
-
-               </div>   
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-white" data-dismiss="modal">Đóng</button>
-                  <button type="button" onClick="codeverify()" class="btn btn-primary" >Tiếp tục</button>
-                  <button hidden id="show_modal_info" data-toggle="modal" data-target="#registration_customer">Tiếp tục</button>
-               </div>
-            </div>
-         </div>
-      </div>
-{{--  -------------------------------------------------------------  --}}
 {{-- đỏi mật khẩu  --}}
-         <div class="modal inmodal fade" id="change_password" tabindex="-1" role="dialog"  aria-hidden="true">
+         <div class="modal inmodal fade" id="Forgot_password_modal" tabindex="-1" role="dialog"  aria-hidden="true">
          <div class="modal-dialog modal-sm">
             <div class="modal-content">
                <div class="modal-header">
@@ -182,18 +153,20 @@
                </div>
                <div class="modal-body">
                   <form>
-                      <strong style="color:#10ABFE">Mật khẩu</strong>:<br>
-                     <input type="password"  onkeyup="checkPass()" id="new_password" placeholder="Mật khẩu" class="form-control" >
+       
+
+                     <strong style="color:#10ABFE">Mật khẩu</strong>:<br>
+                     <input type="password"  onkeyup="checkPass1()" id="new_password1" placeholder="Mật khẩu" class="form-control" ><br>
                      <strong style="color:#10ABFE">Nhập lại mật khẩu</strong>:<br>
-                     <input type="password"  onkeyup="checkPass()" id="confirm_password" placeholder="Nhập lại mật khẩu" class="form-control" ><br>
-                     <div><strong  id="error-nwl" style="color:red"></strong></div>
+                     <input type="password"  onkeyup="checkPass1()" id="confirm_password1" placeholder="Nhập lại mật khẩu" class="form-control" ><br>
+                     <div><strong  id="error-nwl1" style="color:red"></strong></div>
             
                   </form>
                   
                </div>
                <div class="modal-footer">
                   <button type="button" class="btn btn-white" data-dismiss="modal">Quay lại</button>
-                  <button type="button" class="btn btn-primary">Cập nhật</button>
+                  <button type="button" onClick="forgot_password_customer()" class="btn btn-primary">Cập nhật</button>
                </div>
             </div>
          </div>
