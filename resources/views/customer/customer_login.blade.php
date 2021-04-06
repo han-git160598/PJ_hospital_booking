@@ -57,70 +57,57 @@
                      <div class="form-group">
                         <input type="password" class="form-control" id="password_customer" placeholder="Mật khẩu" required="">
                      </div>
-                     <a id="Forgot_password" data-toggle="modal" data-target="#Forgot_password_modal">Quên mật khẩu ?</a>  
+                  <a onClick="type_modal(1)" id="Forgot_password" >Quên mật khẩu ?</a>  
+                  
+                  <button id="change_password" data-toggle="modal"  hidden data-target="#myModal6"></button>
+                  <button id="registration_customer" data-toggle="modal" hidden data-target="#myModal6"></button>
+      
                      <hr>
                      <button type="button" onClick="customer_login()" class="btn btn-primary block full-width m-b"> Đăng nhập </button>
                        
                   </form>
-                   <p>Bạn không có tài khoản, <a data-toggle="modal" data-target="#myModal6">Đăng ký</a></p>
+
+                   <p>Bạn không có tài khoản, <a onClick="type_modal(2)"  >Đăng ký</a></p>
                     
                </div>
             </div>
          </div>
       <hr/>  
       </div>
-      {{--  modal nhập sdt xác minh  --}}
+   {{-- ---------------------- modal nhập sdt xác minh ----------------- --}}
       <div class="modal inmodal fade" id="myModal6" tabindex="-1" role="dialog"  aria-hidden="true">
          <div class="modal-dialog modal-sm">
             <div class="modal-content">
                <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                  <h5 class="modal-title"><strong style="color:black">Số điện thoại của bạn là gì ? </strong></h5>
+                  <h3><strong style="color:black">Số điện thoại của bạn là gì ? </strong></h3>
                </div>
                <div class="modal-body">
-                  <p>
-                     <strong> <input type="tel" class="form-control"  placeholder="84+" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"></strong> 
-                  </p>
-                  <p>
-                     <strong>Nhập sdt để nhận mã xác minh.</strong> 
-                  </p>
-               </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-white" data-dismiss="modal">Đóng</button>
-                  <button type="button" onclick="phoneAuth()">Tiếp tục</button>
-                  <button type="button" data-toggle="modal" data-target="#Verification_modal" class="btn btn-primary">Tiếp tục</button>
-               </div>
-            </div>
-         </div>
-      </div>
-{{--  -------------------------------------------------------------  --}}
-{{--  modal nhập mã xác minh  --}}
-      <div class="modal inmodal fade" id="Verification_modal" tabindex="-1" role="dialog"  aria-hidden="true">
-         <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                  <h5 class="modal-title"><strong style="color:black">Nhập mã xác minh </strong></h5>
-               </div>
-               <div class="modal-body">
-                  <p>
-                     <strong>Kiểm tra tin nhắn SMS của bạn. Chúng tôi đã gửi mã PIN tại 0123456789</strong> 
-                  </p>
-                  <p>
-                     <strong> <input type="tel" class="form-control"  placeholder="Mã xác minh" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"></strong> 
-                  </p>
                   
-               </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-white" data-dismiss="modal">Quay lại</button>
-                  <button type="button" data-toggle="modal" data-target="#registration" class="btn btn-primary">Tiếp tục</button>
+            <label>Nhập số điện thoại</label>
+            <form>
+                <input type="text" id="numberrr" class="form-control"  placeholder="84+">
+                <small class="text-danger" id="er_phone_used"></small>
+
+                <div id="recaptcha-container"></div>
+                <button class="btn btn-primary btn-sm" type="button" onclick="phoneAuth()">Gửi mã</button>
+            </form>
+            <br>
+            <label>Nhập mã điện thoại (mã được gửi về số điện thoại của bạn)</label>
+            <input type="text" id="verificationCode" class="form-control" placeholder="Nhập mã">
+
+               </div>   
+               <div class="modal-footer" id="btn_sms">
+                  <button type="button" class="btn btn-white" data-dismiss="modal">Đóng</button>
+                  <button type="button" onClick="codeverify()" class="btn btn-primary" >Tiếp tục</button>
+                  <button hidden id="show_modal_info" data-toggle="modal" data-target="#registration_customer">Tiếp tục</button>
                </div>
             </div>
          </div>
       </div>
 {{--  -------------------------------------------------------------  --}}
 {{--  đăng ký tông tin  --}}
-         <div class="modal inmodal fade" id="registration" tabindex="-1" role="dialog"  aria-hidden="true">
+         <div class="modal inmodal fade" id="registration_customer" tabindex="-1" role="dialog"  aria-hidden="true">
          <div class="modal-dialog modal-sm">
             <div class="modal-content">
                <div class="modal-header">
@@ -130,77 +117,62 @@
                <div class="modal-body">
                   <form>
                      <strong style="color:#10ABFE">Tên đầy đủ</strong>:<br>
-                     <input type="text" placeholder="Tên đầy đủ" class="form-control" ><br>
+                     <input type="text" id="reg_name" placeholder="Tên đầy đủ" class="form-control" ><br>
                      <strong style="color:#10ABFE">Địa chỉ</strong>:<br>
-                     <input type="text" placeholder="Địa chỉ" class="form-control" >
+                     <input type="text" id="reg_address" placeholder="Địa chỉ" class="form-control" >
                      <strong style="color:#10ABFE">Email</strong>:<br>
-                     <input type="text" placeholder="Email" class="form-control" ><br>
+                     <input type="text" id="reg_email" placeholder="Email" class="form-control" ><br>
                      <strong style="color:#10ABFE">Mật khẩu</strong>:<br>
-                     <input type="text" placeholder="Mật khẩu" class="form-control" >
+                     <input type="password"  onkeyup="checkPass()" id="new_password" placeholder="Mật khẩu" class="form-control" >
                      <strong style="color:#10ABFE">Nhập lại mật khẩu</strong>:<br>
-                     <input type="text" placeholder="Nhập lại mật khẩu" class="form-control" ><br>
+                     <input type="password"  onkeyup="checkPass()" id="confirm_password" placeholder="Nhập lại mật khẩu" class="form-control" ><br>
+                     <div><strong  id="error-nwl" style="color:red"></strong></div>
                   </form>
                   
                </div>
                <div class="modal-footer">
                   <button type="button" class="btn btn-white" data-dismiss="modal">Quay lại</button>
-                  <button type="button" data-toggle="modal" data-target="#registration" class="btn btn-primary">Đăng ký</button>
+                  <button type="button" onClick="registration_customer()" class="btn btn-primary">Đăng ký</button>
                </div>
             </div>
          </div>
       </div>
 {{--  -------------------------------------------------------------  --}}
 {{--  Quên mật khẩu--}}
-      <div class="modal inmodal fade" id="Forgot_password_modal" tabindex="-1" role="dialog"  aria-hidden="true">
+   
+         <div class="modal inmodal fade" id="Forgot_password_modal" tabindex="-1" role="dialog"  aria-hidden="true">
          <div class="modal-dialog modal-sm">
             <div class="modal-content">
                <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                  <h5 class="modal-title"><strong style="color:black">Quên mật khẩu</strong></h5>
+                  <h3><strong style="color:black">Số điện thoại của bạn là gì ? </strong></h3>
                </div>
                <div class="modal-body">
-                  <p>
-                     <strong>Nhập số điện thoại đăng ký để điền lại mật khẩu</strong> 
-                  </p>
-                  <p>
-                     <strong> <input type="tel" class="form-control"  placeholder="Số điện thoại" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"></strong> 
-                  </p>
                   
-               </div>
+            <label>Nhập số điện thoại</label>
+            <form>
+   
+                <input type="text" id="numberrr" class="form-control"  placeholder="84+">
+                <small class="text-danger" id="er_phone_used"></small>
+
+                <div id="recaptcha-container"></div>
+                <button class="btn btn-primary btn-sm" type="button" onclick="phoneAuth()">Gửi mã</button>
+            </form>
+            <br>
+            <label>Nhập mã điện thoại (mã được gửi về số điện thoại của bạn)</label>
+            <input type="text" id="verificationCode" class="form-control" placeholder="Nhập mã">
+
+               </div>   
                <div class="modal-footer">
-                  <button type="button" class="btn btn-white" data-dismiss="modal">Quay lại</button>
-                  <button type="button" data-toggle="modal" data-target="#Verification_Forgot_password" class="btn btn-primary">Tiếp tục</button>
+                  <button type="button" class="btn btn-white" data-dismiss="modal">Đóng</button>
+                  <button type="button" onClick="codeverify()" class="btn btn-primary" >Tiếp tục</button>
+                  <button hidden id="show_modal_info" data-toggle="modal" data-target="#registration_customer">Tiếp tục</button>
                </div>
             </div>
          </div>
       </div>
 {{--  -------------------------------------------------------------  --}}
-{{--  mã xác minh quên mật khẩu--}}
-            <div class="modal inmodal fade" id="Verification_Forgot_password" tabindex="-1" role="dialog"  aria-hidden="true">
-         <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                  <h5 class="modal-title"><strong style="color:black">Nhập mã xác minh </strong></h5>
-               </div>
-               <div class="modal-body">
-                  <p>
-                     <strong>Kiểm tra tin nhắn SMS của bạn. Chúng tôi đã gửi mã PIN tại 0123456789</strong> 
-                  </p>
-                  <p>
-                     <strong> <input type="tel" class="form-control"  placeholder="Mã xác minh" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"></strong> 
-                  </p>
-                  
-               </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-white" data-dismiss="modal">Quay lại</button>
-                  <button type="button" data-toggle="modal" data-target="#change_password" class="btn btn-primary">Tiếp tục</button>
-               </div>
-            </div>
-         </div>
-      </div>
-{{--  -------------------------------------------------------------  --}}
-{{--  đăng ký tông tin  --}}
+{{-- đỏi mật khẩu  --}}
          <div class="modal inmodal fade" id="change_password" tabindex="-1" role="dialog"  aria-hidden="true">
          <div class="modal-dialog modal-sm">
             <div class="modal-content">
@@ -210,10 +182,11 @@
                </div>
                <div class="modal-body">
                   <form>
-                     <strong style="color:#10ABFE">1. Mật khẩu mới</strong>:<br>
-                     <input type="password" placeholder="password" class="form-control" ><br>
-                     <strong style="color:#10ABFE">2. Xác nhận lại mật khẩu</strong>:<br>
-                     <input type="password" placeholder="password" class="form-control" >
+                      <strong style="color:#10ABFE">Mật khẩu</strong>:<br>
+                     <input type="password"  onkeyup="checkPass()" id="new_password" placeholder="Mật khẩu" class="form-control" >
+                     <strong style="color:#10ABFE">Nhập lại mật khẩu</strong>:<br>
+                     <input type="password"  onkeyup="checkPass()" id="confirm_password" placeholder="Nhập lại mật khẩu" class="form-control" ><br>
+                     <div><strong  id="error-nwl" style="color:red"></strong></div>
             
                   </form>
                   
@@ -226,11 +199,35 @@
          </div>
       </div>
 {{--  -------------------------------------------------------------  --}}
+      
 
    </body>
  
     <script src="{{ asset('backend/customer-js/customer_local.js') }}"></script>
     <script src="{{ asset('backend/customer-js/account_customer.js') }}"></script>
+
+
+   <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
+
+
+
+   <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-analytics.js"></script>
+
+   <script>
+
+   var firebaseConfig = {
+      apiKey: "AIzaSyD0D5zo0ix6jznGnWFH0NSbS-kSvhzYTC4",
+      authDomain: "hospital-booking-6ccc1.firebaseapp.com",
+      projectId: "hospital-booking-6ccc1",
+      storageBucket: "hospital-booking-6ccc1.appspot.com",
+      messagingSenderId: "426700145474",
+      appId: "1:426700145474:web:261b2b6e0ed9e6735e3edb",
+      measurementId: "G-SJSWKTJ5T3"
+   };
+   // Initialize Firebase
+   firebase.initializeApp(firebaseConfig);
+   firebase.analytics();
+   </script>
 
 
   <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>

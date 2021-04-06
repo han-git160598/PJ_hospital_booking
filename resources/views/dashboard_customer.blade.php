@@ -240,9 +240,9 @@
                             </div>
                             <small id="erold_password" class="text-danger"></small><br /><br />
 
-                             <label>Mật khẩu mới</label>
+                            <label>Mật khẩu mới</label>
                             <div class="input-group" id="show_hide_password2">
-                            <input class="form-control" onkeyup="checkPass()" type="password" id="new_password" id="dashpassword_change">
+                            <input class="form-control" onkeyup="checkPass()" type="password" id="new_password" >
                             <br />
                             <div class="input-group-addon">
                                 <a onClick="show_new_password()"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
@@ -253,7 +253,7 @@
                             <br />
                         <label>Nhập lại mật khẩu</label>
                             <div class="input-group" id="show_hide_password3">
-                            <input class="form-control" onkeyup="checkPass()" type="password" id="confirm_password" id="dashpassword_change2">
+                            <input class="form-control" onkeyup="checkPass()" type="password" id="confirm_password">
 
                             <div class="input-group-addon">
                                 <a onClick="show_confirm_password()"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
@@ -327,9 +327,7 @@
     $( document ).ready(function() {
         var username = JSON.parse(localStorage.getItem('account_customer'));
         //$('#username').html(username.full_name);
-        if(username !=null)
-        {
-            var output = `
+           var output = `
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                 <span class="pl15"><i id="cart" class="fa fa-cart-plus"></i></span><span id="badge" class="badge badge-danger">0</span>
                 <span class="pl15"><i class="fa fa-user"></i><span id="username">${username.full_name}</span></span>
@@ -344,7 +342,7 @@
             </ul>`;
             $('#username_ac').html(output);
                     
-        }
+        
     });
         
     </script>

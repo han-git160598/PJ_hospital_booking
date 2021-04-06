@@ -10,14 +10,15 @@ function customer_login()
         headers: headers,
         success: function(response) 
         {
-            console.log(response);
+            
             if(response.success=='false')
             {
                 alert(response.message);
             }else{
+                //console.log(esponse);
         
                 localStorage.setItem('account_customer', JSON.stringify(response.data[0]));
-                window.history.back();
+                window.location=urlserver+"customer-service-service";
              
             }
             
@@ -27,7 +28,7 @@ function customer_login()
 function customer_logout()
 {
     localStorage.removeItem('account_customer');
-    window.history.back();
+    window.location=urlserver+"login-customer";
 }
 /// change password
 
@@ -79,6 +80,20 @@ function checkPass()
     }
     return flag;
 }
+//helper function for document.getElementById()
+function getElm(id) {
+return document.getElementById(id);
+}
+
+//helper function for setting background color
+function setBGColor(id, value) {
+getElm(id).style.backgroundColor = value;
+}
+
+//helper function for feedback message
+function feedback(msg) {
+getElm('error-nwl').innerHTML = msg;
+}
 function show_modal_change_password()
 {
     $('#change_password_customer_modal').modal('show');
@@ -122,33 +137,20 @@ function change_password()
 }
 
 
-//helper function for document.getElementById()
-function getElm(id) {
-return document.getElementById(id);
-}
 
-//helper function for setting background color
-function setBGColor(id, value) {
-getElm(id).style.backgroundColor = value;
-}
-
-//helper function for feedback message
-function feedback(msg) {
-getElm('error-nwl').innerHTML = msg;
-}
 // eys
-    function show_old_password(){
-    var x = document.getElementById("old_password");
-        if(x.type === "password" ){x.type = "text";} else { x.type = "password";}
-    }
-    function show_new_password(){
-    var z = document.getElementById("new_password");
-    if (z.type === "password" ) {z.type = "text";} else {z.type = "password";}
-    }
-    function show_confirm_password(){
-    var y = document.getElementById("confirm_password");
-    if (y.type === "password" ) {y.type = "text";} else {y.type = "password";}
-    }
+function show_old_password(){
+var x = document.getElementById("old_password");
+    if(x.type === "password" ){x.type = "text";} else { x.type = "password";}
+}
+function show_new_password(){
+var z = document.getElementById("new_password");
+if (z.type === "password" ) {z.type = "text";} else {z.type = "password";}
+}
+function show_confirm_password(){
+var y = document.getElementById("confirm_password");
+if (y.type === "password" ) {y.type = "text";} else {y.type = "password";}
+}
 
 //thay đổi thông tin cá nhân
 function show_modal_profile()
@@ -204,50 +206,137 @@ function update_info()
 
 
 
-// window.onload = function() {
-//     capcha()
-//         //render_quenmk();
-// };
 
-// function capcha() {
-//     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
-//     recaptchaVerifier.render();
-// }
+window.onload = function() {
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+    recaptchaVerifier.render();
+};
+function capcha() {
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+    recaptchaVerifier.render();
+}
 
 
-// function phoneAuth() {
-//     //get the number
-//     var a =  check_phone(document.getElementById('numberrr').value)
-//     console.log(a);
-//     if (a == "true") {
-//         $('#er_phone_used').html('Số điện thoại đã được sử dụng')
-//     } else {
-//         var number = document.getElementById('numberrr').value;
-//         var numberVND = "+84" + document.getElementById('numberrr').value;
-//         $("#customer_phone").val(number);
-//         console.log(number);
-//         //phone number authentication function of firebase
-//         //it takes two parameter first one is number,,,second one is recaptcha
-//         firebase.auth().signInWithPhoneNumber(numberVND, window.recaptchaVerifier).then(function(confirmationResult) {
-//             //s is in lowercase
-//             window.confirmationResult = confirmationResult;
-//             coderesult = confirmationResult;
-//             console.log(coderesult);
-//             alert("Gửi mã số thành công");
-//         }).catch(function(error) {
-//             alert("Gưi mã thất bại");
-//         });
-//     }
 
-// }
 
-// function codeverify() {
-//     var code = document.getElementById('verificationCode').value;
-//     coderesult.confirm(code).then(function(result) {
-//         $('#close_modol_phone').click();
-//         $('#btn_new_cus').click();
-//     }).catch(function(error) {
-//         alert("Mã OTP không hợp lệ");
 
-//     });
-// }
+
+function phoneAuth() {
+    // var a = await check_phone(document.getElementById('numberrr').value)
+    // console.log(a);
+    // if (a == "true") {
+    //     $('#er_phone_used').html('Số điện thoại đã được sử dụng')
+    // } else {
+        var number = document.getElementById('numberrr').value;
+        var numberVND = "+84" + document.getElementById('numberrr').value;
+        $("#customer_phone").val(number);
+
+        firebase.auth().signInWithPhoneNumber(numberVND, window.recaptchaVerifier).then(function(confirmationResult) {
+            //s is in lowercase
+            window.confirmationResult = confirmationResult;
+            coderesult = confirmationResult;
+            console.log(coderesult);
+            alert("Gửi mã PIN thành công, vui lòng đợi trong ít phút");
+        }).catch(function(error) {
+            console.log(error)
+            alert("Gưi mã PIN thất bại, thử lại tối đa 5 lần 1 ngày");
+           
+        });
+    // }
+
+}
+function codeverify(id) {
+if(id ==2 )
+{
+    var code = $('#verificationCode').val();
+    coderesult.confirm(code).then(function(result) {
+    $('#show_modal_info').click();
+    }).catch(function(error) {
+        alert("Mã OTP không hợp lệ");   
+        $('#show_modal_info').click();
+    });
+}
+if(id ==1 ) // quên mật khẩu
+{
+    var code = $('#verificationCode').val();
+    coderesult.confirm(code).then(function(result) {
+        $('#change_password').click();
+    }).catch(function(error) {
+        alert("Mã OTP không hợp lệ");   
+        $('#change_password').click();
+    });
+}
+    
+   
+    
+}
+function check_text_registration_customer()
+{
+    flag= 0;
+    var full_name= $('#reg_name').val();
+    var password= $('#reg_password').val();
+    var phone_active= $('#numberrr').val();
+    var address= $('#reg_address').val();
+    if(full_name == '' || password == '' || phone_active=='' || address=='')
+    {
+        flag=1;
+    }
+    return flag;
+}
+function registration_customer()
+{
+    var full_name= $('#reg_name').val();
+    var password= $('#new_password').val();
+    var phone_active= $('#numberrr').val();
+    var address= $('#reg_address').val();
+    var email= $('#reg_email').val();
+    var check = check_text_registration_customer();
+    var a = checkPass();
+   
+   if(check == 1)
+   {
+       alert('Vui lòng điền đầy đủ thông tin')
+   }else if(a == 1){
+    alert('Mật khẩu không trùng khớp')
+   }
+   else{
+    $.ajax({
+        url: urlapi,
+        type: 'POST',
+        data: { detect:'customer_register',full_name:full_name, password:password,phone_active:phone_active,address:address,email:email},
+        dataType: 'json',
+        headers: headers,
+        success: function(response) 
+        {
+            alert('Đăng ký thành công');
+        }
+    });
+   }
+   
+}
+function type_modal(id)
+{
+    var output= ``;
+    if(id == 1) // quên mật khẩu
+    {
+        output =`
+        <button type="button" class="btn btn-white" data-dismiss="modal">Đóng</button>
+        <button type="button" onClick="codeverify(1)" class="btn btn-primary" >Tiếp tục</button>
+        <button hidden id="change_password" data-toggle="modal" data-target="#Forgot_password_modal">Tiếp tục</button>
+        `;
+        $('#btn_sms').html(output);
+        $('#change_password').click();
+        
+        
+    }if(id == 2) // Đăng ký
+    {
+        output =`
+        <button type="button" class="btn btn-white" data-dismiss="modal">Đóng</button>
+        <button type="button" onClick="codeverify(2)" class="btn btn-primary" >Tiếp tục</button>
+        <button hidden id="show_modal_info" data-toggle="modal" data-target="#registration_customer">Tiếp tục</button>
+        `;
+        $('#btn_sms').html(output);
+        $('#registration_customer').click();
+    }
+
+}
