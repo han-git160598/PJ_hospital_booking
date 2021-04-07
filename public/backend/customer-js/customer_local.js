@@ -1,5 +1,5 @@
-const urlapi = "http://192.168.100.16/api_hospital/";
-const urlserver="http://192.168.100.16/PJ_hospital_booking/public/";
+const urlapi = "http://192.168.1.17/api_hospital/";
+const urlserver="http://192.168.1.17/PJ_hospital_booking/public/";
 //const urlsocket = "https://exchangekse.herokuapp.com/";
 const headers = {"Authorization": "Basic YWRtaW46cXRjdGVrQDEyMwx=="};
 function formatNumber(num) {

@@ -101,7 +101,7 @@ function form_profile_cart() {
                         </tr>
                         <tr> 
                             <td><strong style="color:#blue"> Giới tính:</strong></td>
-                            <td><strong id="customer_sex" style="color:#blue">${account_customer.sex}</strong></td>
+                            <td><strong id="customer_sex" style="color:#blue">${customer_sex(account_customer.sex)}</strong></td>
                         </tr>
                     </table>
                     
@@ -203,7 +203,7 @@ function form_profile_cart() {
                         </tr>
                         <tr> 
                             <td><strong style="color:#blue">Giới tính:</strong></td>
-                            <td><strong style="color:#blue">${item.customer_sex}</strong></td>
+                            <td><strong style="color:#blue">${customer_sex(item.customer_sex)}</strong></td>
                         </tr>
                     </table>
                         <p>Tiểu sử(nếu có):</p>
@@ -344,16 +344,19 @@ function remove_customer(id) {
 function booking_history_again() {
 
     var booking_type = $('#type_cars').val();
-    var customer_name = $('#customer_name').html();
-    var customer_phone = $('#customer_phone').html();
-    var customer_sex = $('#customer_sex').html();
-    var customer_birthday = $('#customer_birthday').html();
-    var customer_address = $('#customer_address').html();
+    // var customer_name = $('#customer_name').html();
+    // var customer_phone = $('#customer_phone').html();
+    // var customer_sex = $('#customer_sex').html();
+    // var customer_birthday = $('#customer_birthday').html();
+    // var customer_address = $('#customer_address').html();
     var appointment_date = $('#appointment_date').val();
     var appointment_time = $('#appointment_time').val();
     var customer_prehistoric = $('#customer_prehistoric').val();
     var total_service_price = $('total_service_price').html();
 
+
+    var account_customer = JSON.parse(localStorage.getItem('account_customer'));
+    
     var payment_type = $('payment_type').val();
     var arr_cart = JSON.parse(localStorage.getItem('service_service'));
     var id_service = [];
@@ -381,27 +384,27 @@ function booking_history_again() {
               <table class="total_history">
                 <tr> 
                     <td><strong style="color:#blue"> Họ & Tên</strong></td>
-                    <td><strong style="color:#blue">${customer_name}</strong></td>
+                    <td><strong style="color:#blue">${account_customer.full_name}</strong></td>
                     <input type="text" hidden id="customer_name" value="${customer_name}" >
                 </tr>
                 <tr> 
                     <td><strong style="color:#blue"> SDT:</strong></td>
-                    <td><strong  style="color:#blue">${customer_phone} </strong></td>
+                    <td><strong  style="color:#blue">${account_customer.phone_number} </strong></td>
                     <input type="text" hidden id="customer_phone" value="${customer_phone}" >
                 </tr>
                 <tr> 
                     <td><strong style="color:#blue"> Địa chỉ:</strong></td>
-                    <td><strong  style="color:#blue">${customer_address}</strong></td>
+                    <td><strong  style="color:#blue">${account_customer.address}</strong></td>
                     <input type="text" hidden id="customer_address" value="${customer_address}" >
                 </tr>
                 <tr> 
                     <td><strong style="color:#blue"> Ngày sinh:</strong></td>
-                    <td><strong style="color:#blue">${customer_birthday}</strong></td>
+                    <td><strong style="color:#blue">${account_customer.birthday}</strong></td>
                     <input type="text" hidden id="customer_birthday" value="${customer_birthday}" >
                 </tr>
                 <tr> 
                     <td><strong style="color:#blue"> Giới tính:</strong></td>
-                    <td><strong style="color:#blue">${customer_sex} </strong></td>
+                    <td><strong style="color:#blue">${customer_sex(account_customer.sex)} </strong></td>
                     <input type="text" hidden id="customer_sex" value="${customer_sex}" >
                 </tr>
               </table>
@@ -489,17 +492,17 @@ function booking_history_again() {
 // khám hộ xem lại đơn khám
 function help_booking_history_again() {
     var booking_type = $('#type_cars').val();
-    var customer_name = $('#customer_name').html();
-    var customer_phone = $('#customer_phone').html();
-    var customer_sex = $('#customer_sex').html();
-    var customer_birthday = $('#customer_birthday').html();
-    var customer_address = $('#customer_address').html();
+    // var customer_name = $('#customer_name').html();
+    // var customer_phone = $('#customer_phone').html();
+    // var customer_sex = $('#customer_sex').html();
+    // var customer_birthday = $('#customer_birthday').html();
+    // var customer_address = $('#customer_address').html();
     var appointment_date = $('#appointment_date').val();
     var appointment_time = $('#appointment_time').val();
-    var customer_prehistoric = $('#customer_prehistoric').val();
-    var total_service_price = $('total_service_price').html();
+    // var customer_prehistoric = $('#customer_prehistoric').val();
+    // var total_service_price = $('total_service_price').html();
 
-    var payment_type = $('payment_type').val();
+    //var payment_type = $('payment_type').val();
     var arr_cart = JSON.parse(localStorage.getItem('service_service'));
     var arr_customer = JSON.parse(localStorage.getItem('customer_customer'));
     var id_service = [];
@@ -558,7 +561,7 @@ function help_booking_history_again() {
                 </tr>
                 <tr> 
                     <td><strong style="color:#blue"> Giới tính:</strong></td>
-                    <td><strong style="color:#blue">${item.customer_sex} </strong></td>
+                    <td><strong style="color:#blue">${customer_sex(item.customer_sex)} </strong></td>
                     <input type="text" hidden id="customer_sex" value="${item.customer_sex}" >
                 </tr>
               </table>
@@ -660,7 +663,6 @@ function help_create_booking() {
 
 
     var arr_customer = JSON.parse(localStorage.getItem('customer_customer'));
-    console.log(arr_customer);
     var id_service = [];
     var service_price = []; // lấy ra list dịch vụ 
 
@@ -692,24 +694,27 @@ function help_create_booking() {
         }
     });
     var customer = JSON.parse(localStorage.getItem('account_customer'));
-    console.log(customer_address_string);
-    console.log(customer_name.toString());
-    console.log(customer_phone.toString());
-    console.log(customer_sex.toString());
-    console.log(customer_birthday.toString());
-    console.log(customer_prehistoric.toString());
-    console.log('---------------------')
-    console.log(id_service.toString());
-    console.log(service_price.toString());
-    console.log(booking_type);
-    console.log(appointment_date);
-    console.log(appointment_time);
-    console.log(payment_type);
+    // console.log(customer_address_string);
+    // console.log(customer_name.toString());
+    // console.log(customer_phone.toString());
+    // console.log(customer_sex.toString());
+    // console.log(customer_birthday.toString());
+    // console.log(customer_prehistoric.toString());
+    // console.log('---------------------')
+    // console.log(id_service.toString());
+    // console.log(service_price.toString());
+    // console.log(booking_type);
+    // console.log(appointment_date);
+    // console.log(appointment_time);
+    // console.log(payment_type);
 
 
     if (typeof payment_type == 'undefined') {
         alert('Vui lòng chọn phương thức thanh toán')
     } else {
+        localStorage.removeItem('service_service');
+        localStorage.removeItem('service_packet');
+        localStorage.removeItem('total_cart');
         $.ajax({
             url: urlapi,
             type: 'POST',
@@ -732,12 +737,14 @@ function help_create_booking() {
             dataType: 'json',
             headers: headers,
             success: function(response) {
-                alert(response.message);
+               
                 localStorage.removeItem('service_service');
                 localStorage.removeItem('service_packet');
                 localStorage.removeItem('total_cart');
                 list_cart();
-                window.localStorage = urlserver + 'customer-booking-history';
+                alert(response.message);
+                window.location = urlserver + 'customer-booking-history';
+ 
             }
         });
 
@@ -783,11 +790,11 @@ function create_booking() {
                 booking_code: '',
                 id_customer: customer.id,
                 booking_type: booking_type,
-                customer_address: customer_address,
-                customer_name: customer_name,
-                customer_phone: customer_phone,
-                customer_sex: customer_sex,
-                customer_birthday: customer_birthday,
+                customer_address: customer.address,
+                customer_name: customer.full_name,
+                customer_phone: customer.phone_number,
+                customer_sex: customer.sex,
+                customer_birthday: customer.birthday,
                 date_schedule: appointment_date,
                 time_schedule: appointment_time,
                 customer_prehistoric: customer_prehistoric,
@@ -799,13 +806,12 @@ function create_booking() {
             headers: headers,
             success: function(response) {
 
-                alert(response.message);
-
                 localStorage.removeItem('service_service');
                 localStorage.removeItem('service_packet');
                 localStorage.removeItem('total_cart');
                 list_cart();
-                window.localStorage = urlserver + 'customer-booking-history';
+                alert(response.message);
+                window.location = urlserver + 'customer-booking-history';
             }
         });
 

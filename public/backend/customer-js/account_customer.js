@@ -214,12 +214,20 @@ function show_modal_profile() {
     var customer = JSON.parse(localStorage.getItem('account_customer'));
     var output = `
     <form>
-        <strong style="color:#10ABFE">1. Số điện thoại liên hệ :</strong><br>
-        <input type="text" placeholder="số điện thoại" id="phone_number" value="${customer.phone_number}" class="form-control" ><br>
+        <strong style="color:#10ABFE">1. Số điện thoại liên hệ :</strong><br>`;
+        if(customer.phone_number == null || customer.phone_number == '')
+        {
+            output+=`<input type="text" placeholder="số điện thoại" id="phone_number" value="${customer.phone_active}" class="form-control" ><br>`;
+        }else{
+            output += `
+            <input type="text" placeholder="số điện thoại" id="phone_number" value="${customer.phone_number}" class="form-control" ><br>`;
+        }
+        output += `
         <strong style="color:#10ABFE">2. Họ và tên (*) :</strong><br>
         <input type="text" placeholder="Họ và tên" id="full_name" value="${customer.full_name}"  class="form-control" ><br>
         <strong style="color:#10ABFE">3. Giới tính (*) :</strong><br>
-        <input type="text" placeholder="Giới tính" id="sex" value="${customer.sex}" class="form-control" ><br>
+        <input type="text" readonly placeholder="Giới tính" id="sex" value="${customer_sex(customer.sex)}" class="form-control" ><br>
+
         <strong style="color:#10ABFE">4. Ngày sinh (*) :</strong><br>
         <input type="date" class="form-control" id="birthday" value="${customer.birthday}" ><br>
         <strong style="color:#10ABFE">5. Email :</strong><br>
@@ -237,7 +245,7 @@ function update_info() {
     var full_name = $('#full_name').val();
     var address = $('#address').val();
     var birthday = $('#birthday').val();
-    var sex = $('#sex').val();
+    var sex = customer_sex_fill_info($('#sex').val());
     var email = $('#email').val();
     var nationality = $('#nationality').val();
     var phone_number = $('#phone_number').val();
@@ -369,6 +377,7 @@ function codeverify(id) {
         coderesult.confirm(code).then(function(result) {
             $('#show_modal_info').click();
         }).catch(function(error) {
+            
             alert("Mã OTP không hợp lệ");
 
         });
@@ -379,6 +388,7 @@ function codeverify(id) {
         coderesult.confirm(code).then(function(result) {
             $('#btn_forgot_password').click();
         }).catch(function(error) {
+            console.log(error);
             alert("Mã OTP không hợp lệ");
 
         });

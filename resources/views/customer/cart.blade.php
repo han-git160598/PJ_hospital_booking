@@ -51,12 +51,12 @@ p{
       
 <div style="clear: both; height: 61px;"></div>
 <div class="wrapper wrapper-content animated fadeInRight">
-    {{--  <div class="row">
+     <div class="row">
         <div class="col-lg-12">
             <div class="inqbox float-e-margins">
             <div class="inqbox-content">
-                <h2>Clients</h2>
-                <ol class="breadcrumb">
+                <h2>Đặt lịch khám</h2>
+                <!-- <ol class="breadcrumb">
                     <li>
                         <a href="index.html">Home</a>
                     </li>
@@ -66,23 +66,23 @@ p{
                     <li class="active">
                         <strong>Clients</strong>
                     </li>
-                </ol>
+                </ol> -->
             </div>
             </div>
         </div>
-    </div>  --}}
+    </div>  
     <div class="row">
         <div class="col-sm-7">
             <div class="inqbox">
             <div class="inqbox-content">
-                {{--  <span class="text-muted small pull-right">Last modification: <i class="fa fa-clock-o"></i> 2:10 pm - 12.06.2015</span>
+                <!-- {{--  <span class="text-muted small pull-right">Last modification: <i class="fa fa-clock-o"></i> 2:10 pm - 12.06.2015</span>
                 <h2>Clients</h2>  --}}
                 <div class="input-group">
                     <input type="text" placeholder="Search client " class="input form-control">
                     <span class="input-group-btn">
                     <button type="button" class="btn btn btn-primary"> <i class="fa fa-search"></i> Search</button>
                     </span>
-                </div>
+                </div> -->
                 <div class="clients-list">
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane active">
