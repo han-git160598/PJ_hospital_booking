@@ -53,18 +53,8 @@ padding-inline-start: 0px;
         <div class="col-lg-12">
             <div class="inqbox float-e-margins">
             <div class="inqbox-content">
-                <h2>Clients</h2>
-                <ol class="breadcrumb">
-                    <li>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li>
-                        <a>Apps</a>
-                    </li>
-                    <li class="active">
-                        <strong>Clients</strong>
-                    </li>
-                </ol>
+                <h2>Thông tin hữu ích</h2>
+              
             </div>
             </div>
         </div>
@@ -76,7 +66,7 @@ padding-inline-start: 0px;
                 {{--  <span class="text-muted small pull-right">Last modification: <i class="fa fa-clock-o"></i> 2:10 pm - 12.06.2015</span>
                 <h2>Clients</h2>  --}}
                 <div class="input-group">
-                    <input type="text" id="key_news" placeholder="Search client " class="input form-control">
+                    <input type="text" id="key_news"  class="input form-control">
                     <span class="input-group-btn">
                     <button type="button" onClick="search_news()" class="btn btn btn-primary"> <i class="fa fa-search"></i> Search</button>
                     </span>

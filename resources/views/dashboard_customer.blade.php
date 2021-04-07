@@ -33,7 +33,7 @@
                         <li>
                             <div class="logopanel" style="margin-left: 0px; z-index: 99999">
                                 <div class="profile-element">
-                                    <h2><a href="{{ URL::to('/dashboard') }}">QTC ADMIN</a></h2>
+                                    <h2><a href="{{ URL::to('/dashboard') }}"></a></h2>
                                 </div>
                                 <div class="logo-element">
 
@@ -51,42 +51,41 @@
                                         <li class="active">
                                             <a href="{{ URL::to('/dashboard-customer') }}"><i class="fa fa-home"></i> <span class="nav-label">Trang chủ</span></a>
                                         </li>
-                                       
                                         
-                                                    <li >
+                                        <li >
 
-                                                        <a href="{{ URL::to('customer-service-packet') }}"><img src="#" width="25px" height="25px">&nbsp;&nbsp;<span class="nav-label">Các gói khám tổng hợp</span></a>
-                                                    </li>
-                                                    
-                                                    <li >
+                                            <a href="{{ URL::to('customer-service-packet') }}"><img src="../backend/icon/list of medical packages.png" width="25px" height="25px">&nbsp;&nbsp;<span class="nav-label">Gói khám tổng hợp</span></a>
+                                        </li>
+                                        
+                                        <li >
 
-                                                        <a href="{{ URL::to('customer-service-service') }}"><img src="#"  width="25px" height="25px">&nbsp;&nbsp;<span class="nav-label">Dịch vụ khám tùy chọn</span></a>
-                                                       
-                                                    </li>
-                                                 
-                                                    <li >
+                                            <a href="{{ URL::to('customer-service-service') }}"><img src="../backend/icon/medical-history.png"  width="25px" height="25px">&nbsp;&nbsp;<span class="nav-label">khám tùy chọn</span></a>
+                                            
+                                        </li>
+                                        
+                                        <li >
 
-                                                        <a href="{{ URL::to('customer-booking-history') }}"><img src="#"  width="25px" height="25px">&nbsp;&nbsp;<span class="nav-label">Lịch sửa đặt khám</span></a>
-                                                      
-                                                    </li>
+                                            <a href="{{ URL::to('customer-booking-history') }}"><img src="../backend/icon/surface1.png"  width="25px" height="25px">&nbsp;&nbsp;<span class="nav-label">Lịch sửa đặt khám</span></a>
+                                            
+                                        </li>
 
 
 
-                                                    <li >
-                                                        <a href="customer-useful-news"><img src="#"  width="25px" height="25px">&nbsp;&nbsp;<span class="nav-label">Thông tin hữu ích</span></a>
-                                                       
-                                                    </li>
-                                                    
-                                                    
-                                                    <li>
-                                                        <a href="customer-appointment-schedule"><img src="#"  width="25px" height="25px">&nbsp;&nbsp;<span class="nav-label">Cuộc hẹn & lịch trình</span></a>
-                                                      
-                                                    </li>
-                                                   
-                                                    <li>
-                                                        <a href="customer-cart"><img src="#"  width="25px" height="25px">&nbsp;&nbsp;<span class="nav-label">Giỏ hàng</span></a>
-                                                      
-                                                    </li>
+                                        <li >
+                                            <a href="customer-useful-news"><img src="../backend/icon/userful information.png"  width="25px" height="25px">&nbsp;&nbsp;<span class="nav-label">Thông tin hữu ích</span></a>
+                                            
+                                        </li>
+                                        
+                                        
+                                        <li>
+                                            <a href="customer-appointment-schedule"><img src="../backend/icon/appointment schedule.png"  width="25px" height="25px">&nbsp;&nbsp;<span class="nav-label">Cuộc hẹn & lịch trình</span></a>
+                                            
+                                        </li>
+                                        
+                                        <li>
+                                            <a href="customer-cart"><img src="../backend/icon/gio hang.png"  width="25px" height="25px">&nbsp;&nbsp;<span class="nav-label">Giỏ hàng</span></a>
+                                            
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -251,7 +250,7 @@
                             <small id="dasherpassword" class="text-danger"></small>
                             <br /> 
                             <br />
-                        <label>Nhập lại mật khẩu</label>
+                            <label>Nhập lại mật khẩu</label>
                             <div class="input-group" id="show_hide_password3">
                             <input class="form-control" onkeyup="checkPass()" type="password" id="confirm_password">
 

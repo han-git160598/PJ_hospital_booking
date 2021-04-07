@@ -18,7 +18,7 @@
                         <div class="inqbox-content">
 
                            <div class="input-group">
-                              <input type="text" id="key_service" placeholder="Search client " class="input form-control">
+                              <input type="text" id="key_service" placeholder="Tìm kiếm" class="input form-control">
                               <span class="input-group-btn">
                               <button type="button" onClick="search_service_service()" class="btn btn btn-primary"> <i class="fa fa-search"></i> Tìm kiếm</button>
                               </span>

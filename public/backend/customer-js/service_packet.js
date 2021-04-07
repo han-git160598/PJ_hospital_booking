@@ -1,6 +1,6 @@
-var arr_service_packet=[];
-var count_cart=0;
-var arr_cart=[];
+var arr_service_packet = [];
+var count_cart = 0;
+var arr_cart = [];
 var arr_id_packet = [];
 $(document).ready(function() {
 
@@ -9,23 +9,22 @@ $(document).ready(function() {
 
     $('#badge').html(count_cart);
 });
-function list_service_packet()
-{
-    var tam="";
-    let i=0;
+
+function list_service_packet() {
+    var tam = "";
+    let i = 0;
     $.ajax({
         url: urlapi,
         type: 'POST',
-        data: { detect: 'list_service_packet',limit: '200' },
+        data: { detect: 'list_service_packet', limit: '200' },
         dataType: 'json',
         headers: headers,
-        success: function(response) 
-        {
-           
-            var output=``;
+        success: function(response) {
+
+            var output = ``;
             response.data.forEach(function(item) {
-            arr_service_packet.push(item);
-            output+=`
+                arr_service_packet.push(item);
+                output += `
             <tr>
             <th style="30px"></th>
             <td> <img alt="image" width="25px" height="25px"  src="../backend/icon/service_packet.svg"> ${item.service_packet_title}</td>
@@ -33,16 +32,16 @@ function list_service_packet()
             <td colspan="2"><center><button onClick="detail_service_packet(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </button>
             <button onClick="add_cart(${i})" class="btn btn-primary btn-sm"><i class="fa fa-cart-plus"></i></button></center></td>
             </tr>`;
-            i++;
-        });
+                i++;
+            });
             $('#list_service_packet').html(output);
         }
     });
 }
-function detail_service_packet(data)
-{
-    var item  = arr_service_packet[data];
-    var output =` <div class="tab-content">
+
+function detail_service_packet(data) {
+    var item = arr_service_packet[data];
+    var output = ` <div class="tab-content">
     <div id="contact-1" class="tab-pane active">
         <div class="row m-b-lg">
         <div class="col-lg-12 text-center">
@@ -51,7 +50,7 @@ function detail_service_packet(data)
         </div>
         <div class="client-detail">
         <div class="full-height-scroll">
-            <strong style="color:#FF5722">1. Tại sao lại chọn gói khám sức khỏe nâng cao:</strong>
+            <strong style="color:#FF5722">1. Mô tả:</strong>
                 <p>
                 ${item.service_packet_content}
                 </p>
@@ -67,9 +66,9 @@ function detail_service_packet(data)
                     </tr>
                 </thead >
                 <tbody>`;
-                var dem = 1  ;
-                item.packet_detail.forEach(function(item1) {
-                output +=`        
+    var dem = 1;
+    item.packet_detail.forEach(function(item1) {
+        output += `        
                     <tr>
                         <td>${dem++}</td>
                         <td>
@@ -78,8 +77,8 @@ function detail_service_packet(data)
                         </td>
                         <td>${formatNumber(item1.service_price)}</td>
                     </tr>`;
-                });
-                output +=` 
+    });
+    output += ` 
                 </tbody>
                 </table>
                 
@@ -99,27 +98,26 @@ function detail_service_packet(data)
 <button type="button" onClick="add_cart(${data})" class="btn btn-danger btn-sm btn-block">Đặt khám</button>
     </div>
 </div>`;
-   
+
     $('#detail_service_packet_data').fadeOut().html(output);
     $('#detail_service_packet_data').fadeIn().html(output);
 }
-function search_service_packet()
-{
-    let i=0;
-    arr_service_packet=[];
+
+function search_service_packet() {
+    let i = 0;
+    arr_service_packet = [];
     var key_service_packet = $('#key_service_packet').val();
     $.ajax({
         url: urlapi,
         type: 'POST',
-        data: { detect: 'list_service_packet', filter: key_service_packet,limit: '20' },
+        data: { detect: 'list_service_packet', filter: key_service_packet, limit: '20' },
         dataType: 'json',
         headers: headers,
-        success: function(response) 
-        {
-            var output=``;
+        success: function(response) {
+            var output = ``;
             response.data.forEach(function(item) {
-            arr_service_packet.push(item);
-            output+=`
+                arr_service_packet.push(item);
+                output += `
             <tr>
             <th style="30px"></th>
             <td><img alt="image" width="25px" height="25px"  src="../backend/icon/service_packet.svg"> ${item.service_packet_title}</td>
@@ -127,73 +125,68 @@ function search_service_packet()
             <td colspan="2"><center><button onClick="detail_service_packet(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </button>
             <button onClick="add_cart(${i})" class="btn btn-primary btn-sm"><i class="fa fa-cart-plus"></i></button></center></td>
             </tr>`;
-            i++;
+                i++;
             });
             $('#list_service_packet').html(output);
         }
     });
 }
 
-function add_cart(data)
-{
-    var count_cart=0;
-    var flag =0;
-    var item  = arr_service_packet[data];
-    var arr_service =[JSON.parse(localStorage.getItem('service_service'))];
+function add_cart(data) {
+    var count_cart = 0;
+    var flag = 0;
+    var item = arr_service_packet[data];
+    var arr_service = [JSON.parse(localStorage.getItem('service_service'))];
     var arr_packet = JSON.parse(localStorage.getItem('service_packet'));
-      //  arr_id_packet = JSON.parse(localStorage.getItem('service_packet'));
+    //  arr_id_packet = JSON.parse(localStorage.getItem('service_packet'));
 
-   
 
-    if(arr_packet == null )
-    {
+
+    if (arr_packet == null) {
         item.packet_detail.forEach(function(item1) {
             arr_cart.push(item1);
         });
         arr_id_packet.push(item.service_packet_id);
 
-       
+
         localStorage.setItem('service_packet', JSON.stringify(arr_id_packet));
         localStorage.setItem('service_service', JSON.stringify(arr_cart));
 
-        arr_service_count =JSON.parse(localStorage.getItem('service_service'));
+        arr_service_count = JSON.parse(localStorage.getItem('service_service'));
         arr_service_count.forEach(function(item1) {
             count_cart++;
         });
         localStorage.setItem('total_cart', JSON.stringify(count_cart));
 
-    }
-    else{
-        arr_packet.forEach(function(cart) {
-            if(cart == item.service_packet_id)
-            {
-                alert('Dịch vụ này đã tốn tại trong giỏ hàng của bạn')
-                flag = 1;
-            }
-        });
-        if(flag == 0) 
-        {
-            arr_service[0].forEach(function (service){
+    } else {
+        // arr_packet.forEach(function(cart) {
+        //     if(cart == item.service_packet_id)
+        //     {
+        //         alert('Dịch vụ này đã tốn tại trong giỏ hàng của bạn')
+        //         flag = 1;
+        //     }
+        // });
+        if (flag == 0) {
+            arr_service[0].forEach(function(service) {
                 arr_cart.push(service);
             });
             item.packet_detail.forEach(function(item1) {
-                arr_cart.push(item1);   
+                arr_cart.push(item1);
             });
             const key = 'id_service';
 
-            const unique = [...new Map(arr_cart.map(item =>
-            [item[key], item])).values()]
-            
+            const unique = [...new Map(arr_cart.map(item => [item[key], item])).values()]
+
             arr_id_packet = JSON.parse(localStorage.getItem('service_packet'));
 
             arr_id_packet.push(item.service_packet_id);
 
             localStorage.setItem('service_packet', JSON.stringify(arr_id_packet));
             localStorage.setItem('service_service', JSON.stringify(unique));
-           
+
         }
 
-        arr_service_count =JSON.parse(localStorage.getItem('service_service'));
+        arr_service_count = JSON.parse(localStorage.getItem('service_service'));
         arr_service_count.forEach(function(item1) {
             count_cart++;
         });
@@ -202,4 +195,3 @@ function add_cart(data)
     $('#badge').html(count_cart);
 
 }
-

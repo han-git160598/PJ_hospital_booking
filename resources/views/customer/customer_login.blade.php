@@ -92,7 +92,8 @@
                 <small class="text-danger" id="er_phone_used"></small>
 
                 <div id="recaptcha-container"></div>
-                <button class="btn btn-primary btn-sm" type="button" onclick="phoneAuth()">Gửi mã</button>
+                <div id="btn_phoneauth"></div>
+                
             </form>
             <br>
             <label>Nhập mã điện thoại (mã được gửi về số điện thoại của bạn)</label>
@@ -104,7 +105,6 @@
                   <button type="button" onClick="codeverify()" class="btn btn-primary" >Tiếp tục</button>
                   <button hidden id="show_modal_info" data-toggle="modal" data-target="#registration_customer"> </button>
                   <button hidden id="btn_forgot_password" data-toggle="modal" data-target="#Forgot_password_modal"> </button>
-            
                </div>
             </div>
          </div>

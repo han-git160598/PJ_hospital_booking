@@ -55,18 +55,7 @@ p{
         <div class="col-lg-12">
             <div class="inqbox float-e-margins">
             <div class="inqbox-content">
-                <h2>Clients</h2>
-                <ol class="breadcrumb">
-                    <li>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li>
-                        <a>Apps</a>
-                    </li>
-                    <li class="active">
-                        <strong>Clients</strong>
-                    </li>
-                </ol>
+                <h2>Cuộc hẹn & lịch trình</h2>
             </div>
             </div>
         </div>
@@ -78,7 +67,7 @@ p{
                 {{--  <span class="text-muted small pull-right">Last modification: <i class="fa fa-clock-o"></i> 2:10 pm - 12.06.2015</span>
                 <h2>Clients</h2>  --}}
                 <div class="input-group">
-                    <input type="text" placeholder="Search client " class="input form-control">
+                    <input type="text" placeholder="Tìm kiếm " class="input form-control">
                     <span class="input-group-btn">
                     <button type="button" class="btn btn btn-primary" onClick="filter_history() "> <i class="fa fa-filter"></i> Search</button>
                     </span>
@@ -87,7 +76,7 @@ p{
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane active">
                         <div class="full-height-scroll">
-                            <div class="table-responsive">
+                            <div class="table-responsive" style="width:100%;height:500px; overflow: auto;">
                                 <table class="table table-striped table-hover">
                                 <tbody>
                                     <tr>
@@ -99,7 +88,7 @@ p{
                                         <th colspan="2"><center>Hành động</center></th>
                                     </tr>
                                     </tbody>
-                                    <tbody id="list_billing_billing">
+                                    <tbody id="list_billing_billing" >
                                     {{--  <tr>
                                         <th style="30px"></th>
                                         <td>MH 51222366</td>
@@ -134,7 +123,7 @@ p{
                         <div class="full-height-scroll">
                             
                            
-                            <div  class="vertical-container dark-timeline" style="width:100%;height:600px; overflow: auto;">
+                            <div  class="vertical-container dark-timeline" style="width:100%;height:300px; overflow: auto;">
                                 
                             
                             <h3><strong style="color:Black">Nhắc hẹn khám </strong></h3>
@@ -166,86 +155,7 @@ p{
                                         <td>250.000</td>
                                      
                                     </tr>
-                                    <tr>
-                                        <td>Maria Anders</td>
-                                        <td>250.000</td>
-                                       
-                                    </tr>
-                                     <tr>
-                                        <td>Maria Anders</td>
-                                        <td>250.000</td>
-                                     
-                                    </tr>
-                                    <tr>
-                                        <td>Maria Anders</td>
-                                        <td>250.000</td>
-                                       
-                                    </tr> <tr>
-                                        <td>Maria Anders</td>
-                                        <td>250.000</td>
-                                     
-                                    </tr>
-                                    <tr>
-                                        <td>Maria Anders</td>
-                                        <td>250.000</td>
-                                       
-                                    </tr> <tr>
-                                        <td>Maria Anders</td>
-                                        <td>250.000</td>
-                                     
-                                    </tr>
-                                    <tr>
-                                        <td>Maria Anders</td>
-                                        <td>250.000</td>
-                                       
-                                    </tr> <tr>
-                                        <td>Maria Anders</td>
-                                        <td>250.000</td>
-                                     
-                                    </tr>
-                                    <tr>
-                                        <td>Maria Anders</td>
-                                        <td>250.000</td>
-                                       
-                                    </tr> <tr>
-                                        <td>Maria Anders</td>
-                                        <td>250.000</td>
-                                     
-                                    </tr>
-                                    <tr>
-                                        <td>Maria Anders</td>
-                                        <td>250.000</td>
-                                       
-                                    </tr> <tr>
-                                        <td>Maria Anders</td>
-                                        <td>250.000</td>
-                                     
-                                    </tr>
-                                    <tr>
-                                        <td>Maria Anders</td>
-                                        <td>250.000</td>
-                                       
-                                    </tr> <tr>
-                                        <td>Maria Anders</td>
-                                        <td>250.000</td>
-                                     
-                                    </tr>
-                                    <tr>
-                                        <td>Maria Anders</td>
-                                        <td>250.000</td>
-                                       
-                                    </tr> <tr>
-                                        <td>Maria Anders</td>
-                                        <td>250.000</td>
-                                     
-                                    </tr>
-                                    <tr>
-                                        <td>Maria Anders</td>
-                                        <td>250.000</td>
-                                       
-                                    </tr>
-                                   
-                                
+
                                 </tbody>
                                </table>
 
@@ -255,7 +165,7 @@ p{
 
                             </div>
                         
-                        <button type="button" class="btn btn-danger btn-sm btn-block">Xem lại đơn hàng này</button>
+                        <span id="btn_history"><button type="button" class="btn btn-danger btn-sm btn-block">Xem lại đơn hàng này</button></span>
                         </div>
                         </div>
                     </div>
@@ -270,6 +180,5 @@ p{
     <script src="{{ asset('backend/js/jquery-3.5.0.min.js') }}"></script>
     <script src="{{ asset('backend/customer-js/customer_local.js') }}"></script>
     <script src="{{ asset('backend/customer-js/appointment_schedule.js') }}"></script>
-
 @endsection
    

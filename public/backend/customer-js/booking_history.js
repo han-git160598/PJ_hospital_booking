@@ -1,37 +1,33 @@
-
-
-var arr_booking_history=[];
+var arr_booking_history = [];
 var customer = JSON.parse(localStorage.getItem('account_customer'));
 $(document).ready(function() {
     count_cart = localStorage.getItem('total_cart');
     $('#badge').html(count_cart);
-    
-    if(customer ==null)
-    {
+
+    if (customer == null) {
         var r = confirm('Vui lòng đăng nhập để xem lịch sử khám của bạn');
-        if(r ==true)
-        {
-            window.location=urlserver+'login-customer';
+        if (r == true) {
+            window.location = urlserver + 'login-customer';
         }
 
-    }else{
-        let i=0;
+    } else {
+        let i = 0;
         $.ajax({
             url: urlapi,
             type: 'POST',
-            data: { detect: 'list_booking_history',limit: '100',id_customer:customer.id },
+            data: { detect: 'list_booking_history', limit: '100', id_customer: customer.id },
             dataType: 'json',
             headers: headers,
-            success: function(response) 
-            {
-                if(response.data == '')
-                {
+            success: function(response) {
+
+                if (response.data == '') {
                     alert('Chưa có lịch sử khám')
-                }else{
-                    var output=``;
+                } else {
+                    var output = ``;
                     response.data.forEach(function(item) {
                         arr_booking_history.push(item);
-                        output+=`
+
+                        output += `
                         <tr>
                         <th style="30px"></th>
                         <td>${item.booking_code}</  td>
@@ -44,17 +40,16 @@ $(document).ready(function() {
                         i++;
                     });
                 }
-                
-            $('#list_booking_history').html(output);
+
+                $('#list_booking_history').html(output);
             }
         });
     }
 });
-function detail_booking_history(data)
-{
-    var item  = arr_booking_history[data];
-    console.log((item.booking_status));
-    var output =` 
+
+function detail_booking_history(data) {
+    var item = arr_booking_history[data];
+    var output = ` 
     <div class="tab-content">
     <div id="contact-1" class="tab-pane active">
         <div class="row m-b-lg" >
@@ -83,34 +78,55 @@ function detail_booking_history(data)
                         <td><strong style="color:#10ABFE"> ${item.booking_date} - ${item.booking_time}</strong></td>
                     </tr>
                 </table>
-            <h3><strong style="color:Black">Kết quả xét nghiệm: </strong></h3>
-            <img alt="" height="150" width="99%" src="../images/slide/204683265.png">
-           
+                <h3><strong style="color:Black">Kết quả xét nghiệm: </strong></h3>`;
+    if (item.booking_type == 4) {
+        // img resutl
+        var img = ``;
+        item.booking_result.forEach(function(param) {
+            img += `
+    <img alt="" height="200" width="99%" src="../${param.image_upload}">
+    <hr>
+    `;
+        });
+        $('#list_img_result').html(img);
+
+        output += `
+                <div id="img_result">
+                <a data-toggle="modal" data-target="#img_result_modal" ><img alt="" height="150" width="99%" src="../${item.booking_result[0].image_upload}">
+                <span> + ${item.booking_result.length}</span></a>
+                </div>
+                `;
+    } else {
+        output += `<center><h4><strong style="color:red">Chưa có kết quả </strong></h4></center>`;
+    }
+    item.booking_customer.forEach(function(param) {
+
+        output += `
             <h3><strong style="color:Black">Thông tin cá nhân: </strong></h3>
             <div>
               <table class="total_history">
                 <tr> 
                     <td><strong style="color:#10ABFE"> Họ & Tên</strong></td>
-                    <td><strong style="color:#10ABFE"> ${item.booking_customer[0].customer_name}</strong></td>
+                    <td><strong style="color:#10ABFE"> ${param.customer_name}</strong></td>
                 </tr>
                 <tr> 
                     <td><strong style="color:#10ABFE"> SDT:</strong></td>
-                    <td><strong style="color:#10ABFE"> ${item.booking_customer[0].customer_phone} </strong></td>
+                    <td><strong style="color:#10ABFE"> ${param.customer_phone} </strong></td>
                 </tr>
                 <tr> 
                     <td><strong style="color:#10ABFE"> Địa chỉ:</strong></td>
-                    <td><strong style="color:#10ABFE"> ${item.booking_customer[0].customer_address}</strong></td>
+                    <td><strong style="color:#10ABFE"> ${param.customer_address}</strong></td>
                 </tr>
                 <tr> 
                     <td><strong style="color:#10ABFE"> Giới tính:</strong></td>
-                    <td><strong style="color:#10ABFE"> ${customer_sex(item.booking_customer[0].customer_sex)} </strong></td>
+                    <td><strong style="color:#10ABFE"> ${customer_sex(param.customer_sex)} </strong></td>
                 </tr>
               </table>
                 <p>Tiểu sử(nếu có):</p>
-                <textarea rows="6" cols="50">${item.booking_comment}</textarea>
-            </div>
-           
-            <h3><strong style="color:Black">Thông tin dịch vụ khám: </strong></h3>
+                <textarea rows="6" cols="50">${param.customer_prehistoric}</textarea>
+            </div>`;
+    });
+    output += ` <h3><strong style="color:Black">Thông tin dịch vụ khám: </strong></h3>
                <table  id="detail_service_packet">
                 <thead>
                     <tr>
@@ -121,10 +137,11 @@ function detail_booking_history(data)
                 </thead >
                 
                 <tbody>`;
-                var total_service=0;
-                var dem_service=1;
-                    item.booking_service.forEach(function(param) {
-                output+=`
+
+    var total_service = 0;
+    var dem_service = 1;
+    item.booking_service.forEach(function(param) {
+        output += `
                     <tr>
                         <td>${dem_service++}</td>
                         <td> 
@@ -133,10 +150,10 @@ function detail_booking_history(data)
                         </td>
                         <td>${(param.service_price)} VND</td>
                     </tr>`;
-                    total_service +=parseInt(param.service_price);
-                    });
-                  
-                output+=`
+        total_service += parseInt(param.service_price);
+    });
+
+    output += `
                 </tbody>
                </table>
 
@@ -155,11 +172,10 @@ function detail_booking_history(data)
                         <td><strong style="color:#44C13C"> ${(total_service)} VND</strong></td>
                     </tr>
                 </table>`;
-            var total_actually=0;
-            var into_money_service=0;
-            if(item.booking_actually != '')
-            {
-            output +=`
+    var total_actually = 0;
+    var into_money_service = 0;
+    if (item.booking_actually != '') {
+        output += `
             <h3><strong style="color:Black">Các dịch vụ phát sinh: </strong></h3>
                <table  id="detail_service_packet">
                 <thead>
@@ -171,20 +187,20 @@ function detail_booking_history(data)
                     </tr>
                 </thead >
                 <tbody>`;
-                
-                
-                item.booking_actually.forEach(function(param) {
-                    into_money_service+=parseInt(param.service_price);
-                    total_actually+=into_money_service;
-                    output+=`
+
+
+        item.booking_actually.forEach(function(param) {
+            into_money_service += parseInt(param.service_price);
+            total_actually += into_money_service;
+            output += `
                     <tr>
                         <td>${param.service_title}</td>
                         <td>${param.service_price}</td>
                         <td>${param.service_quantity}</td>
                         <td>${into_money_service}</td>
                     </tr>`;
-                });
-                output+=`      
+        });
+        output += `      
                 </tbody>
                </table>
 
@@ -194,8 +210,8 @@ function detail_booking_history(data)
                         <td><strong style="color:#44C13C"> ${(total_actually)} VND</strong></td>
                     </tr>
                 </table>`;
-            }
-            output+=`      
+    }
+    output += `      
                 <hr>
                 <table class="total_history">
                   <tr> 
@@ -205,14 +221,13 @@ function detail_booking_history(data)
                  </table>
                 <hr>
                   <h3><strong style="color:Black">Phương thức thanh toán </strong></h3>`;
-            if(item.payment_type == 1)
-            {
-                output+=`<h5> <span style="color:blue;"><i><img src="../backend/icon/cash in hand.svg"></i> <i><img src="../backend/icon/Thanh toán chi phí tại bệnh viện.svg"></i> </span></h5>    `;
-            }else{
-                output+=`<h5> <span style="color:blue;"><i><img src="../backend/icon/online payment.svg"></i> <i><img src="../backend/icon/Thanh toán chi phí qua chuyển khoản.svg"></i> </span></h5>
+    if (item.payment_type == 1) {
+        output += `<h5> <span style="color:blue;"><i><img src="../backend/icon/cash in hand.svg"></i> <i><img src="../backend/icon/Thanh toán chi phí tại bệnh viện.svg"></i> </span></h5>    `;
+    } else {
+        output += `<h5> <span style="color:blue;"><i><img src="../backend/icon/online payment.svg"></i> <i><img src="../backend/icon/Thanh toán chi phí qua chuyển khoản.svg"></i> </span></h5>
                 <img alt="" height="200px" width="99%" src="${item.payment_image}">    `;
-            }
-            output+=`
+    }
+    output += `
                 </div>
             </div>
             </div>
@@ -222,20 +237,19 @@ function detail_booking_history(data)
     $('#detail_booking_history').fadeOut().html(output);
     $('#detail_booking_history').fadeIn().html(output);
 }
-function search_service_service()
-{
+
+function search_service_service() {
     var key_service_packet = $('#key_service_packet').val();
     $.ajax({
         url: urlapi,
         type: 'POST',
-        data: { detect: 'list_service_packet', filter: key_service_packet,limit: '20' },
+        data: { detect: 'list_service_packet', filter: key_service_packet, limit: '20' },
         dataType: 'json',
         headers: headers,
-        success: function(response) 
-        {
-            var output=``;
+        success: function(response) {
+            var output = ``;
             response.data.forEach(function(item) {
-            output+=`
+                output += `
             <tr>
                 <th style="30px"></th>
                 <td>${item.service_title}</td>
@@ -250,40 +264,41 @@ function search_service_service()
         }
     });
 }
-function filter_history()
-{
+
+function filter_history() {
     var favDialog = document.getElementById('filter_history');
     favDialog.showModal();
 }
-function filter_booking_history()
-{
-    var status_booking= $('#status_booking').val();
-    var type_customer= $('#type_customer').val();
-    var finish_time_booking=$('#finish_time_booking').val();
-    
-    console.log(finish_time_booking);
-   let i =0;
+
+function filter_booking_history() {
+    var status_booking = $('#status_booking').val();
+    var type_customer = $('#type_customer').val();
+    var finish_time_booking = $('#finish_time_booking').val();
+
+
+    let i = 0;
     $.ajax({
         url: urlapi,
         type: 'POST',
-        data: { detect: 'list_booking_history', 
-        date_option:'',
-        booking_status: status_booking,
-        booking_type:type_customer,
-        limit: '20',id_customer:customer.id },
+        data: {
+            detect: 'list_booking_history',
+            date_option: '',
+            booking_status: status_booking,
+            booking_type: type_customer,
+            limit: '20',
+            id_customer: customer.id
+        },
         dataType: 'json',
         headers: headers,
-        success: function(response) 
-        {
-            console.log(response);
-            if(response.data == '')
-            {
+        success: function(response) {
+
+            if (response.data == '') {
                 alert('Không tìm thấy yêu cầu')
-            }else{
-                var output=``;
+            } else {
+                var output = ``;
                 response.data.forEach(function(item) {
                     arr_booking_history.push(item);
-                    output+=`
+                    output += `
                     <tr>
                     <th style="30px"></th>
                     <td>${item.booking_code}</  td>
@@ -296,8 +311,8 @@ function filter_booking_history()
                     i++;
                 });
             }
-            
-        $('#list_booking_history').html(output);
+
+            $('#list_booking_history').html(output);
         }
     });
 

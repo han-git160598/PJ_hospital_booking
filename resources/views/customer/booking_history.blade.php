@@ -45,6 +45,18 @@ padding-inline-start: 0px;
 p{
     color: #10ABFE;
 }
+
+#img_result{
+    position: relative;
+    
+}
+#img_result span{
+    position: absolute;
+    top: 40%;
+    left: 45%;
+    font-size: 26px;
+    font-weight: 700;
+}
 </style>
 
 <body>     
@@ -55,18 +67,8 @@ p{
         <div class="col-lg-12">
             <div class="inqbox float-e-margins">
             <div class="inqbox-content">
-                <h2>Clients</h2>
-                <ol class="breadcrumb">
-                    <li>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li>
-                        <a>Apps</a>
-                    </li>
-                    <li class="active">
-                        <strong>Clients</strong>
-                    </li>
-                </ol>
+                <h2>Lịch sử lịch hẹn</h2>
+               
             </div>
             </div>
         </div>
@@ -341,6 +343,23 @@ p{
             </form>
             </dialog>
          {{-- ---------------------------  --}}
+         {{--  modal img  --}}
+           <div id="img_result_modal" class="modal fade">
+                <div class="modal-dialog">
+                 <div class="modal-content">
+                  <div class="modal-header">
+                   <button type="button" class="close" data-dismiss="modal">&times;</button>
+                   <center><h2 class="modal-title"><strong>Kết quả xét nghiệm</strong></h2></center>
+                  </div>
+                  <div class="modal-body">
+                    <div class="inqbox-content" id="list_img_result" style="width:100%;height:520px; overflow: auto;">
+
+
+                    </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
 </body>
     <script src="{{ asset('backend/js/jquery-3.5.0.min.js') }}"></script>
     <script src="{{ asset('backend/customer-js/customer_local.js') }}"></script>

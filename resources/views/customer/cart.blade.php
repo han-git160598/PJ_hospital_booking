@@ -251,7 +251,7 @@ p{
        </div>
 
       <div class="modal-footer">
-       <button type="button" data-dismiss="modal" id="insert_service" onClick="select_type_payment()" class="btn btn-danger">Chọn ngay</button>
+       <button type="button" data-dismiss="modal" id="insert_service" onClick="select_type_payment(1)" class="btn btn-danger">Chọn ngay</button>
        <button type="button" class="btn btn-default" data-dismiss="modal"> Đóng </button>
       </div>
       

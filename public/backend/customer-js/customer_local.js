@@ -1,6 +1,6 @@
-const urlapi = "http://localhost/api_hospital/";
-const urlserver = "http://127.0.0.1:8000/";
-const urlsocket = "https://exchangekse.herokuapp.com/";
+const urlapi = "http://192.168.100.16/api_hospital/";
+const urlserver="http://192.168.100.16/PJ_hospital_booking/public/";
+//const urlsocket = "https://exchangekse.herokuapp.com/";
 const headers = {"Authorization": "Basic YWRtaW46cXRjdGVrQDEyMwx=="};
 function formatNumber(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');

@@ -1,55 +1,49 @@
-
 $(document).ready(function() {
     var output = localStorage.getItem('total_cart');
     $('#badge').html(output);
     list_cart();
 });
-function list_cart()
-{
-    var arr_cart = JSON.parse(localStorage.getItem('service_service'));
 
+function list_cart() {
+    var arr_cart = JSON.parse(localStorage.getItem('service_service'));
+    var total_service_price = 0;
     var output_cart = ``;
-    if(arr_cart == null || arr_cart =='')
-    {
-        output_cart +=` 
+    if (arr_cart == null || arr_cart == '') {
+        output_cart += ` 
         <tr>
             <td colspan="4"><center><h2 style="color:red">Vui lòng chọn dịch vụ</h2></center></td>
         </tr>`;
-   
+
         $('#list_cart').html(output_cart);
-    }else{
-        var total_service_price = 0;
+    } else {
+
         arr_cart.forEach(function(cart) {
-          
-        output_cart +=` 
+            output_cart += ` 
         <tr>
             <th style="30px"></th>
             <td style="width:50%">${cart.service_title}</td>
             <td style="width:30%">${formatNumber(cart.service_price)} VND</td>
             <td colspan="2"><a onClick="remove_service(${cart.id_service})"><center><i class="fa fa-trash"></i> </a></center></td>
         </tr>`;
-        total_service_price+=Number(cart.service_price);
+            total_service_price += Number(cart.service_price);
         });
-
-    $('#list_cart').html(output_cart);
-    $('#total_service_price').html(formatNumber(total_service_price +'  ' + 'VND'));
+        $('#list_cart').html(output_cart);
     }
+    $('#total_service_price').html(formatNumber(total_service_price + '  ' + 'VND'));
 }
-function remove_service(id)
-{
-    var count_cart =localStorage.getItem('total_cart');
-    if(count_cart < 0)
-    {
-        count_cart=1;
+
+function remove_service(id) {
+    var count_cart = localStorage.getItem('total_cart');
+    if (count_cart < 0) {
+        count_cart = 1;
         localStorage.setItem('total_cart', JSON.stringify(count_cart));
     }
     var arr_cart = JSON.parse(localStorage.getItem('service_service'));
     var i = 0;
     arr_cart.forEach(function(item) {
-        
-        if(item.id_service == id)
-        {
-            arr_cart.splice(i,1);
+
+        if (item.id_service == id) {
+            arr_cart.splice(i, 1);
         }
         i++;
 
@@ -59,27 +53,23 @@ function remove_service(id)
     localStorage.setItem('total_cart', JSON.stringify(count_cart));
     $('#badge').html(count_cart);
     list_cart();
-    
+
 }
-function form_profile_cart()
-{
-   var a = $('#type_cars').val();
-   var count_cart = JSON.parse(localStorage.getItem('service_service'));
-   var account_customer = JSON.parse(localStorage.getItem('account_customer'));
 
-   if(account_customer == null || account_customer == '')
-   {
+function form_profile_cart() {
+    var a = $('#type_cars').val();
+    var count_cart = JSON.parse(localStorage.getItem('service_service'));
+    var account_customer = JSON.parse(localStorage.getItem('account_customer'));
+    var output = ``;
+    if (account_customer == null || account_customer == '') {
         alert('Vui lòng đăng nhập để đặt lịch');
-        window.location=urlserver+'login-customer';
+        window.location = urlserver + 'login-customer';
 
-   }
-   else if( count_cart == '' || count_cart == null )
-   {
-       alert('Bạn chưa chọn dịch vụ nào');
-   }else{
-        if(a == 1)
-        {
-            var output=`
+    } else if (count_cart == '' || count_cart == null) {
+        alert('Bạn chưa chọn dịch vụ nào');
+    } else {
+        if (a == 1) {
+            output += `
             <div class="tab-content">
             <div id="contact-1" class="tab-pane active">
                 <div class="row m-b-lg">
@@ -135,12 +125,11 @@ function form_profile_cart()
                 </div>
             </div>
         </div> `;
-        $('#detail_profile').html(output);
-        }else{
-            var arr_customer= JSON.parse(localStorage.getItem('customer_customer'));
-            if(arr_customer == null || arr_customer == '')
-            {
-            output+=`
+            $('#detail_profile').html(output);
+        } else {
+            var arr_customer = JSON.parse(localStorage.getItem('customer_customer'));
+            if (arr_customer == null || arr_customer == '') {
+                output += `
 
             <div class="tab-content">
             <div id="contact-1" class="tab-pane active">
@@ -160,9 +149,10 @@ function form_profile_cart()
                 </div>
                 </div>    
             </div>
-            </div> `;    
-            }else{
-             output+=`
+            </div> `;
+            } else {
+                output += `
+
             <div class="tab-content">
             <div id="contact-1" class="tab-pane active">
                 <div class="row m-b-lg">
@@ -186,8 +176,8 @@ function form_profile_cart()
                     </tr>
                 </table>
                     `;
-                    arr_customer.forEach(function (item){
-                    output+=`
+                arr_customer.forEach(function(item) {
+                    output += `
                     <div> 
 
                     <table class="total_history">
@@ -221,7 +211,7 @@ function form_profile_cart()
                     </div>
                     <hr>`;
                 });
-                    output+=`
+                output += `
 
                     <button type="button" onClick="help_booking_history_again()" class="btn btn-danger btn-sm btn-block">Xem lại lịch đặt khám</button> 
                     </div>
@@ -234,9 +224,9 @@ function form_profile_cart()
         }
     }
 }
-function fill_in_information()
-{
-    var output=`
+
+function fill_in_information() {
+    var output = `
         <div class="tab-content">
         <div id="contact-1" class="tab-pane active">
             <div class="row m-b-lg">
@@ -280,64 +270,68 @@ function fill_in_information()
         </div>
     </div>
         `;
-        $('#detail_profile').html(output);
+    $('#detail_profile').html(output);
 }
 
 // thêm người khám hộ
-function add_customer_booking()
-{
-    
+function add_customer_booking() {
+
     var customer_name = $('#customer_name_form').val();
-    var customer_phone = $('#customer_phone_form').val();   
+    var customer_phone = $('#customer_phone_form').val();
     var customer_sex = $('#customer_sex_form').val();
     var customer_birthday = $('#customer_birdth_form').val();
     var customer_address = $('#customer_address_form').val();
     var customer_prehistoric = $('#customer_prehistoric_form').val();
     var arr_customer_localStorage = JSON.parse(localStorage.getItem('customer_customer'));
-    
-    
+
+
     var arr_customer = [];
-    if(customer_name== '' ||customer_phone=='' ||customer_sex==''|| customer_birthday=='' ||customer_address=='' )
-    {
+    if (customer_name == '' || customer_phone == '' || customer_sex == '' || customer_birthday == '' || customer_address == '') {
         alert('Vui lòng điền thông tin vào trường có kí hiệu (*) để tiếp tục');
-    }else{
-        if(arr_customer_localStorage == null )
-        {
+    } else {
+        if (arr_customer_localStorage == null) {
             arr_customer.push({
-            id_customer:0,
-            customer_name:customer_name,customer_phone:customer_phone,customer_birthday:customer_birthday,
-            customer_address:customer_address,customer_sex:customer_sex,customer_prehistoric:customer_prehistoric
+                id_customer: 0,
+                customer_name: customer_name,
+                customer_phone: customer_phone,
+                customer_birthday: customer_birthday,
+                customer_address: customer_address,
+                customer_sex: customer_sex,
+                customer_prehistoric: customer_prehistoric
             });
-            
-        }else{
+
+        } else {
             var count_customer = arr_customer_localStorage.length;
-            
-            arr_customer_localStorage.forEach(function (item){
+
+            arr_customer_localStorage.forEach(function(item) {
                 arr_customer.push(item);
             });
             arr_customer.push({
-            id_customer:count_customer,
-            customer_name:customer_name,customer_phone:customer_phone,customer_birthday:customer_birthday,
-            customer_address:customer_address,customer_sex:customer_sex,customer_prehistoric:customer_prehistoric
+                id_customer: count_customer,
+                customer_name: customer_name,
+                customer_phone: customer_phone,
+                customer_birthday: customer_birthday,
+                customer_address: customer_address,
+                customer_sex: customer_sex,
+                customer_prehistoric: customer_prehistoric
             });
         }
-       
+
         localStorage.setItem('customer_customer', JSON.stringify(arr_customer));
-    
+
         form_profile_cart();
     }
-    
+
 
 }
-function remove_customer(id)
-{
-    var arr_customer= JSON.parse(localStorage.getItem('customer_customer'));
-    
+
+function remove_customer(id) {
+    var arr_customer = JSON.parse(localStorage.getItem('customer_customer'));
+
     var i = 0;
     arr_customer.forEach(function(item) {
-        if(item.id_customer == id)
-        {
-            arr_customer.splice(i,1);
+        if (item.id_customer == id) {
+            arr_customer.splice(i, 1);
         }
         i++;
     });
@@ -347,9 +341,8 @@ function remove_customer(id)
 
 }
 // khám cá nhân xem lại đơn khám
-function booking_history_again()
-{
-   
+function booking_history_again() {
+
     var booking_type = $('#type_cars').val();
     var customer_name = $('#customer_name').html();
     var customer_phone = $('#customer_phone').html();
@@ -360,20 +353,18 @@ function booking_history_again()
     var appointment_time = $('#appointment_time').val();
     var customer_prehistoric = $('#customer_prehistoric').val();
     var total_service_price = $('total_service_price').html();
-    
+
     var payment_type = $('payment_type').val();
     var arr_cart = JSON.parse(localStorage.getItem('service_service'));
-    var id_service=[];
+    var id_service = [];
     arr_cart.forEach(function(item) {
         id_service.push(item.id_service)
     });
-    if(appointment_time == '' || appointment_date=='' )
-    {
+    if (appointment_time == '' || appointment_date == '') {
         alert('Bạn chưa chọn thời gian hẹn')
-    }
-    else{
+    } else {
 
-    var output =` 
+        var output = ` 
     <div class="tab-content">
     <div id="contact-1" class="tab-pane active">
         <div class="row m-b-lg" >
@@ -440,10 +431,10 @@ function booking_history_again()
                 </thead >
                 
                 <tbody>`;
-                var total_service=0;
-                var dem_service=1;
-                arr_cart.forEach(function(param) {
-                output+=`
+        var total_service = 0;
+        var dem_service = 1;
+        arr_cart.forEach(function(param) {
+            output += `
                     <tr>
                         <td>${dem_service++}</td>
                         <td style="width:60%"> 
@@ -452,10 +443,10 @@ function booking_history_again()
                         </td>
                         <td style="width:30%">${formatNumber(param.service_price)} VND</td>
                     </tr>`;
-                    total_service +=parseInt(param.service_price);
-                    });
-                  
-                output+=`
+            total_service += parseInt(param.service_price);
+        });
+
+        output += `
                 </tbody>
                </table>
 
@@ -469,7 +460,7 @@ function booking_history_again()
                         <td><strong style="color:#blue"> X1 </strong></td>
                     </tr>
                 </table>`;
-            output+=`      
+        output += `      
                 <hr>
                 <table class="total_history">
                   <tr> 
@@ -489,15 +480,14 @@ function booking_history_again()
         </div>
     </div>
     `;
-    $('#detail_profile').fadeOut().html(output);
-    $('#detail_profile').fadeIn().html(output);
+        $('#detail_profile').fadeOut().html(output);
+        $('#detail_profile').fadeIn().html(output);
     }
-    
-    
+
+
 }
 // khám hộ xem lại đơn khám
-function help_booking_history_again()
-{
+function help_booking_history_again() {
     var booking_type = $('#type_cars').val();
     var customer_name = $('#customer_name').html();
     var customer_phone = $('#customer_phone').html();
@@ -508,12 +498,12 @@ function help_booking_history_again()
     var appointment_time = $('#appointment_time').val();
     var customer_prehistoric = $('#customer_prehistoric').val();
     var total_service_price = $('total_service_price').html();
-    
+
     var payment_type = $('payment_type').val();
     var arr_cart = JSON.parse(localStorage.getItem('service_service'));
     var arr_customer = JSON.parse(localStorage.getItem('customer_customer'));
-    var id_service=[];
-    var id_customer=[];
+    var id_service = [];
+    var id_customer = [];
 
     arr_customer.forEach(function(item) {
         id_customer.push(item.id_customer)
@@ -523,13 +513,11 @@ function help_booking_history_again()
         id_service.push(item.id_service)
     });
 
-    if(appointment_time == '' || appointment_date=='' )
-    {
+    if (appointment_time == '' || appointment_date == '') {
         alert('Bạn chưa chọn thời gian hẹn')
-    }
-    else{
+    } else {
 
-    var output =` 
+        var output = ` 
     <div class="tab-content">
     <div id="contact-1" class="tab-pane active">
         <div class="row m-b-lg" >
@@ -542,10 +530,10 @@ function help_booking_history_again()
             
             <div  class="vertical-container dark-timeline" style="width:100%;height:600px; overflow: auto;">
             <h3><strong style="color:Black">Thông tin cá nhân: </strong></h3>`;
-            var count_customer= 0;
-            arr_customer.forEach(function(item) {
-                count_customer++;
-            output+=`
+        var count_customer = 0;
+        arr_customer.forEach(function(item) {
+            count_customer++;
+            output += `
             <div>
               <table class="total_history">
                 <tr> 
@@ -577,8 +565,8 @@ function help_booking_history_again()
                 <p>Tiểu sử(nếu có):</p>
                 <textarea rows="6" id="customer_prehistoric" readonly cols="50">${item.customer_prehistoric}</textarea>
             </div>`;
-            });
-            output+=`
+        });
+        output += `
             <h3><strong style="color:#blue"></strong></h3>
             <table class="total_history">
                 <tr> 
@@ -601,10 +589,10 @@ function help_booking_history_again()
                     </tr>
                 </thead >
                 <tbody>`;
-                var total_service=0;
-                var dem_service=1;
-                arr_cart.forEach(function(param) {
-                output+=`
+        var total_service = 0;
+        var dem_service = 1;
+        arr_cart.forEach(function(param) {
+            output += `
                     <tr>
                         <td>${dem_service++}</td>
                         <td style="width:60%"> 
@@ -613,10 +601,10 @@ function help_booking_history_again()
                         </td>
                         <td style="width:30%">${formatNumber(param.service_price)} VND</td>
                     </tr>`;
-                    total_service +=parseInt(param.service_price);
-                    });
-                  
-                output+=`
+            total_service += parseInt(param.service_price);
+        });
+
+        output += `
                 </tbody>
                </table>
 
@@ -630,7 +618,7 @@ function help_booking_history_again()
                         <td><strong style="color:#blue"> X ${count_customer} </strong></td>
                     </tr>
                 </table>`;
-            output+=`      
+        output += `      
                 <hr>
                 <table class="total_history">
                   <tr> 
@@ -650,38 +638,30 @@ function help_booking_history_again()
         </div>
     </div>
     `;
-    $('#detail_profile').fadeOut().html(output);
-    $('#detail_profile').fadeIn().html(output);
+        $('#detail_profile').fadeOut().html(output);
+        $('#detail_profile').fadeIn().html(output);
     }
 }
 // khám hộ đặt lịch
-function help_create_booking()
-{
+function help_create_booking() {
+    var customer_name = [];
+    var customer_phone = [];
+    var customer_sex = [];
+    var customer_birthday = [];
 
-    // var customer_name = $('#customer_name').val();
-    // var customer_phone = $('#customer_phone').val();
-    // var customer_sex = customer_sex_fill_info($('#customer_sex').val());
-    // var customer_birthday = $('#customer_birthday').val();
-    // var customer_prehistoric = $('#customer_prehistoric').val();
-    // var customer_address = $('#customer_address').val();
-    var customer_name=[];
-    var customer_phone=[];
-    var customer_sex=[];
-    var customer_birthday=[];
-    var customer_prehistoric=[];
-    var customer_address=[];
+    var customer_address = [];
 
     var appointment_date = $('#appointment_date').val();
     var appointment_time = $('#appointment_time').val();
     var booking_type = $('#type_cars').val();
     var payment_type = $('#payment_type').val();
-    
+
     var arr_cart = JSON.parse(localStorage.getItem('service_service'));
-    
+
 
     var arr_customer = JSON.parse(localStorage.getItem('customer_customer'));
-
-    var id_service=[]; 
+    console.log(arr_customer);
+    var id_service = [];
     var service_price = []; // lấy ra list dịch vụ 
 
     arr_cart.forEach(function(item) {
@@ -689,62 +669,83 @@ function help_create_booking()
         service_price.push(item.service_price);
     });
 
-    var customer_address_string='';
+    var customer_address_string = '';
+    var customer_prehistoric = '';
     var dem = 0;
     arr_customer.forEach(function(item) {
-        dem++
-        if(dem == 1)
-        {
-          customer_address_string = item.customer_address;
-        }
-        customer_name.push(item.customer_name);
-        customer_phone.push(item.customer_phone);
-        customer_sex.push(item.customer_sex);
-        customer_birthday.push(item.customer_birthday);
-        customer_prehistoric.push(item.customer_prehistoric);
-        customer_address_string+='|'+item.customer_address;
-    });
-    // console.log(customer_name.toString());
-    // console.log(customer_phone.toString());
-    // console.log(customer_sex.toString());
-    // console.log(customer_birthday.toString());
-    // console.log(customer_prehistoric.toString());
-    // console.log(customer_address_string);
-    // console.log('---------------------------------------');
-    // console.log(id_service.toString());
-    // console.log(payment_type);
-    // console.log(service_price.toString());
-    // console.log(appointment_date);
-    // console.log(appointment_time);
 
-    if(typeof payment_type=='undefined')
-    {
+        if (dem == 0) {
+            customer_address_string = item.customer_address;
+            customer_name.push(item.customer_name);
+            customer_phone.push(item.customer_phone);
+            customer_sex.push(item.customer_sex);
+            customer_birthday.push(item.customer_birthday);
+            customer_prehistoric = item.customer_prehistoric;
+            dem++;
+        } else {
+            customer_name.push(item.customer_name);
+            customer_phone.push(item.customer_phone);
+            customer_sex.push(item.customer_sex);
+            customer_birthday.push(item.customer_birthday);
+            customer_prehistoric += '|' + item.customer_prehistoric;
+            customer_address_string += '|' + item.customer_address;
+        }
+    });
+    var customer = JSON.parse(localStorage.getItem('account_customer'));
+    console.log(customer_address_string);
+    console.log(customer_name.toString());
+    console.log(customer_phone.toString());
+    console.log(customer_sex.toString());
+    console.log(customer_birthday.toString());
+    console.log(customer_prehistoric.toString());
+    console.log('---------------------')
+    console.log(id_service.toString());
+    console.log(service_price.toString());
+    console.log(booking_type);
+    console.log(appointment_date);
+    console.log(appointment_time);
+    console.log(payment_type);
+
+
+    if (typeof payment_type == 'undefined') {
         alert('Vui lòng chọn phương thức thanh toán')
-    }else{
-    $.ajax({
+    } else {
+        $.ajax({
             url: urlapi,
             type: 'POST',
-            data: { detect: 'create_booking',booking_code:'',
-            id_customer:31,booking_type:booking_type ,customer_address:customer_address_string,
-            customer_birthday:customer_birthday.toString(),customer_prehistoric:customer_prehistoric.toString(),
-            customer_sex:customer_sex.toString(),customer_name:customer_name.toString(),customer_phone:customer_phone.toString(),
-            date_schedule:appointment_date,time_schedule:appointment_time,payment_type:payment_type,
-            service_price:service_price.toString(),id_service:id_service.toString(),
+            data: {
+                detect: 'create_booking',
+                id_customer: customer.id,
+                booking_type: booking_type,
+                customer_address: customer_address_string.toString(),
+                customer_birthday: customer_birthday.toString(),
+                customer_prehistoric: customer_prehistoric.toString(),
+                customer_sex: customer_sex.toString(),
+                customer_name: customer_name.toString(),
+                customer_phone: customer_phone.toString(),
+                date_schedule: appointment_date,
+                time_schedule: appointment_time,
+                payment_type: payment_type,
+                service_price: service_price.toString(),
+                id_service: id_service.toString(),
             },
             dataType: 'json',
             headers: headers,
-            success: function(response) 
-            {
+            success: function(response) {
                 alert(response.message);
+                localStorage.removeItem('service_service');
+                localStorage.removeItem('service_packet');
+                localStorage.removeItem('total_cart');
+                list_cart();
+                window.localStorage = urlserver + 'customer-booking-history';
             }
         });
 
     }
-   
+
 }
 //khám cá nhân
-function create_booking()
-{
+function create_booking() {
 
     var booking_type = $('#type_cars').val();
     var customer_name = $('#customer_name').val();
@@ -755,9 +756,10 @@ function create_booking()
     var appointment_date = $('#appointment_date').val();
     var appointment_time = $('#appointment_time').val();
     var customer_prehistoric = $('#customer_prehistoric').val();
+
     var payment_type = $('#payment_type').val();
     var arr_cart = JSON.parse(localStorage.getItem('service_service'));
-    var id_service=[];
+    var id_service = [];
 
     var service_price = [];
 
@@ -765,27 +767,45 @@ function create_booking()
         id_service.push(item.id_service);
         service_price.push(item.service_price);
     });
-    
-    if(typeof payment_type=='undefined')
-    {
+    var customer = JSON.parse(localStorage.getItem('account_customer'));
+
+    if (typeof payment_type == 'undefined') {
         alert('Vui lòng chọn phương thức thanh toán')
-    }else{
-    $.ajax({
+    } else {
+        localStorage.removeItem('service_service');
+        localStorage.removeItem('service_packet');
+        localStorage.removeItem('total_cart');
+        $.ajax({
             url: urlapi,
             type: 'POST',
-            data: { detect: 'create_booking',booking_code:'',
-            id_customer:31,booking_type:booking_type ,customer_address:customer_address,
-            customer_name:customer_name,customer_phone:customer_phone,customer_sex:customer_sex,
-            customer_birthday:customer_birthday,date_schedule:appointment_date,
-            time_schedule:appointment_time,customer_prehistoric:customer_prehistoric,
-            service_price:service_price.toString(),payment_type:payment_type,
-            id_service:id_service.toString(),
+            data: {
+                detect: 'create_booking',
+                booking_code: '',
+                id_customer: customer.id,
+                booking_type: booking_type,
+                customer_address: customer_address,
+                customer_name: customer_name,
+                customer_phone: customer_phone,
+                customer_sex: customer_sex,
+                customer_birthday: customer_birthday,
+                date_schedule: appointment_date,
+                time_schedule: appointment_time,
+                customer_prehistoric: customer_prehistoric,
+                service_price: service_price.toString(),
+                payment_type: payment_type,
+                id_service: id_service.toString(),
             },
             dataType: 'json',
             headers: headers,
-            success: function(response) 
-            {
+            success: function(response) {
+
                 alert(response.message);
+
+                localStorage.removeItem('service_service');
+                localStorage.removeItem('service_packet');
+                localStorage.removeItem('total_cart');
+                list_cart();
+                window.localStorage = urlserver + 'customer-booking-history';
             }
         });
 
@@ -794,7 +814,7 @@ function create_booking()
         // console.log(customer_name);
         // console.log(customer_phone);
         // console.log(customer_sex);
-        // console.log(customer_birthday);  
+        // console.log(customer_birthday);
         // console.log(appointment_date);
         // console.log(appointment_time);
         // console.log(customer_prehistoric);
@@ -802,33 +822,32 @@ function create_booking()
         // console.log(payment_type);
         // console.log(id_service.toString());
     }
-   
+
 
 }
-function cash_in_hand()
-{
-    var output= `
+
+function cash_in_hand() {
+    var output = `
     <center><img alt="" height="250px" width="230px" src="../backend/icon/img_paypal.svg"> </center>
     <center><h2><strong style="color:orange"> Lưu ý :</strong></h2></center>
     <input type="text" hidden value="1">
     <p style="color:black">Đối với khách hàng thanh toán trực tiếp tại bệnh viện chúng tôi sẽ hỗ trợ đặt lịch khám cho khách hàng. Tuy nhiên số thứ tự khám bệnh sẽ được cấp sau khi khách hàng thanh toán chi phí khám cho bệnh viện. </p>
     `;
     $('#img_type_pay').html(output);
-    var btn =`<button type="button" data-dismiss="modal" id="insert_service" onClick="select_type_payment(1)" class="btn btn-danger">Chọn ngay</button>
+    var btn = `<button type="button" data-dismiss="modal" id="insert_service" onClick="select_type_payment(1)" class="btn btn-danger">Chọn ngay</button>
     <button type="button" class="btn btn-default" data-dismiss="modal"> Đóng </button>`;
     $('.modal-footer').html(btn);
 }
-function online_payment()
-{
-    var output= ``;
+
+function online_payment() {
+    var output = ``;
     $.ajax({
         url: urlapi,
         type: 'POST',
         data: { detect: 'get_bank_transfer_info' },
         dataType: 'json',
         headers: headers,
-        success: function(response) 
-        {
+        success: function(response) {
             output += `
             <center><img alt="" height="250px" width="230px" src="../backend/icon/img_paypal.svg"> </center>
             <center><h2><strong style="color:orange"> Lưu ý :</strong></h2></center>
@@ -841,17 +860,17 @@ function online_payment()
             <p style="color:black">- Tên tài khoản ${response.data[0].account_holder}</p>
             `;
             $('#img_type_pay').html(output);
-            var btn =`<button type="button" data-dismiss="modal" id="insert_service" onClick="select_type_payment(2)" class="btn btn-danger">Chọn ngay</button>
+            var btn = `<button type="button" data-dismiss="modal" id="insert_service" onClick="select_type_payment(2)" class="btn btn-danger">Chọn ngay</button>
             <button type="button" class="btn btn-default" data-dismiss="modal"> Đóng </button>`;
             $('.modal-footer').html(btn);
         }
-        
+
     });
-    
-    
+
+
 }
-function select_type_payment(id)
-{
+
+function select_type_payment(id) {
     var output = select_payment_type(id);
     $('#type_payment').html(output);
 }
