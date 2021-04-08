@@ -66,12 +66,12 @@ p{
             <div class="inqbox-content">
                 {{--  <span class="text-muted small pull-right">Last modification: <i class="fa fa-clock-o"></i> 2:10 pm - 12.06.2015</span>
                 <h2>Clients</h2>  --}}
-                <div class="input-group">
+                {{--  <div class="input-group">
                     <input type="text" placeholder="Tìm kiếm " class="input form-control">
                     <span class="input-group-btn">
                     <button type="button" class="btn btn btn-primary" onClick="filter_history() "> <i class="fa fa-filter"></i> Search</button>
                     </span>
-                </div>
+                </div>  --}}
                 <div class="clients-list">
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane active">

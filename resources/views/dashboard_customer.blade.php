@@ -22,6 +22,29 @@
 #badge {
   font-size: 130%;
 }
+.notification {
+  {{--  background-color: red;
+  color: white;
+  text-decoration: none;
+  padding: 15px 26px;
+  position: relative;
+  display: inline-block;
+  border-radius: 2px;  --}}
+}
+
+.notification:hover {
+  background: red;
+}
+
+.notification .badge {
+  position: absolute;
+  top: 3px;
+  right: 0px;
+  padding: 2px 5px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+}
 </style>
     </head>
     <body>
@@ -33,10 +56,10 @@
                         <li>
                             <div class="logopanel" style="margin-left: 0px; z-index: 99999">
                                 <div class="profile-element">
-                                    <h2><a href="{{ URL::to('/dashboard') }}"></a></h2>
+                                    <h2><a href="{{ URL::to('/') }}"><h2>HOSPITAL</h2></a></h2>
                                 </div>
                                 <div class="logo-element">
-
+                                
                                 </div>
                             </div>
                         </li>
@@ -59,7 +82,7 @@
                                         
                                         <li >
 
-                                            <a href="{{ URL::to('customer-service-service') }}"><img src="../backend/icon/medical-history.png"  width="25px" height="25px">&nbsp;&nbsp;<span class="nav-label">khám tùy chọn</span></a>
+                                            <a href="{{ URL::to('/') }}"><img src="../backend/icon/medical-history.png"  width="25px" height="25px">&nbsp;&nbsp;<span class="nav-label">khám tùy chọn</span></a>
                                             
                                         </li>
                                         
@@ -72,18 +95,18 @@
 
 
                                         <li >
-                                            <a href="customer-useful-news"><img src="../backend/icon/userful information.png"  width="25px" height="25px">&nbsp;&nbsp;<span class="nav-label">Thông tin hữu ích</span></a>
+                                            <a href="{{URL::to('customer-useful-news')}}"><img src="../backend/icon/userful information.png"  width="25px" height="25px">&nbsp;&nbsp;<span class="nav-label">Thông tin hữu ích</span></a>
                                             
                                         </li>
                                         
                                         
                                         <li>
-                                            <a href="customer-appointment-schedule"><img src="../backend/icon/appointment schedule.png"  width="25px" height="25px">&nbsp;&nbsp;<span class="nav-label">Cuộc hẹn & lịch trình</span></a>
+                                            <a href="{{URL::to('customer-appointment-schedule')}}"><img src="../backend/icon/appointment schedule.png"  width="25px" height="25px">&nbsp;&nbsp;<span class="nav-label">Cuộc hẹn & lịch trình</span></a>
                                             
                                         </li>
                                         
                                         <li>
-                                            <a href="customer-cart"><img src="../backend/icon/gio hang.png"  width="25px" height="25px">&nbsp;&nbsp;<span class="nav-label">Giỏ hàng</span></a>
+                                            <a href="{{URL::to('customer-cart')}}"><img src="../backend/icon/gio hang.png"  width="25px" height="25px">&nbsp;&nbsp;<span class="nav-label">Giỏ hàng</span></a>
                                             
                                         </li>
                                     </ul>
@@ -129,29 +152,29 @@
                                     </li>
                                 </ul>
                             </li>
+                            
                             <li class="dropdown hidden-xs">
-                                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-
+                                <a href="{{URL::to('customer-cart')}}" class="notification">
+                                    <span class="pl15"><i id="cart" class="fa fa-cart-plus"></i></span>
+                                    <span id="badge" class="badge badge-danger">0</span>
                                 </a>
-                                <ul class="dropdown-menu dropdown-alerts">
-                                    <li>
-                                        <a href="mailbox.html" class="animated animated-short fadeInUp">
-                                            <div>
-                                                <i class="fa fa-envelope fa-fw"></i>
-                                                <span class="pull-right text-muted small"></span>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                </ul>
+                                
                             </li>
+                            
+
                             <li class="dropdown pull-right" id="username_ac">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                                    <span class="pl15"><i id="cart" class="fa fa-cart-plus"></i></span><span id="badge" class="badge badge-danger">0</span>
-                                    <span class="pl15"><i class="fa fa-user"></i><span id="username"></span></span>
+                                    <span class="pl15"><i class="fa fa-user"></i></span>
+                                    <span id="username">Đăng nhập</span>
                                 </a>
-                              
+                                 <ul class="dropdown-menu animated m-t-xs">
+                                    <li><a  class="animated animated-short fadeInUp" href="{{URL::to('/admin')}}" >Admin</a></li>
+                                    <li class="divider"></li>
+                                    <li><a  class="animated animated-short fadeInUp" href="{{URL::to('/login-customer')}}">Khách hàng</a></li>
+                                </ul>
+                                
                             </li>
+
                         </ul>
                     </nav>
                 </div>
@@ -172,9 +195,6 @@
                   <strong>Copyright</strong> Your Company &copy; 2015-2016
                </div>
             </div>    
-
-               
-
 
 
             </div>
@@ -291,6 +311,7 @@
                   </div>
                 </div>
               </div>
+             
 
 {{--  --------------------------------  --}}
 
@@ -328,7 +349,6 @@
         //$('#username').html(username.full_name);
            var output = `
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                <span class="pl15"><i id="cart" class="fa fa-cart-plus"></i></span><span id="badge" class="badge badge-danger">0</span>
                 <span class="pl15"><i class="fa fa-user"></i><span id="username">${username.full_name}</span></span>
                 <span class="caret caret-tp"></span>
             </a>

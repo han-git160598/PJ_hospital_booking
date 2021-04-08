@@ -308,7 +308,7 @@
                                 <div class="hr-line-dashed"></div>     
                                 @foreach($data['document'] as $v)
                                 <a class="prop-entry d-block">
-                                <button onClick="remove_img_document({{$v->id}})"><i class="fa fa-remove"></i></button>
+                                <button onClick="remove_img_document({{$v->id}})"><i class="fa fa-trash"></i></button>
                                 <a target="_blank" href="../../{{$v->image_upload}}" class="imgpreview">
                                 <img src="../../{{$v->image_upload}}" alt="gallery thumbnail" height="200" width="270" /></a>
                                 </a>  
@@ -1129,7 +1129,7 @@ $( document ).ready(function() {
                 console.log(item);
             output+=`
             <div>
-            <button onClick="remove_img_document(${item.id})"><i class="fa fa-remove"></i></button>
+            <button onClick="remove_img_document(${item.id})"><i class="fa fa-trash"></i></button>
             
 
             <a target="_blank" href="../../${item.image_upload}" class="imgpreview">
@@ -1204,7 +1204,7 @@ function remove_img_document(id)
             console.log(item);
         output+=`
         <div>
-        <button onClick="remove_img_document(${item.id})"><i class="fa fa-remove"></i></button>
+        <button onClick="remove_img_document(${item.id})"><i class="fa fa-trash"></i></button>
         <a target="_blank" href="../../${item.image_upload}" class="imgpreview">
         <img src="../../${item.image_upload}" alt="gallery thumbnail" height="200" width="270" /></a>
         <div class="hr-line-dashed"></div>

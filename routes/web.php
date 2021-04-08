@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
-Route::get('/', function () {
+Route::get('/admin', function () {
     Session::put('full_name',null);
     Session::put('email',null);
     Session::put('id',null);
@@ -245,7 +245,7 @@ Route::get('/customer-service-packet', function () {
     // Session::put('id',null);
     return view('customer.service_packet');
 });
-Route::get('/customer-service-service', function () {
+Route::get('/', function () {
     // Session::put('full_name',null);
     // Session::put('email',null);
     // Session::put('id',null);

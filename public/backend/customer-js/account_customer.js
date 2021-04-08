@@ -13,10 +13,10 @@ function customer_login() {
             if (response.success == 'false') {
                 alert(response.message);
             } else {
-                //console.log(esponse);
+
 
                 localStorage.setItem('account_customer', JSON.stringify(response.data[0]));
-                window.location = urlserver + "customer-service-service";
+                window.location = urlserver;
 
             }
 
@@ -26,7 +26,7 @@ function customer_login() {
 
 function customer_logout() {
     localStorage.removeItem('account_customer');
-    window.location = urlserver + "login-customer";
+    window.location = urlserver;
 }
 /// change password
 
@@ -39,8 +39,7 @@ function checkPass() {
 
     var password1 = getElm('new_password').value;
     var password2 = getElm('confirm_password').value;
-    console.log(password1);
-    console.log(password2);
+
     //if password length is less than 6
     if (password1.length < 6) {
         feedback('Mật khẩu tối thiểu 6 kí tự');
@@ -88,8 +87,7 @@ function checkPass1() {
 
     var password1 = getElm('new_password1').value;
     var password2 = getElm('confirm_password1').value;
-    console.log(password1);
-    console.log(password2);
+
     //if password length is less than 6
     if (password1.length < 6) {
         feedback1('Mật khẩu tối thiểu 6 kí tự');
@@ -215,14 +213,13 @@ function show_modal_profile() {
     var output = `
     <form>
         <strong style="color:#10ABFE">1. Số điện thoại liên hệ :</strong><br>`;
-        if(customer.phone_number == null || customer.phone_number == '')
-        {
-            output+=`<input type="text" placeholder="số điện thoại" id="phone_number" value="${customer.phone_active}" class="form-control" ><br>`;
-        }else{
-            output += `
-            <input type="text" placeholder="số điện thoại" id="phone_number" value="${customer.phone_number}" class="form-control" ><br>`;
-        }
+    if (customer.phone_number == null || customer.phone_number == '') {
+        output += `<input type="text" placeholder="số điện thoại" id="phone_number" value="${customer.phone_active}" class="form-control" ><br>`;
+    } else {
         output += `
+            <input type="text" placeholder="số điện thoại" id="phone_number" value="${customer.phone_number}" class="form-control" ><br>`;
+    }
+    output += `
         <strong style="color:#10ABFE">2. Họ và tên (*) :</strong><br>
         <input type="text" placeholder="Họ và tên" id="full_name" value="${customer.full_name}"  class="form-control" ><br>
         <strong style="color:#10ABFE">3. Giới tính (*) :</strong><br>
@@ -267,9 +264,69 @@ function update_info() {
         headers: headers,
         success: function(response) {
             localStorage.setItem('account_customer', JSON.stringify(response.data[0]));
-            alert('Cập nhật thông tin cá nhân thành công')
+            alert('Cập nhật thông tin cá nhân thành công');
+            var account_customer = JSON.parse(localStorage.getItem('account_customer'));
+            var output = `
+            <div class="tab-content">
+            <div id="contact-1" class="tab-pane active">
+                <div class="row m-b-lg">
+                <div class="col-lg-12 text-center">
+                    <h2><strong style="color:#blue"> Khám cá nhân </strong></h2>
+                </div>
+                </div>
+                <div class="client-detail">
+                <div class="full-height-scroll">
+                    <div  class="vertical-container dark-timeline" style="width:100%;height:600px; overflow: auto;">
+                    <h3><strong style="color:Black">Thông tin cá nhân: <a onClick="show_modal_profile()"><i class="fa fa-edit"></i></a></strong></h3>
+                    <div>
+                    <table class="total_history">
+                         
+                        <tr> 
+                            <td><strong style="color:#blue"> Họ & Tên</strong></td>
+                            <td><strong id="customer_name" style="color:#blue">${account_customer.full_name}</strong></td>
+                        </tr>
+                        <tr> 
+                            <td><strong style="color:#blue"> Số điện thoại:</strong></td>
+                            <td><strong id="customer_phone" style="color:#blue">${account_customer.phone_number}</strong></td>
+                        </tr>
+                        <tr> 
+                            <td><strong style="color:#blue"> Địa chỉ:</strong></td>
+                            <td><strong id="customer_address" style="color:#blue">${account_customer.address}</strong></td>
+                        </tr>
+                        <tr> 
+                            <td><strong style="color:#blue"> Ngày sinh:</strong></td>
+                            <td><strong id="customer_birthday" style="color:#blue">${account_customer.birthday}</strong></td>
+                        </tr>
+                        <tr> 
+                            <td><strong style="color:#blue"> Giới tính:</strong></td>
+                            <td><strong id="customer_sex" style="color:#blue">${customer_sex(account_customer.sex)}</strong></td>
+                        </tr>
+                    </table>
+                    
+                    <table>
+                        <tr> 
+                            <td> <strong style="color:#blue">1. Ngày hẹn:</strong></td>
+                            <td> <input id="appointment_date" type="date" class="form-control"></td>
+                        </tr>
+                        <tr> 
+                            <td> <strong style="color:#blue">2. Giờ hẹn:</strong></td>
+                            <td> <input id="appointment_time" type="time" class="form-control"></td>
+                        </tr>
+                    </table>
+                        <p>Tiểu sử(nếu có):</p>
+                        <textarea id="customer_prehistoric" rows="6" cols="50"></textarea>
+                    </div>
+                        <hr>
+                        <button type="button"  onclick="booking_history_again()" class="btn btn-danger btn-sm btn-block">Xem lại lịch đặt khám</button> 
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div> `;
+            $('#detail_profile').html(output);
         }
     });
+
 }
 
 
@@ -377,7 +434,7 @@ function codeverify(id) {
         coderesult.confirm(code).then(function(result) {
             $('#show_modal_info').click();
         }).catch(function(error) {
-            
+
             alert("Mã OTP không hợp lệ");
 
         });

@@ -21,12 +21,14 @@ $(document).ready(function() {
             dataType: 'json',
             headers: headers,
             success: function(response) {
-                console.log(response);
+
 
                 var output = ``;
                 response.data.forEach(function(item) {
-                    if (item.booking_status != 4 || item.booking_status != 5) {
-                        arr_billing_billing.push(item) ư
+                    if (item.booking_status == 4 || item.booking_status == 5) {
+
+                    } else {
+                        arr_billing_billing.push(item)
                         output += `
                         <tr>
                         <th style="30px"></th>
@@ -47,6 +49,7 @@ $(document).ready(function() {
 
 function detail_booking_appointment(data) {
     var item = arr_billing_billing[data];
+
     var output = ` `;
     output += ` 
     <div class="tab-content">
@@ -63,8 +66,37 @@ function detail_booking_appointment(data) {
             <div  class="vertical-container dark-timeline" style="width:100%;height:500px; overflow: auto;">
                 
             
-            <h3><strong style="color:Black">Nhắc hẹn khám </strong></h3>
-            <img alt="" height="150" width="99%" src="{{ asset('images/slide/204683265.png')}}">
+            <h3><strong style="color:Black">Nhắc hẹn khám </strong></h3>`;
+
+    var today = new Date()
+    var date_now = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    const timeDiff = (new Date(item.booking_date)) - (new Date(date_now));
+    const day = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    output += `
+  
+    <table class="table table-striped table-hover" >
+    <tbody>
+    <tr>
+        <th>Ngày hiện tại</th>
+        <th>Ngày chờ</th>
+        <th>Ngày khám</th>
+    </tr>
+    </tbody>
+    <tbody>
+    <tr>
+        <td><strong style="color:#FF5722"><button class="btn btn-danger">${date_now}</button></strong></td>
+        <td><strong><button class="btn btn-warning">${day}</button></strong></td>
+        <td><strong ><button class="btn btn-success">${item.booking_date}</button></strong> </td>
+    </tr>
+    
+    </tbody>
+    </table>
+    
+    
+    
+  `;
+    output += `
+           
            
             <h3><strong style="color:Black"> Lịch trình </strong></h3>
         
@@ -78,7 +110,7 @@ function detail_booking_appointment(data) {
               
                 <tbody>`;
     item.booking_appointment.forEach(function(param) {
-        console.log(param);
+
         output += `
                 <tr>
                     <td>${param.service_title}</td>
@@ -127,7 +159,7 @@ function search_service_service() {
 }
 
 function detail_booking_history(data) {
-    console.log(data);
+
     var item = arr_billing_billing[data];
     var output = ` 
     <div class="tab-content">

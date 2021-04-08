@@ -263,4 +263,5 @@ p{
     <script src="{{ asset('backend/js/jquery-3.5.0.min.js') }}"></script>
     <script src="{{ asset('backend/customer-js/customer_local.js') }}"></script>
     <script src="{{ asset('backend/customer-js/cart.js') }}"></script>
+    
 @endsection

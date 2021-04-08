@@ -80,9 +80,10 @@ function form_profile_cart() {
                 <div class="client-detail">
                 <div class="full-height-scroll">
                     <div  class="vertical-container dark-timeline" style="width:100%;height:600px; overflow: auto;">
-                    <h3><strong style="color:Black">Thông tin cá nhân: </strong></h3>
+                    <h3><strong style="color:Black">Thông tin cá nhân: <a onClick="show_modal_profile()"><i class="fa fa-edit"></i></a></strong></h3>
                     <div>
                     <table class="total_history">
+                         
                         <tr> 
                             <td><strong style="color:#blue"> Họ & Tên</strong></td>
                             <td><strong id="customer_name" style="color:#blue">${account_customer.full_name}</strong></td>
@@ -230,8 +231,8 @@ function fill_in_information() {
         <div class="tab-content">
         <div id="contact-1" class="tab-pane active">
             <div class="row m-b-lg">
-            <div class="col-lg-12 text-center">
-                <h2><a onclick="form_profile_cart()"><i class="fa fa-arrow-left" aria-hidden="true"></i></a><strong style="color:#blue"> Khám hộ </strong></h2>
+            <div class="col-lg-12">
+                <h2><a onclick="form_profile_cart()"><i class="fa fa-arrow-left" aria-hidden="true"></i></a><strong style="color:#blue;margin-left:93px"> Khám hộ </strong></h2>
             </div>
             </div>
             <div class="client-detail">
@@ -356,7 +357,7 @@ function booking_history_again() {
 
 
     var account_customer = JSON.parse(localStorage.getItem('account_customer'));
-    
+
     var payment_type = $('payment_type').val();
     var arr_cart = JSON.parse(localStorage.getItem('service_service'));
     var id_service = [];
@@ -371,8 +372,8 @@ function booking_history_again() {
     <div class="tab-content">
     <div id="contact-1" class="tab-pane active">
         <div class="row m-b-lg" >
-        <div class="col-lg-12 text-center"> 
-            <h2><a onclick="form_profile_cart()"><i class="fa fa-arrow-left" aria-hidden="true"></i></a><strong style="color:#blue"> ${billing_type(booking_type)}</strong></h2>
+        <div class="col-lg-12"> 
+            <h2><a onclick="form_profile_cart()"><i class="fa fa-arrow-left" aria-hidden="true"></i></a><strong style="color:#blue;margin-left:93px"> ${billing_type(booking_type)}</strong></h2>
         </div>
         </div>
         <div class="client-detail">
@@ -524,8 +525,9 @@ function help_booking_history_again() {
     <div class="tab-content">
     <div id="contact-1" class="tab-pane active">
         <div class="row m-b-lg" >
-        <div class="col-lg-12 text-center"> 
-            <h2><a onclick="form_profile_cart()"><i class="fa fa-arrow-left" aria-hidden="true"></i></a><strong style="color:#blue"> ${billing_type(booking_type)}</strong></h2>
+        <div class="col-lg-12"> 
+            <h2><a onclick="form_profile_cart()"><i class="fa fa-arrow-left" aria-hidden="true"></i></a><strong style="color:#blue;margin-left:93px"> ${billing_type(booking_type)}</strong></h2>
+           
         </div>
         </div>
         <div class="client-detail">
@@ -737,14 +739,14 @@ function help_create_booking() {
             dataType: 'json',
             headers: headers,
             success: function(response) {
-               
+
                 localStorage.removeItem('service_service');
                 localStorage.removeItem('service_packet');
                 localStorage.removeItem('total_cart');
                 list_cart();
                 alert(response.message);
                 window.location = urlserver + 'customer-booking-history';
- 
+
             }
         });
 

@@ -57,18 +57,15 @@
                      <div class="form-group">
                         <input type="password" class="form-control" id="password_customer" placeholder="Mật khẩu" required="">
                      </div>
-                  <a onClick="type_modal(1)" id="Forgot_password" >Quên mật khẩu ?</a>  
-                  
-                  <button id="btn_change_password" data-toggle="modal"  hidden data-target="#myModal6"></button>
-                  <button id="btn_registration_customer" data-toggle="modal" hidden data-target="#myModal6"></button>
-                  
-                  
-      
+                     
+                     <a onClick="type_modal(1)" id="Forgot_password" >Quên mật khẩu ?</a>  
+
                      <hr>
-                     <button type="button" onClick="customer_login()" class="btn btn-primary block full-width m-b"> Đăng nhập </button>
+                     <button type="submit" onClick="customer_login()" class="btn btn-primary block full-width m-b"> Đăng nhập </button>
                        
                   </form>
-
+                  <button id="btn_change_password" data-toggle="modal"  hidden data-target="#myModal6"></button>
+                  <button id="btn_registration_customer" data-toggle="modal" hidden data-target="#myModal6"></button>
                    <p>Bạn không có tài khoản, <a onClick="type_modal(2)"  >Đăng ký</a></p>
                     
                </div>

@@ -57,7 +57,7 @@
                                 @if($v->billing_status ==1)
                                 <td>Chờ xác nhận</td>
                                 @elseif ($v->billing_status==2)
-                                <td>Lên kế hoạch</td>
+                                <td>Đã đặt lịch</td>
                                 @elseif ($v->billing_status==3)
                                 <td> Đã chuyển khoản</td>
                                 @elseif ($v->billing_status==4)
