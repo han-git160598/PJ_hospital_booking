@@ -161,7 +161,9 @@ function change_password() {
     var old_password = $('#old_password').val();
     var password = $('#new_password').val();
     var customer = JSON.parse(localStorage.getItem('account_customer'));
-    if (a == 0) {
+    if (old_password == '') {
+        alert('Bạn chưa nhập mật khẩu cũ');
+    } else if (a == 0) {
         $.ajax({
             url: urlapi,
             type: 'POST',

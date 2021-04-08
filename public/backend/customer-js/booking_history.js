@@ -273,16 +273,19 @@ function filter_history() {
 function filter_booking_history() {
     var status_booking = $('#status_booking').val();
     var type_customer = $('#type_customer').val();
-    var finish_time_booking = $('#finish_time_booking').val();
+    var filter_date = $('#finish_time_booking').val();
+    let arr_date = filter_date.split('-');
+    var date_option = 'M' + arr_date[1] + '_' + arr_date[0];
+    console.log(date_option);
 
-
+    arr_booking_history = [];
     let i = 0;
     $.ajax({
         url: urlapi,
         type: 'POST',
         data: {
             detect: 'list_booking_history',
-            date_option: '',
+            date_option: date_option,
             booking_status: status_booking,
             booking_type: type_customer,
             limit: '20',
