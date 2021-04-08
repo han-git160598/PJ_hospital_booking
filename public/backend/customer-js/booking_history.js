@@ -19,12 +19,15 @@ $(document).ready(function() {
             dataType: 'json',
             headers: headers,
             success: function(response) {
-
+                console.log(response)
                 if (response.data == '') {
                     alert('Chưa có lịch sử khám')
                 } else {
+
+
+
                     var output = ``;
-                    response.data.forEach(function(item) {
+                    response.data.sort((a, b) => b.id_booking - a.id_booking).forEach(function(item) {
                         arr_booking_history.push(item);
 
                         output += `
