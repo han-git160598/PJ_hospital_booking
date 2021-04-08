@@ -49,6 +49,7 @@ $(document).ready(function() {
 
 function detail_booking_history(data) {
     var item = arr_booking_history[data];
+
     var output = ` 
     <div class="tab-content">
     <div id="contact-1" class="tab-pane active">
@@ -79,23 +80,23 @@ function detail_booking_history(data) {
                     </tr>
                 </table>
                 <h3><strong style="color:Black">Kết quả xét nghiệm: </strong></h3>`;
-    if (item.booking_type == 4) {
+
+    if (item.booking_status == 4) {
         // img resutl
         var img = ``;
         item.booking_result.forEach(function(param) {
             img += `
-    <img alt="" height="200" width="99%" src="../${param.image_upload}">
-    <hr>
-    `;
+            <img alt="" height="200" width="99%" src="../${param.image_upload}">
+            <hr>
+            `;
         });
         $('#list_img_result').html(img);
-
         output += `
-                <div id="img_result">
-                <a data-toggle="modal" data-target="#img_result_modal" ><img alt="" height="150" width="99%" src="../${item.booking_result[0].image_upload}">
-                <span> + ${item.booking_result.length}</span></a>
-                </div>
-                `;
+            <div id="img_result">
+            <a data-toggle="modal" data-target="#img_result_modal" ><img alt="" height="150" width="99%" src="../${item.booking_result[0].image_upload}">
+            <span> + ${item.booking_result.length}</span></a>
+            </div>
+            `;
     } else {
         output += `<center><h4><strong style="color:red">Chưa có kết quả </strong></h4></center>`;
     }
@@ -274,9 +275,11 @@ function filter_booking_history() {
     var status_booking = $('#status_booking').val();
     var type_customer = $('#type_customer').val();
     var filter_date = $('#finish_time_booking').val();
-    let arr_date = filter_date.split('-');
-    var date_option = 'M' + arr_date[1] + '_' + arr_date[0];
-    console.log(date_option);
+    var date_option = '';
+    if (filter_date != '') {
+        let arr_date = filter_date.split('-');
+        date_option = 'M' + arr_date[1] + '_' + arr_date[0];
+    }
 
     arr_booking_history = [];
     let i = 0;

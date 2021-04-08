@@ -42,6 +42,7 @@
               
             <div class="col-md-6">
                <div class="inqbox-content">
+               <center><h2><strong>Khách hàng</strong></h2></center>
                <h4><center><span style="color: red"> <?php
                               $message=Session::get('message');
                               if($message)
@@ -66,7 +67,7 @@
                   </form>
                   <button id="btn_change_password" data-toggle="modal"  hidden data-target="#myModal6"></button>
                   <button id="btn_registration_customer" data-toggle="modal" hidden data-target="#myModal6"></button>
-                   <p>Bạn không có tài khoản, <a onClick="type_modal(2)"  >Đăng ký</a></p>
+                   <p>Bạn không có tài khoản ? <a onClick="type_modal(2)"  >Đăng ký</a></p>
                     
                </div>
             </div>

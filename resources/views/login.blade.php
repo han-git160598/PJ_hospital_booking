@@ -22,6 +22,7 @@
               
             <div class="col-md-6">
                <div class="inqbox-content">
+               <center><h2><strong>Admin</strong></h2></center>
                <h4><center><span style="color: red"> <?php
                               $message=Session::get('message');
                               if($message)
