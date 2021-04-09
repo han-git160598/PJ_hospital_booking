@@ -1,10 +1,9 @@
-
 // var count_cart=0;
 // var arr_cart=[];
 // arr_service_service=[];
 // arr_service=[];
 // $(document).ready(function() {
-    
+
 //     list_service_service();
 //     count_cart = localStorage.getItem('total_cart');
 
@@ -102,19 +101,19 @@
 //                 arr_service.push(service);
 //             });
 //             arr_service.push(item);   
-            
+
 //             const key = 'id_service';
-    
+
 //             const unique = [...new Map(arr_service.map(item =>
 //             [item[key], item])).values()]
-            
+
 //             localStorage.setItem('service_service', JSON.stringify(unique));
 //             count_cart++;
 //             localStorage.setItem('total_cart', JSON.stringify(count_cart));
 //         }
 
-       
-    
+
+
 //     }
 
 //     $('#badge').html(count_cart);
@@ -127,12 +126,12 @@
 
 
 
-var count_cart=0;
-var arr_cart=[];
-arr_service_service=[];
-arr_service=[];
+var count_cart = 0;
+var arr_cart = [];
+arr_service_service = [];
+arr_service = [];
 $(document).ready(function() {
-    
+
     list_service_service();
     count_cart = localStorage.getItem('total_cart');
 
@@ -141,21 +140,19 @@ $(document).ready(function() {
 
 });
 
-function list_service_service()
-{
-    let i=0;
+function list_service_service() {
+    let i = 0;
     $.ajax({
-        url: urlapi, 
+        url: urlapi,
         type: 'POST',
-        data: { detect: 'list_service',limit: '100' },
+        data: { detect: 'list_service', limit: '100' },
         dataType: 'json',
         headers: headers,
-        success: function(response) 
-        {
-            var output=``;
+        success: function(response) {
+            var output = ``;
             response.data.forEach(function(item) {
-            arr_service_service.push(item);
-            output+=`
+                arr_service_service.push(item);
+                output += `
             <div class="col-lg-4" id="div_div" >
                      <div class="contact-box">
                         <div class="row">
@@ -183,29 +180,27 @@ function list_service_service()
                      </div>
                   </div>
                   `;
-            i++;
+                i++;
             });
             $('#list_service_service').html(output);
         }
     });
 }
 
-function search_service_service()
-{
-    let i=0;
+function search_service_service() {
+    let i = 0;
     var key_service = $('#key_service').val();
     $.ajax({
         url: urlapi,
         type: 'POST',
-        data: { detect: 'list_service', filter: key_service,limit: '10' },
+        data: { detect: 'list_service', filter: key_service, limit: '10' },
         dataType: 'json',
         headers: headers,
-        success: function(response) 
-        {
-            var output=``;
+        success: function(response) {
+            var output = ``;
             response.data.forEach(function(item) {
-            arr_service_service.push(item);
-            output+=`
+                arr_service_service.push(item);
+                output += `
             <div class="col-lg-4" id="div_div">
                      <div class="contact-box">
                         <div class="row">
@@ -233,55 +228,50 @@ function search_service_service()
                      </div>
                   </div>
                   `;
-            i++;
+                i++;
             });
             $('#list_service_service').html(output);
         }
     });
 }
-function add_cart(data)
-{
 
-    var flag  = 0 ;
-    var item  = arr_service_service[data];
-    
-    var arr_service_json =JSON.parse(localStorage.getItem('service_service'));
+function add_cart(data) {
 
-    if(arr_service_json == null )
-    {
+    var flag = 0;
+    var item = arr_service_service[data];
+
+    var arr_service_json = JSON.parse(localStorage.getItem('service_service'));
+
+    if (arr_service_json == null) {
         arr_service.push(item);
         count_cart++;
         localStorage.setItem('service_service', JSON.stringify(arr_service));
         localStorage.setItem('total_cart', JSON.stringify(count_cart));
-    }
-    else{
+    } else {
         arr_service_json.forEach(function(cart) {
             console.log(cart);
-            if(cart.id_service == item.id_service)
-            {
+            if (cart.id_service == item.id_service) {
                 alert('Dịch vụ này đã tốn tại trong giỏ hàng của bạn')
                 flag = 1;
             }
         });
-        if(flag == 0)
-        {
-            arr_service_json.forEach(function (service){
+        if (flag == 0) {
+            arr_service_json.forEach(function(service) {
                 arr_service.push(service);
             });
-            arr_service.push(item);   
-            
+            arr_service.push(item);
+
             const key = 'id_service';
-    
-            const unique = [...new Map(arr_service.map(item =>
-            [item[key], item])).values()]
-            
+
+            const unique = [...new Map(arr_service.map(item => [item[key], item])).values()]
+
             localStorage.setItem('service_service', JSON.stringify(unique));
             count_cart++;
             localStorage.setItem('total_cart', JSON.stringify(count_cart));
         }
 
-       
-    
+
+
     }
 
     $('#badge').html(count_cart);
