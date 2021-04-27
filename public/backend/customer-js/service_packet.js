@@ -20,18 +20,18 @@ function list_service_packet() {
         dataType: 'json',
         headers: headers,
         success: function(response) {
-
             var output = ``;
             response.data.forEach(function(item) {
                 arr_service_packet.push(item);
                 output += `
-            <tr>
-            <th style="30px"></th>
-            <td> <img alt="image" width="25px" height="25px"  src="../backend/icon/service_packet.svg"> ${item.service_packet_title}</td>
-            <td>${formatNumber(item.service_packet_total)} VND</td>
-            <td colspan="2"><center><button onClick="detail_service_packet(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </button>
-            <button onClick="add_cart(${i})" class="btn btn-primary btn-sm"><i class="fa fa-cart-plus"></i></button></center></td>
-            </tr>`;
+                <tr>
+                    <td style="width:50%"> <img alt="image" width="18px" height="18px"  src="../backend/icon/service_packet.svg"> ${item.service_packet_title}</td>
+                    <td style="width:20%">${formatNumber(item.service_packet_total)} VND</td>
+                    <td style="width:30%" colspan="2">
+                        <center><a href="#detail_service_packet_data" onClick="detail_service_packet(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </a>
+                        <button onClick="add_cart(${i})" class="btn btn-primary btn-sm"><i class="fa fa-cart-plus"></i></button></center>
+                    </td>
+                </tr> `;
                 i++;
             });
             $('#list_service_packet').html(output);
@@ -118,13 +118,15 @@ function search_service_packet() {
             response.data.forEach(function(item) {
                 arr_service_packet.push(item);
                 output += `
-            <tr>
-            <th style="30px"></th>
-            <td><img alt="image" width="25px" height="25px"  src="../backend/icon/service_packet.svg"> ${item.service_packet_title}</td>
-            <td>${formatNumber(item.service_packet_total)} VND</td>
-            <td colspan="2"><center><button onClick="detail_service_packet(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </button>
-            <button onClick="add_cart(${i})" class="btn btn-primary btn-sm"><i class="fa fa-cart-plus"></i></button></center></td>
-            </tr>`;
+                <tr>
+                    <td style="width:50%"> <img alt="image" width="18px" height="18px"  src="../backend/icon/service_packet.svg"> ${item.service_packet_title}</td>
+                    <td style="width:20%">${formatNumber(item.service_packet_total)} VND</td>
+                    <td style="width:30%" colspan="2">
+                        <center><a href="#detail_service_packet_data" onClick="detail_service_packet(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </a>
+                        <button onClick="add_cart(${i})" class="btn btn-primary btn-sm"><i class="fa fa-cart-plus"></i></button></center>
+                    </td>
+                </tr> `;
+
                 i++;
             });
             $('#list_service_packet').html(output);

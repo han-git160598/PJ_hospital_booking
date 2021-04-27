@@ -158,7 +158,7 @@ function list_service_service() {
                         <div class="row">
                            <div class="col-sm-3">
                               <div class="text-center">
-                                 <img alt="image" width="100%" height="100%" class="img-circle m-t-xs img-responsive" src="../backend/icon/service service.svg">
+                                 <img alt="image" width="60px" height="60px" class="img-circle m-t-xs img-responsive" src="../backend/icon/service service.svg">
                               </div>
                            </div>
                            <div class="col-sm-9">
@@ -190,13 +190,15 @@ function list_service_service() {
 function search_service_service() {
     let i = 0;
     var key_service = $('#key_service').val();
+    arr_service_service = [];
     $.ajax({
         url: urlapi,
         type: 'POST',
-        data: { detect: 'list_service', filter: key_service, limit: '10' },
+        data: { detect: 'list_service', filter: key_service, limit: '20' },
         dataType: 'json',
         headers: headers,
         success: function(response) {
+            console.log(response);
             var output = ``;
             response.data.forEach(function(item) {
                 arr_service_service.push(item);
@@ -206,7 +208,7 @@ function search_service_service() {
                         <div class="row">
                            <div class="col-sm-3">
                               <div class="text-center">
-                                 <img alt="image" width="100%" height="100%" class="img-circle m-t-xs img-responsive" src="../backend/icon/service service.svg">
+                                 <img alt="image" width="60px" height="60px" class="img-circle m-t-xs img-responsive" src="../backend/icon/service service.svg">
                               </div>
                            </div>
                            <div class="col-sm-9">

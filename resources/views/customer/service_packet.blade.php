@@ -76,20 +76,17 @@ padding-inline-start: 0px;
                         <div id="tab-1" class="tab-pane active">
                         <div class="full-height-scroll">
                             <div class="table-responsive" style="width:100%;height:600px; overflow: auto;" >
-                                <table class="table table-striped table-hover">
-                                <tbody>
+                                <table style="width:100%">
+                                {{--  <table class="table table-striped table-hover" >  --}}
+                                <thead>
                                     <tr>
-                                        
-                                        <th style="30px"></th>
-                                        <th>Tên gói khám </th>
-                                        <th>Giá tiền</th>
-                    
-                                        <th colspan="2"><center>Hành động</center></th>
+                                        <th style="width:50%">Tên gói khám </th>
+                                        <th style="width:20%">Giá tiền</th>
+                                        <th style="width:30%" colspan="2"><center>Hành động</center></th>
                                     </tr>
-
-                                    </tbody>
-                                    <tbody id="list_service_packet">
-                                    <tr>
+                                </thead>
+                                <tbody id="list_service_packet">
+                                    {{--  <tr>
                                         <th style="30px"></th>
                                         <td>Anthony Jackson</td>
                                         <td>20.000.000</td>
@@ -97,9 +94,9 @@ padding-inline-start: 0px;
                             
                                         <button class="btn btn-primary btn-sm"><i class="fa fa-cart-plus"></i></button></center></td>
                                         
-                                    </tr>
+                                    </tr>  --}}
                                     
-                                    </tbody>
+                                </tbody>
                                 </table>
                             </div>
                         </div>

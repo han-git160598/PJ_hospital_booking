@@ -89,29 +89,29 @@ p{
                         <div id="tab-1" class="tab-pane active">
                         <div class="full-height-scroll">
                             <div class="table-responsive" style="width:100%;height:600px; overflow: auto;">
-                                <table class="table table-striped table-hover" >
-                                <tbody>
+                                <table style="width:100%" >
+                                <thead>
                                     <tr>
                                         
-                                        <th style="30px"></th>
-                                        <th>Mã đơn </th>
-                                        <th>Ngày đặt</th>
-                                        <th>Dịch vụ</th>
+
+                                        <th style="width:35%">Mã đơn</th>
+                                        <th style="width:25%">Ngày đặt</th>
+                                        <th style="width:25%">Dịch vụ</th>
                     
-                                        <th colspan="2"><center>Hành động</center></th>
+                                        <th style="width:15%" colspan="2"><center>Hành động</center></th>
                                     </tr>
 
-                                    </tbody>
-                                    <tbody id="list_booking_history" >
-                                    {{--  <tr>
-                                        <th style="30px"></th>
-                                        <td>MH 51222366</td>
-                                        <td>20/11/2020 9:30</td>
-                                        <td>Khám nội tổng quát ...</td>
-                                        <td><center><button class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </button></center></td>
-                                        
-                                    </tr>  --}}
-                                    </tbody>
+                                </thead>
+                                <tbody id="list_booking_history" > 
+                                {{--  <tr>
+                                    <th style="30px"></th>
+                                    <td>MH 51222366</td>
+                                    <td>20/11/2020 9:30</td>
+                                    <td>Khám nội tổng quát ...</td>
+                                    <td><center><button class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </button></center></td>
+                                    
+                                </tr>  --}}
+                                </tbody>
                                    
                                 </table>
                             </div>

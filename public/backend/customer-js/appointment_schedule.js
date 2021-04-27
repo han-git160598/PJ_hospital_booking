@@ -31,11 +31,11 @@ $(document).ready(function() {
                         arr_billing_billing.push(item)
                         output += `
                         <tr>
-                        <th style="30px"></th>
-                        <td>${item.booking_code}</td>
-                        <td>${item.booking_date} - ${item.booking_time} </td>
-                        <td colspan="2"><center><button onClick="detail_booking_appointment(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </button>
-                        </center></td>
+                         
+                            <td style="width:40%">${item.booking_code}</td>
+                            <td style="width:40%">${item.booking_date} - ${item.booking_time} </td>
+                            <td style="width:20%" colspan="2"><center><a href="#detail_booking_appointment" onClick="detail_booking_appointment(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </a>
+                            </center></td>
                         </tr>`;
                         i++;
                     }
@@ -144,10 +144,10 @@ function search_service_service() {
             response.data.forEach(function(item) {
                 output += `
             <tr>
-                <th style="30px"></th>
-                <td>${item.service_title}</td>
-                <td >${item.service_content}</td>
-                <td>${formatNumber(item.service_price)} VND</td>
+              
+                <td style="width:40%">${item.service_title}</td>
+                <td style="width:40%">${item.service_content}</td>
+                <td style="width:20%">${formatNumber(item.service_price)} VND</td>
                 <td colspan="2"><center>
 
                 <button class="btn btn-primary btn-sm"><i class="fa fa-cart-plus"></i></button></center></td>
@@ -334,7 +334,7 @@ function detail_booking_history(data) {
         output += `<h5> <span style="color:blue;"><i><img src="../backend/icon/cash in hand.svg"></i> <i><img src="../backend/icon/Thanh toán chi phí tại bệnh viện.svg"></i> </span></h5>    `;
     } else {
         output += `<h5> <span style="color:blue;"><i><img src="../backend/icon/online payment.svg"></i> <i><img src="../backend/icon/Thanh toán chi phí qua chuyển khoản.svg"></i> </span></h5>
-                <img alt="" height="200px" width="99%" src="${item.payment_image}">    `;
+                <img alt="" height="200px" width="99%" src="../${item.payment_image}">    `;
     }
     output += `
                 </div>

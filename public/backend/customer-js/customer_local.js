@@ -1,5 +1,5 @@
-const urlapi = "http://192.168.100.16/api_hospital/";
-const urlserver = "http://192.168.100.16/PJ_hospital_booking/public/";
+const urlapi = "http://192.168.100.34/api_hospital/";
+const urlserver = "http://192.168.100.34/PJ_hospital_booking/public/";
 
 const headers = { "Authorization": "Basic YWRtaW46cXRjdGVrQDEyMwx==" };
 

@@ -7,39 +7,35 @@ $(document).ready(function() {
     $.ajax({
         url: urlapi,
         type: 'POST',
-        data: { detect: 'list_news',limit: '100' },
+        data: { detect: 'list_news', limit: '100' },
         dataType: 'json',
         headers: headers,
-        success: function(response) 
-        {
-    
-            let i =0;
-            var output=``;
-            response.data.forEach(function(item) {
-            if(item.home_action == 'Y')
-            {
-                arr_news.push(item);  
-                output+=`
-                <tr>
-                    <th style="30px"></th>
-                    <td>${item.title}</td>
-                    <td><img alt="" height="150" width="150" src="${item.image_upload}"></td>
-                    <td colspan="2"><center>
+        success: function(response) {
 
-                    <button type="button" onClick="detail_news(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i></button></center></td>
+            let i = 0;
+            var output = ``;
+            response.data.forEach(function(item) {
+                if (item.home_action == 'Y') {
+                    arr_news.push(item);
+                    output += `
+                <tr>
+                    <td style="width:40%" >${item.title}</td>
+                    <td style="width:40%"> <img alt="" height="120px" width="170px" src="../${item.image_upload}"></td>
+                    <td style="width:20%" colspan="2"><center>
+                    <a href="#detail_news" type="button" onClick="detail_news(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i></a></center></td>
                 </tr>`;
-                i++;
-            }
+                    i++;
+                }
             });
             $('#arr_news').html(output);
         }
     });
 });
-function detail_news(data)
-{
-    var item  = arr_news[data];
-  
-    var output=`
+
+function detail_news(data) {
+    var item = arr_news[data];
+
+    var output = `
     <div class="tab-content">
     <div id="contact-1" class="tab-pane active">
         <div class="row m-b-lg">
@@ -49,7 +45,7 @@ function detail_news(data)
         </div>
         <div class="client-detail">
         <div class="full-height-scroll">
-            <div><img alt="" height="200px" width="100%" src="{{ asset('images/slide/204683265.png')}}"></div>
+            <div><img alt="" height="200px" width="100%" src="../${item.image_upload}"></div>
             <hr/>
             
             <div  class="vertical-container dark-timeline" style="width:100%;height:350px; overflow: auto;">
@@ -68,35 +64,33 @@ function detail_news(data)
     $('#detail_news').fadeIn().html(output);
 
 }
-function search_news()
-{
+
+function search_news() {
     var key_news = $('#key_news').val();
     $.ajax({
         url: urlapi,
         type: 'POST',
-        data: { detect: 'list_news', filter: key_news,limit: '20' },
+        data: { detect: 'list_news', filter: key_news, limit: '20' },
         dataType: 'json',
         headers: headers,
-        success: function(response) 
-        {
+        success: function(response) {
 
-            let i =0;
-            var output=``;
+            let i = 0;
+            var output = ``;
             response.data.forEach(function(item) {
-            if(item.home_action == 'Y')
-            {
-                arr_news.push(item);  
-                output+=`
+                if (item.home_action == 'Y') {
+                    arr_news.push(item);
+                    output += `
                 <tr>
                     <th style="30px"></th>
                     <td>${item.title}</td>
-                    <td><img alt="" height="150" width="150" src="${item.image_upload}"></td>
+                    <td><img alt="" height="150" width="150" src="../${item.image_upload}"></td>
                     <td colspan="2"><center>
 
                     <button type="button" onClick="detail_news(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i></button></center></td>
                 </tr>`;
-                i++;
-            }
+                    i++;
+                }
             });
             $('#arr_news').html(output);
         }

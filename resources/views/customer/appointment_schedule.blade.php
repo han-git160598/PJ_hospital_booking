@@ -77,15 +77,15 @@ p{
                         <div id="tab-1" class="tab-pane active">
                         <div class="full-height-scroll">
                             <div class="table-responsive" style="width:100%;height:500px; overflow: auto;">
-                                <table class="table table-striped table-hover">
+                                <table style="width:100%">
                                 <tbody>
                                     <tr>
                                         
-                                        <th style="30px"></th>
-                                        <th>Mã đơn </th>
-                                        <th>Ngày đặt</th>
+                                       
+                                        <th style="width:40%">Mã đơn </th>
+                                        <th style="width:40%">Ngày đặt</th>
                                       
-                                        <th colspan="2"><center>Hành động</center></th>
+                                        <th style="width:20%" colspan="2"><center>Hành động</center></th>
                                     </tr>
                                     </tbody>
                                     <tbody id="list_billing_billing" >
@@ -132,7 +132,7 @@ p{
                             <h3><strong style="color:Black">Lịch trình </strong></h3>
                         
                                <table  id="detail_service_packet">
-                                <thead>
+                                {{--  <thead>
                                     <tr>
                                         <th>Dịch vụ</th>
                                         <th>Thời gian</th>
@@ -156,7 +156,7 @@ p{
                                      
                                     </tr>
 
-                                </tbody>
+                                </tbody>  --}}
                                </table>
 
         

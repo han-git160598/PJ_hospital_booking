@@ -43,6 +43,7 @@ margin-inline-end: 0px;
 padding-inline-start: 0px;
 }
 
+
 </style>
 
 <body>     
@@ -68,7 +69,7 @@ padding-inline-start: 0px;
                 <div class="input-group">
                     <input type="text" id="key_news"  class="input form-control">
                     <span class="input-group-btn">
-                    <button type="button" onClick="search_news()" class="btn btn btn-primary"> <i class="fa fa-search"></i> Search</button>
+                    <button type="button" onClick="search_news()" class="btn btn btn-primary"> <i class="fa fa-search"></i> Tìm kiếm</button>
                     </span>
                 </div>
                 <div class="clients-list">
@@ -76,19 +77,19 @@ padding-inline-start: 0px;
                         <div id="tab-1" class="tab-pane active">
                         <div class="full-height-scroll">
                             <div class="table-responsive" style="width:100%;height:600px; overflow: auto;">
-                                <table class="table table-striped table-hover">
+                                <table style="width:100%">
                                     <thead >
                                     <tr>          
-                                        <th style="30px"></th>
-                                        <th> Tiêu đề </th>
-                                        <th> Hình ảnh </th>
+                                      
+                                        <th style="width:40%"> Tiêu đề </th>
+                                        <th style="width:40%"> Hình ảnh </th>
                             
-                                        <th colspan="2"><center>Chi tiết</center></th>
+                                        <th style="width:20%" colspan="2"><center>Chi tiết</center></th>
                                     </tr>
                                     </thead >
 
                                     <tbody id="arr_news">
-                                    <tr>
+                                    {{--  <tr>
                                         <th style="30px"></th>
                                         <td>Anthony Jackson</td>
                                         <td ><img alt="" height="150" width="150" src="{{ asset('images/slide/204683265.png')}}"></td>
@@ -96,7 +97,7 @@ padding-inline-start: 0px;
                                         <td colspan="2"><center>
                             
                                         <button class="btn btn-primary btn-sm"><i class="fa fa-info"></i></button></center></td>
-                                    </tr>
+                                    </tr>  --}}
                                     </tbody>
                                     
                                 </table>

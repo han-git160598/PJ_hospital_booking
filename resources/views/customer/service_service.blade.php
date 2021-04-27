@@ -5,11 +5,10 @@
   height: 220px;
   /* border: 1px solid #4CAF50; */
   padding: 5px;
-
-  
 }
+
 </style>
-<body>     
+<body>  
 <div style="clear: both; height: 61px;"></div>
 <div class="wrapper wrapper-content animated fadeInRight">
                <div class="row">
@@ -32,7 +31,7 @@
                 
             
 
-            
+{{--              
                   <div class="col-lg-4">
                      <div class="contact-box">
                         <div class="row">
@@ -58,7 +57,7 @@
                            <div class="clearfix"></div>
                     
                      </div>
-                  </div>
+                  </div>  --}}
 
            
                  

@@ -88,23 +88,22 @@ p{
                         <div id="tab-1" class="tab-pane active">
                         <div class="full-height-scroll">
                             <div class="table-responsive" style="width:100%;height:400px; overflow: auto;">
-                                <table class="table table-striped table-hover">
+                                <table style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th style="30px"></th>
-                                        <th>Tên dich vụ</th>
-                                        <th>Giá tiền</th>
-                                        <th colspan="2"><center>Hành động </center></th>
+                                        <th style="width:50%">Tên dich vụ</th>
+                                        <th style="width:30%">Giá tiền</th>
+                                        <th style="width:20%" colspan="2"><center>Hành động </center></th>
                                     </tr>
 
                                     </thead>
                                     <tbody id="list_cart">
-                                    <tr>
+                                    {{--  <tr>
                                         <th style="30px"></th>
                                         <td>Anthony Jackson</td>
                                         <td>20.000.000</td>
                                         <td colspan="2"><a><center><i class="fa fa-remove"></i> </a></center></td>
-                                    </tr>
+                                    </tr>  --}}
                                     </tbody>
 
                                 </table>

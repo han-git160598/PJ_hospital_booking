@@ -45,6 +45,46 @@
   background-color: red;
   color: white;
 }
+
+// back to top
+a.cd-top {
+display: inline-block;
+height: 40px;
+width: 40px;
+position: fixed;
+bottom: 10px;
+right: 10px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+/* image replacement properties */
+overflow: hidden;
+text-indent: 100%;
+white-space: nowrap;
+background: #3097D1 url("https://thinhweb.com/wp-content/themes/thinhweb/images/cd-top-arrow.svg") no-repeat center 50%;
+visibility: hidden;
+opacity: 0;
+-webkit-transition: opacity .3s 0s, visibility 0s .3s;
+-moz-transition: opacity .3s 0s, visibility 0s .3s;
+transition: opacity .3s 0s, visibility 0s .3s;
+}
+a.cd-top.cd-is-visible, a.cd-top.cd-fade-out, .no-touch a.cd-top:hover {
+-webkit-transition: opacity .3s 0s, visibility 0s 0s;
+-moz-transition: opacity .3s 0s, visibility 0s 0s;
+transition: opacity .3s 0s, visibility 0s 0s;
+}
+a.cd-top, a.cd-top:visited, a.cd-top:hover {
+color: #CCCCCC;
+text-decoration: none;
+}
+a.cd-top.cd-is-visible {
+/* the button becomes visible */
+visibility: visible;
+opacity: 1;
+}
+a.cd-top.cd-fade-out {
+/* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+opacity: 1;
+}
+
 </style>
     </head>
     <body>
@@ -121,11 +161,13 @@
             
         <meta name="csrf-token-get-permission-das" content="{{ csrf_token() }}" />
 
+
             <div id="page-wrapper" class="gray-bg">
                 <!-- BEGIN HEADER -->
                 <div id="header">
                     <nav class="navbar navbar-fixed-top white-bg show-menu-full" id="nav" role="navigation" style="margin-bottom: 0">
                         <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn" href="javascript:void(0)"><i class="fa fa-bars" style="font-size:27px;"></i> </a>
 
                             <form role="search" class="navbar-form-custom">
                                 <div class="form-group">
@@ -138,6 +180,7 @@
                                 </div>
                             </form>
                         </div>
+                        
                         <ul class="nav navbar-top-links navbar-right">
                             <li class="dropdown hidden-xs">
 
@@ -152,16 +195,15 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li ><a href="#" class="cd-top"><span class="pl15"><i class="fa fa-arrow-up"></i></span></a></li>
                             
-                            <li class="dropdown hidden-xs">
+                            <li class="dropdown">
                                 <a href="{{URL::to('customer-cart')}}" class="notification">
                                     <span class="pl15"><i id="cart" class="fa fa-cart-plus"></i></span>
                                     <span id="badge" class="badge badge-danger">0</span>
                                 </a>
-                                
                             </li>
                             
-
                             <li class="dropdown pull-right" id="username_ac">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                     <span class="pl15"><i class="fa fa-user"></i></span>
@@ -174,19 +216,15 @@
                                 </ul>
                                 
                             </li>
+                            
 
                         </ul>
                     </nav>
                 </div>
 
-
-
-
-
                 @yield('customer_content')
-
-
-
+                
+        
             <div class="footer">
                <div class="pull-right">
                   10GB of <strong>250GB</strong> Free.
@@ -282,7 +320,7 @@
                             <br />
                             <div><strong  id="error-nwl" style="color:red"></strong></div>
                             <br />
-                            
+                             
                     <input type="button" onClick="change_password()" name="edit" id="1" value="Cập nhật" class="btn btn-success btn-sm btn-block" />
                     </form>
                   </div>
@@ -320,6 +358,7 @@
    
     <script src="{{ asset('backend/customer-js/customer_local.js') }}"></script>
     <script src="{{ asset('backend/customer-js/account_customer.js') }}"></script>
+    <script src="{{ asset('backend/customer-js/backtotop.js') }}"></script>
 
 
     <script src="{{ asset('backend/js/jquery-2.1.1.js')}}"></script>
@@ -346,8 +385,11 @@
     <script>
     $( document ).ready(function() {
         var username = JSON.parse(localStorage.getItem('account_customer'));
-        //$('#username').html(username.full_name);
-           var output = `
+        
+        if(username != null || username !='')
+        {
+//$('#username').html(username.full_name);
+        var output = `
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                 <span class="pl15"><i class="fa fa-user"></i><span id="username">${username.full_name}</span></span>
                 <span class="caret caret-tp"></span>
@@ -360,6 +402,8 @@
                 <li><a href="#" class="animated animated-short fadeInUp" data-toggle="modal" data-target="#logout-dasboard"><i class="fa fa-sign-out"></i>Đăng xuất</a></li>
             </ul>`;
             $('#username_ac').html(output);
+        }else{}
+        
                     
         
     });

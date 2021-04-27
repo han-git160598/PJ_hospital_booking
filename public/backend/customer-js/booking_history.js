@@ -19,12 +19,10 @@ $(document).ready(function() {
             dataType: 'json',
             headers: headers,
             success: function(response) {
-                console.log(response)
+
                 if (response.data == '') {
                     alert('Chưa có lịch sử khám')
                 } else {
-
-
 
                     var output = ``;
                     response.data.sort((a, b) => b.id_booking - a.id_booking).forEach(function(item) {
@@ -32,12 +30,12 @@ $(document).ready(function() {
 
                         output += `
                         <tr>
-                        <th style="30px"></th>
-                        <td>${item.booking_code}</  td>
-                        <td>${item.booking_date}</td>
-                        <td>${item.booking_service[0].service_title}...</td>
-                        <td colspan="2">
-                            <center><button onClick="detail_booking_history(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </button></center>
+                   
+                        <td style="width:35%">${item.booking_code}</  td>
+                        <td style="width:25%">${item.booking_date}</td>
+                        <td style="width:25%">${item.booking_service[0].service_title}...</td>
+                        <td style="width:15%" colspan="2">
+                            <center><a onClick="detail_booking_history(${i})" href="#detail_booking_history" class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </a></center>
                         </td>
                         </tr>`;
                         i++;
@@ -229,7 +227,7 @@ function detail_booking_history(data) {
         output += `<h5> <span style="color:blue;"><i><img src="../backend/icon/cash in hand.svg"></i> <i><img src="../backend/icon/Thanh toán chi phí tại bệnh viện.svg"></i> </span></h5>    `;
     } else {
         output += `<h5> <span style="color:blue;"><i><img src="../backend/icon/online payment.svg"></i> <i><img src="../backend/icon/Thanh toán chi phí qua chuyển khoản.svg"></i> </span></h5>
-                <img alt="" height="200px" width="99%" src="${item.payment_image}">    `;
+                <img alt="" height="200px" width="99%" src="../${item.payment_image}">`;
     }
     output += `
                 </div>
@@ -308,15 +306,14 @@ function filter_booking_history() {
                 response.data.forEach(function(item) {
                     arr_booking_history.push(item);
                     output += `
-                    <tr>
-                    <th style="30px"></th>
-                    <td>${item.booking_code}</  td>
-                    <td>${item.booking_date}</td>
-                    <td>${item.booking_service[0].service_title}...</td>
-                    <td colspan="2">
-                        <center><button onClick="detail_booking_history(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </button></center>
-                    </td>
-                    </tr>`;
+                        <tr>    
+                        <td style="width:35%">${item.booking_code}</  td>
+                        <td style="width:25%">${item.booking_date}</td>
+                        <td style="width:30%">${item.booking_service[0].service_title}...</td>
+                        <td style="width:10%" colspan="2">
+                            <center><a href="#detail_booking_history" onClick="detail_booking_history(${i})" class="btn btn-primary btn-sm"><i class="fa fa-info"></i> </a></center>
+                        </td>
+                        </tr>`;
                     i++;
                 });
             }
